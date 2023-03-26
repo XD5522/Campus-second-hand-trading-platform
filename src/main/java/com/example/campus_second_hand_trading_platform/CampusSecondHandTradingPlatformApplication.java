@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CampusSecondHandTradingPlatformApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CampusSecondHandTradingPlatformApplication.class, args);//2
+        SpringApplication.run(CampusSecondHandTradingPlatformApplication.class, args);//23
     }
 
 
