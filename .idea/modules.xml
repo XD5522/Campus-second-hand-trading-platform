@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Campus-second-hand-trading-platform.iml" filepath="$PROJECT_DIR$/.idea/Campus-second-hand-trading-platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Campus_second_hand_trading_platform/Campus_second_hand_trading_platform.iml" filepath="$PROJECT_DIR$/Campus_second_hand_trading_platform/Campus_second_hand_trading_platform.iml" />
     </modules>
   </component>
 </project>
