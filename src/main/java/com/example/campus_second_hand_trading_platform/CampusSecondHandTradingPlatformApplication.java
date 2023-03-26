@@ -10,4 +10,5 @@ public class CampusSecondHandTradingPlatformApplication {
         SpringApplication.run(CampusSecondHandTradingPlatformApplication.class, args);
     }
 
+
 }
