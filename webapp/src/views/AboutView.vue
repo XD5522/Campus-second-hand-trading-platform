@@ -4,7 +4,7 @@
   </div>
   <el-row class="mb-4">
     <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
+    <el-button type="primary" @click = "test">Primary</el-button>
     <el-button type="success">Success</el-button>
     <el-button type="info">Info</el-button>
     <el-button type="warning">Warning</el-button>
@@ -47,4 +47,23 @@ import {
   Search,
   Star,
 } from '@element-plus/icons-vue'
+
+
+
 </script>
+
+<script>
+import user from '@/api/user'
+
+export  default {
+
+  methods:{
+    test(){
+      user.demo().then(res=>
+      {alert(res.data)})
+    }
+  }
+
+}
+</script>
+
