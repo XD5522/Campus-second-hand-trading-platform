@@ -1,60 +1,69 @@
 <template>
-<!--  <nav>-->
-<!--    <router-link to="/">Home</router-link> |-->
-<!--    <router-link to="/about">About</router-link>-->
-<!--  </nav>-->
-  <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      :ellipsis="false"
-      @select="handleSelect"
-      router="true"
-  >
-    <el-menu-item index="/">LOGO</el-menu-item>
-    <div class="flex-grow" />
-    <el-menu-item index="/about">首页</el-menu-item>
-    <el-menu-item index="/about">哈哈哈</el-menu-item>
-    <el-menu-item index="/about">哈哈哈哈</el-menu-item>
-    <el-menu-item index="/about">呜呜呜呜</el-menu-item>
-    <div class="flex-grow" />
-    <el-menu-item index="/about">[头像]</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>用户名</template>
-      <el-menu-item index="2-1">个人中心</el-menu-item>
-      <el-menu-item index="2-2">购物车</el-menu-item>
-      <el-menu-item index="2-3">注销</el-menu-item>
-    </el-sub-menu>
-  </el-menu>
-  <router-view/>
+    <el-menu
+            :default-active="activeIndex"
+            class="el-menu-demo"
+            mode="horizontal"
+            :ellipsis="false"
+            @select="handleSelect"
+            router="true"
+    >
+        <el-menu-item index="/">LOGO</el-menu-item>
+        <div class="flex-grow"/>
+        <el-menu-item index="/about">首页</el-menu-item>
+        <el-menu-item index="/about">哈哈哈</el-menu-item>
+        <el-menu-item index="/about">哈哈哈哈</el-menu-item>
+        <el-menu-item index="/about">呜呜呜呜</el-menu-item>
+        <div class="flex-grow"/>
+        <el-menu-item index="/about">[头像]</el-menu-item>
+
+        <el-sub-menu index="2">
+            <template #title>用户名</template>
+            <el-menu-item index="2-1">个人中心</el-menu-item>
+            <el-menu-item index="2-2">购物车</el-menu-item>
+            <el-menu-item index="2-3">注销</el-menu-item>
+        </el-sub-menu>
+    </el-menu>
+
+
+    <router-view/>
 </template>
 
 <style>
-
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.img-container {
+    max-height: 50px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .flex-grow {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 nav {
-  padding: 30px;
+    padding: 30px;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+    color: #42b983;
 }
 
 
 </style>
+<script setup>
+</script>
