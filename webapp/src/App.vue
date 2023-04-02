@@ -5,7 +5,6 @@
             mode="horizontal"
             :ellipsis="false"
             @select="handleSelect"
-            router="true"
     >
         <el-menu-item index="/">LOGO</el-menu-item>
         <div class="flex-grow"/>
@@ -29,17 +28,7 @@
 </template>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
 
-.img-container {
-    max-height: 50px;
-}
 
 img {
     max-width: 100%;
@@ -57,10 +46,6 @@ nav {
 nav a {
     font-weight: bold;
     color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-    color: #42b983;
 }
 
 
