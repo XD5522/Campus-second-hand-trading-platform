@@ -13,28 +13,23 @@
   >
     <el-menu-item index="/">LOGO</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="/about">Processing Center</el-menu-item>
+    <el-menu-item index="/about">首页</el-menu-item>
+    <el-menu-item index="/about">哈哈哈</el-menu-item>
+    <el-menu-item index="/about">哈哈哈哈</el-menu-item>
+    <el-menu-item index="/about">呜呜呜呜</el-menu-item>
+    <div class="flex-grow" />
+    <el-menu-item index="/about">[头像]</el-menu-item>
     <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
+      <template #title>用户名</template>
+      <el-menu-item index="2-1">个人中心</el-menu-item>
+      <el-menu-item index="2-2">购物车</el-menu-item>
+      <el-menu-item index="2-3">注销</el-menu-item>
     </el-sub-menu>
   </el-menu>
   <router-view/>
 </template>
 
-<script lang="ts" setup>
-
-</script>
 <style>
-
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
