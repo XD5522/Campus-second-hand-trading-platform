@@ -18,11 +18,11 @@ class CampusSecondHandTradingPlatformApplicationTests {
                     builder.author("cc") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .outputDir("D:\\user\\cc\\2023\\程序设计\\github\\Campus-second-hand-trading-platform\\src\\main\\resources\\generator"); // 指定输出目录
+                            .outputDir(""); // 指定输出目录
                 })
                 .packageConfig(builder -> {
                     builder.parent("") // 设置父包名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, "D:\\user\\cc\\2023\\程序设计\\github\\Campus-second-hand-trading-platform\\src\\main\\resources\\generator")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, "")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
                     builder .addTablePrefix("t_", "c_"); // 设置过滤表前缀

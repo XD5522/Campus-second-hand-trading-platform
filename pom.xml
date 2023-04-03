@@ -84,9 +84,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.fish.fly</groupId>
+                <groupId>com.github.ciweigg</groupId>
                 <artifactId>mybatis-plus-generator-maven-plugin</artifactId>
-                <version>1.0.0-RELEASE</version>
+                <version>1.0.1-RELEASE</version>
                 <configuration>
                     <configurationFile>${basedir}/src/main/resources/generator/mp-code-generator-config.yaml</configurationFile>
                 </configuration>

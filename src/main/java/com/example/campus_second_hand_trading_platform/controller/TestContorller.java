@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin
 public class TestContorller {
     @GetMapping("/test")
-
     public List<Integer> Test(){
         List<Integer> list = new ArrayList<>();
         list.add(1);
