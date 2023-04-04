@@ -1,7 +1,16 @@
+
+
+
 #spring datasource & jpa config
 spring:
+  mvc:
+    servlet:
+      load-on-startup=1:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost/demo
+#    username: root
+#    password: c225cc
     url: jdbc:mysql://101.43.208.136:3306/2020011236
     username: 2020011236
     password: NxcKw6kNaEt2jxKW
@@ -17,6 +26,6 @@ spring:
 mybatis-plus:
   global-config:
     db-config:
-      logic-delete-field: flag # ????????????(since 3.3.0,????????????2)
-      logic-delete-value: 1 # ??????(??? 1)
-      logic-not-delete-value: 0 # ??????(??? 0)
+      logic-delete-field: flag
+      logic-delete-value: 1
+      logic-not-delete-value: 0

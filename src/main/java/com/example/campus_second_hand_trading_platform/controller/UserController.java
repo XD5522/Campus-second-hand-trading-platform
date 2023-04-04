@@ -5,7 +5,6 @@ import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +38,9 @@ public class UserController {
     }
 
     @GetMapping
-    public User getUsers(@RequestParam("id") int id){
-        System.out.println(id);
-        User user = userService.getById(id);
-
-        return user;
+    public List<User>getUsers(){
+        List<User> users = userService.getBaseMapper().selectList(null);
+        return users;
     }
 
 
