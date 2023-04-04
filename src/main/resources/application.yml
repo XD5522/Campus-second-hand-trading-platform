@@ -11,7 +11,7 @@ spring:
 #    url: jdbc:mysql://localhost/demo
 #    username: root
 #    password: c225cc
-    url: jdbc:mysql://101.43.208.136:3306/2020011236
+    url: jdbc:mysql://101.43.208.136/2020011236
     username: 2020011236
     password: NxcKw6kNaEt2jxKW
   jpa:

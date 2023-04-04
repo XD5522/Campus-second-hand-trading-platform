@@ -1,4 +1,4 @@
-package com.example.campus_second_hand_trading_platform.controller.dto;
+package com.example.campus_second_hand_trading_platform.dto;
 
 public class UserDto {
     private Integer id;

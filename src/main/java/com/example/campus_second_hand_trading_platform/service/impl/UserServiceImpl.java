@@ -22,14 +22,5 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    /*@Autowired
-    UserMapper userMapper;
-    public boolean save(User user){
-        return SqlHelper.retBool(userMapper.insert(user));
-    }
-
-    public User getById(Serializable id){
-        return userMapper.selectById(id);
-    }*/
 
 }
