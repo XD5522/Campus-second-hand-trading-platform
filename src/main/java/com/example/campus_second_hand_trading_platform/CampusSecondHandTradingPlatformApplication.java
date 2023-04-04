@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
+@MapperScan("com.example.campus_second_hand_trading_platform.dao.mapper")
 public class CampusSecondHandTradingPlatformApplication {
 
     public static void main(String[] args) {

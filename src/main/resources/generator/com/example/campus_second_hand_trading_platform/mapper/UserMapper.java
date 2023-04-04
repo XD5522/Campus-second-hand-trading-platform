@@ -1,6 +1,6 @@
-package mapper;
+package com.example.campus_second_hand_trading_platform.mapper;
 
-import entity.User;
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author cc
- * @since 2023-04-03
+ * @since 2023-04-04
  */
 public interface UserMapper extends BaseMapper<User> {
 

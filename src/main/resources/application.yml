@@ -1,4 +1,4 @@
-
+#spring datasource & jpa config
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -13,3 +13,10 @@ spring:
       hibernate:
         dialectorg: hibernate.dialect.MySQL8Dialect
 
+#mybatis-plus config
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: flag # ????????????(since 3.3.0,????????????2)
+      logic-delete-value: 1 # ??????(??? 1)
+      logic-not-delete-value: 0 # ??????(??? 0)
