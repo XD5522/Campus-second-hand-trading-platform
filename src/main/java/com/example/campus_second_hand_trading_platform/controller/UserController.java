@@ -53,8 +53,7 @@ public class UserController {
     }
     @GetMapping("/getbyname")
     public List<UserDto> getuserbyname(@RequestParam String name){
-
-        List<User> users = userMapper.getByName(name);
+        List<User> users = userService.getByName(name);
         List<UserDto> userDtos = BeanUtils.copyPropertiesList(users,UserDto.class);;
         return userDtos;
     }

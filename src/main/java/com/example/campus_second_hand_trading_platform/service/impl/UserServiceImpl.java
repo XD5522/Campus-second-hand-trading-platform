@@ -22,4 +22,9 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+    @Autowired
+    private UserMapper userMapper;
+    public List<User> getByName(String name){
+        return userMapper.getByName(name);
+    }
 }
