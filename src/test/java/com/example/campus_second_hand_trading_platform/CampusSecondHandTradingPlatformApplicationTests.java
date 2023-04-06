@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
@@ -28,6 +30,10 @@ class CampusSecondHandTradingPlatformApplicationTests {
                     builder .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .execute();
+    }
+    @Test
+    void redis(){
+
     }
 
 }

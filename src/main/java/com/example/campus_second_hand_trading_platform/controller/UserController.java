@@ -1,16 +1,16 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
-import com.example.campus_second_hand_trading_platform.dto.UserDto;
+import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +26,7 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
     @Autowired
+    @Qualifier("UserServiceImpl")
     private IUserService userService;
     @Autowired
     private UserMapper userMapper;
