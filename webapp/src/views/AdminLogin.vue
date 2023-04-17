@@ -16,27 +16,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
 import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus';
-
-@Component({
-    components: {
-        ElForm,
-        ElFormItem,
-        ElInput,
-        ElButton
-    }
-})
-export default class LoginPage extends Vue {
-    loginForm = {
-        username: '',
-        password: ''
-    };
-
-    handleLogin() {
-        // 登录逻辑
-        console.log('登录成功');
-    }
+export default {
+    name: 'adminlogin'
 }
 </script>
 
