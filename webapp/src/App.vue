@@ -24,15 +24,18 @@
                     <el-menu-item index="2-3">注销</el-menu-item>
                 </el-sub-menu>
             </el-menu>
+            <navbar></navbar>
         </el-header>
     </div>
-
-
     <router-view/>
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 export default {
+    components: {
+        Navbar // 注册导航栏组件
+    },
     data() {
         return {
             showNavbar: true//showNavbar属性标记导航栏的可见性
