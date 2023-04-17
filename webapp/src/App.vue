@@ -10,7 +10,7 @@
             >
                 <el-menu-item index="/">LOGO</el-menu-item>
                 <div class="flex-grow"/>
-                <el-menu-item index="/about">首页</el-menu-item>
+                <el-menu-item index="/admin">管理员</el-menu-item>
                 <el-menu-item index="/about">哈哈哈</el-menu-item>
                 <el-menu-item index="/about">哈哈哈哈</el-menu-item>
                 <el-menu-item index="/about">呜呜呜呜</el-menu-item>
