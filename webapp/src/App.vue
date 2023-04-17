@@ -4,8 +4,6 @@
             <navbar></navbar>
         </el-header>
     </div>
-
-
     <router-view/>
 </template>
 
