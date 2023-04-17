@@ -8,12 +8,23 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/AdminLogin',
+    name: 'AdminLogin',
+    component: import(/* webpackChunkName: "about" */ '../views/AdminLogin.vue'),
+    meta: {
+      hideNavbar: true //隐藏导航栏
+    }
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    meta: {
+      hideNavbar: true //隐藏导航栏
+    }
   }
 ]
 
