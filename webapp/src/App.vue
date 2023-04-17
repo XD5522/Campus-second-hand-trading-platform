@@ -36,20 +36,6 @@ export default {
     color: #2c3e50;
 }
 
-
-.menu-container {
-    height: 80px;
-}
-
-el-menu {
-    height: 100%;
-}
-
-
-.flex-grow {
-    flex-grow: 1;
-}
-
 nav {
     padding: 30px;
 }
@@ -61,5 +47,3 @@ nav a {
 
 
 </style>
-<script setup>
-</script>
