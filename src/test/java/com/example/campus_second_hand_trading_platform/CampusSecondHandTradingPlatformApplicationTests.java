@@ -3,15 +3,22 @@ package com.example.campus_second_hand_trading_platform;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Collections;
+import java.util.Enumeration;
 
 @SpringBootTest
 class CampusSecondHandTradingPlatformApplicationTests {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Test
     void contextLoads() {
@@ -33,7 +40,8 @@ class CampusSecondHandTradingPlatformApplicationTests {
     }
     @Test
     void redis(){
-
+//            redisTemplate.opsForValue().set("1","1");
+            redisTemplate.delete("1");
     }
 
 }

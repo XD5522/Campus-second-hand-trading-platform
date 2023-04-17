@@ -14,10 +14,8 @@ spring:
     url: jdbc:mysql://101.43.208.136/2020011236
     username: 2020011236
     password: NxcKw6kNaEt2jxKW
-    redis:
-      host: 101.43.208.136
-      port: 6379
-      password: c225cc
+
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,6 +23,12 @@ spring:
     properties:
       hibernate:
         dialectorg: hibernate.dialect.MySQL8Dialect
+  data:
+    redis:
+      host: 101.43.208.136
+      port: 6379
+      password: c225cc
+      database: 0
 
 #mybatis-plus config
 mybatis-plus:
