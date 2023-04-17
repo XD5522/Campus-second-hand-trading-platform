@@ -2,10 +2,10 @@
   <!-- 模板内容 -->
 </template>
 
-<script>
+<script lang="ts" setup>
 export default {
   name: "AdminMain",
-}
+};
 </script>
 
 <style scoped>
