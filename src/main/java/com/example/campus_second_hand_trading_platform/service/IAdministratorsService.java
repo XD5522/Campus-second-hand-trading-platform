@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-04-17
  */
 public interface IAdministratorsService extends IService<Administrators> {
-
+    public Administrators getByAccount(String account);
 }
