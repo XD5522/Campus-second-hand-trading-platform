@@ -3,6 +3,7 @@
 
 #spring datasource & jpa config
 spring:
+
   mvc:
     servlet:
       load-on-startup=1:
@@ -29,6 +30,9 @@ spring:
       port: 6379
       password: c225cc
       database: 0
+  session:
+    store-type: redis
+
 
 #mybatis-plus config
 mybatis-plus:

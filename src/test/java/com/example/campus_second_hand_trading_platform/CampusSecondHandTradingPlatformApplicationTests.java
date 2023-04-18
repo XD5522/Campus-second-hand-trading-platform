@@ -19,6 +19,8 @@ class CampusSecondHandTradingPlatformApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    HttpSession session;
 
     @Test
     void contextLoads() {
@@ -34,14 +36,14 @@ class CampusSecondHandTradingPlatformApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src\\main\\resources\\generator")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder .addTablePrefix("t_", "c_"); // 设置过滤表前缀
+                    builder .addInclude("administrators"); // 设置过滤表前缀
                 })
                 .execute();
     }
     @Test
     void redis(){
-//            redisTemplate.opsForValue().set("1","1");
-            redisTemplate.delete("1");
+            redisTemplate.opsForValue().set("1","1");
+            session.setAttribute("2","2");
     }
 
 }
