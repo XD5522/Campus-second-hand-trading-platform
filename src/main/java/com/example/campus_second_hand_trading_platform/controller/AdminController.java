@@ -6,6 +6,7 @@ import com.example.campus_second_hand_trading_platform.domain.dto.AdminDto;
 import com.example.campus_second_hand_trading_platform.utils.JWT;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin
+@Slf4j
 public class AdminController {
 
     @Autowired
@@ -29,20 +31,12 @@ public class AdminController {
     @Autowired
     AdministratorsMapper administratorsMapper;
 
-    @PostMapping
+    @PostMapping()
     public String  Login(HttpServletRequest request, @RequestBody AdminDto adminDto){
-        Administrators administrators =  administratorsMapper.selectById("1");
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            // 提取 Token，例如将 "Bearer " 后面的部分作为 Token
-            String token = authorizationHeader.substring(7);
-            // 进行后续处理，例如解析、验证等
-            JWT.saveToken(token,30);
-        } else {
-            return "0";
-        }
-        System.out.println(administrators.getName());
-        return adminDto.getAccount();
+        Administrators administrators =  administratorsMapper.getByAccount(adminDto.getUsername());
+
+        log.info(adminDto.toString());
+        return "JWT.saveToken(adminDto.getAccount(),3600);";
     }
     @GetMapping
     public String test(HttpServletRequest request,@RequestBody AdminDto adminDto){

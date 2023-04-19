@@ -15,7 +15,7 @@ public class JWT {
     @Autowired
     private static RedisTemplate<String, String> redisTemplate;
 
-    public static void saveToken(String userId,long expirationTimeMillis) {
+    public static String saveToken(String userId,long expirationTimeMillis) {
 
         long expirationMs = 3600000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationMs);
@@ -27,11 +27,10 @@ public class JWT {
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
-
-
         // 将 JWT 存入 Redis，设置过期时间
         redisTemplate.opsForValue().set(token, token);
         redisTemplate.expire(token, expirationTimeMillis, TimeUnit.MILLISECONDS);
+        return token;
     }
 
     public static boolean isTokenExists(String jwtToken) {
