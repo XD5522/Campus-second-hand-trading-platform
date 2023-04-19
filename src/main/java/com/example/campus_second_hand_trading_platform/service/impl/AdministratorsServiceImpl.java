@@ -1,7 +1,8 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
+import com.example.campus_second_hand_trading_platform.dao.Repository.AdminRepository;
 import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
-import com.example.campus_second_hand_trading_platform.dao.mapper.AdministratorsMapper;
+import com.example.campus_second_hand_trading_platform.dao.mapper.AdminMapper;
 import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
  * @since 2023-04-17
  */
 @Service
-public class AdministratorsServiceImpl extends ServiceImpl<AdministratorsMapper, Administrators> implements IAdministratorsService {
+public class AdministratorsServiceImpl extends ServiceImpl<AdminMapper, Administrators> implements IAdministratorsService {
     @Autowired
-    private AdministratorsMapper administratorsMapper;
+    private AdminRepository adminRepository;
     public Administrators getByAccount(String account){
-        return administratorsMapper.getByAccount(account);
+        return adminRepository.getByAccount(account);
     }
 }
