@@ -12,6 +12,4 @@ import lombok.NoArgsConstructor;
 public class AdminDto {
     private String account;
     private String password;
-
-
 }

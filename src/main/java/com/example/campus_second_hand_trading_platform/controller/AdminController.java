@@ -2,13 +2,18 @@ package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
 import com.example.campus_second_hand_trading_platform.domain.dto.AdminDto;
+import com.example.campus_second_hand_trading_platform.domain.vo.AdminVo;
 import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
+import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -48,8 +53,12 @@ public class AdminController {
         return token;
     }
     @GetMapping
-    public String test(HttpServletRequest request,@RequestBody AdminDto adminDto){
-        return "1";
+    public List<AdminVo> test(HttpServletRequest request){
+        List<Administrators> administrators = administratorsService.list();
+        List<AdminVo> adminVos = BeanUtils.copyPropertiesList(administrators,AdminVo.class);
+        log.info(administrators.toString());
+        log.info(adminVos.toString());
+        return adminVos;
     }
 
 }

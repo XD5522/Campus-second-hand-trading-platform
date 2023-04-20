@@ -2,6 +2,7 @@ package com.example.campus_second_hand_trading_platform.utils;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -39,8 +40,10 @@ public class JwtUtils {
         return token;
     }
 
-    public boolean isTokenExists(String jwtToken) {
+    public boolean isTokenExists(HttpServletRequest request) {
         // 判断 JWT 是否存在于 Redis 中
+        String jwtToken = request.getHeader("***");
+
         return redisTemplate.hasKey(jwtToken);
     }
 
