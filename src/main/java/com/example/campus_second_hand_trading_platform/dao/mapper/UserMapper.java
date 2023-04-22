@@ -22,6 +22,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    @Select("select * from t_user where name = #{key}")
+    @Select("select * from user where user_name = #{key}")
     public List<User> getByName(@Param("key") String name);
 }
