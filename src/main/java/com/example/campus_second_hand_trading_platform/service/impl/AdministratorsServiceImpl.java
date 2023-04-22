@@ -1,6 +1,5 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
-import com.example.campus_second_hand_trading_platform.dao.Repository.AdminRepository;
 import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
 import com.example.campus_second_hand_trading_platform.dao.mapper.AdminMapper;
 import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
@@ -19,8 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdministratorsServiceImpl extends ServiceImpl<AdminMapper, Administrators> implements IAdministratorsService {
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminMapper adminMapper;
     public Administrators getByAccount(String account){
-        return adminRepository.getByAccount(account);
+        return adminMapper.getByAccount(account);
     }
 }

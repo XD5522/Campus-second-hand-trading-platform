@@ -7,13 +7,11 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author cc
- * @since 2023-04-17
- */
+* Description:administrator entity
+* date: 2023/4/22 15:58
+* @author cc
+* @since JDK17
+*/
 @TableName("administrators")
 public class Administrators implements Serializable {
 

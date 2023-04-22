@@ -12,6 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+* Description:
+* date: 2023/4/22 15:38
+* @author cc
+* @since JDK17
+*/
+
 @Component
 public class JwtUtils {
 

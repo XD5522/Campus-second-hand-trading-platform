@@ -8,7 +8,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 
 
 @MapperScan("com.example.campus_second_hand_trading_platform.dao.mapper")
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication()
 public class CampusSecondHandTradingPlatformApplication {
 
     public static void main(String[] args) {

@@ -15,8 +15,6 @@ spring:
     url: jdbc:mysql://101.43.208.136/2020011236
     username: 2020011236
     password: NxcKw6kNaEt2jxKW
-
-
   jpa:
     hibernate:
       ddl-auto: update

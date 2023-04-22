@@ -3,7 +3,13 @@ package com.example.campus_second_hand_trading_platform.domain.vo;
 import lombok.Builder;
 import lombok.Data;
 
-
+/**
+* Description:adminVo,admin视图对象
+* date: 2023/4/22 16:01
+* @author cc
+* @since JDK17
+*/
+@Data
 public class AdminVo {
     private Integer id;
 
@@ -11,30 +17,4 @@ public class AdminVo {
 
     private String name;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAdminAccount() {
-        return adminAccount;
-    }
-
-    public void setAdminAccount(String adminAccount) {
-        this.adminAccount = adminAccount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public AdminVo() {
-    }
 }

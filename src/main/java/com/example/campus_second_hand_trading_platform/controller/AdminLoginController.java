@@ -9,25 +9,21 @@ import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author cc
- * @since 2023-04-17
- */
+* Description:用户登录控制器
+* date: 2023/4/22 15:53
+* @author cc
+* @since JDK17
+*/
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin
 @Slf4j
-public class AdminController {
+public class AdminLoginController {
 
 
     @Autowired
@@ -35,6 +31,13 @@ public class AdminController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * 登录接口
+     * @param request
+     * @param adminDto
+     * @return
+     *
+     */
     @PostMapping()
     public String  Login(HttpServletRequest request, @RequestBody AdminDto adminDto){
         Administrators administrators =  administratorsService.getByAccount(adminDto.getAccount());
