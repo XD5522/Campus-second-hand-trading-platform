@@ -3,6 +3,7 @@ package com.example.campus_second_hand_trading_platform.utils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -21,13 +22,14 @@ import java.util.concurrent.TimeUnit;
 */
 
 @Component
+@Slf4j
 public class JwtUtils {
 
 
     private static final String KEY = "1GH4234ig12G3UYG45U4GV8JGH48F76D4TF69Y97REYG793Q4TG9R2";
     private static final String ISS = "c225cc";
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     public String saveToken(String userId,String userAccount,long expirationTimeMillis) {
         //过期时间
@@ -44,10 +46,10 @@ public class JwtUtils {
                 .compact();
         // 将 JWT 存入 Redis，设置过期时间
         redisTemplate.opsForSet().add(userId,token);
-        redisTemplate.expire(userId, expirationTimeMillis, TimeUnit.MILLISECONDS);
-
+        redisTemplate.expire(userId, expirationMs, TimeUnit.MILLISECONDS);
         redisTemplate.opsForValue().set(token, token);
-        redisTemplate.expire(token, expirationTimeMillis, TimeUnit.MILLISECONDS);
+        redisTemplate.expire(token, expirationMs, TimeUnit.MILLISECONDS);
+        log.info(token);
         return token;
     }
 

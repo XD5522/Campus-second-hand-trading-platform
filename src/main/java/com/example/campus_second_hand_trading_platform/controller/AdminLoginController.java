@@ -23,7 +23,7 @@ import java.util.List;
 * @since JDK17
 */
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/admin/login")
 @CrossOrigin
 @Slf4j
 public class AdminLoginController {
@@ -46,17 +46,19 @@ public class AdminLoginController {
         Administrators administrators =  administratorsService.getByAccount(adminDto.getAdminAccount());
         String token = "";
         String md5psw = MD5Utils.Encryption(adminDto.getAdminPassword());
+        md5psw = MD5Utils.Encryption(md5psw);
         if(administrators==null){
             log.info("用户不存在"+adminDto.getAdminAccount());
         }
         else{
             log.info(administrators.getAdminAccount());
+            log.info(md5psw);
             if(administrators.getAdminPassword().equals(md5psw) ){
                 log.info("密码正确");
                 token = jwtUtils.saveToken(administrators.getId().toString(),adminDto.getAdminAccount(), 3600L);
+                log.info(administrators.getId().toString());
             }
         }
-        log.info(adminDto.toString());
         return ResponseEntity.ok(token);
     }
     @PostMapping
