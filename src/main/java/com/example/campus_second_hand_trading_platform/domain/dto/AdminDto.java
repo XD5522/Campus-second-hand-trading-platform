@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class AdminDto {
-    private String account;
-    private String password;
+    private String adminAccount;
+    private String adminPassword;
+    private String name;
 }

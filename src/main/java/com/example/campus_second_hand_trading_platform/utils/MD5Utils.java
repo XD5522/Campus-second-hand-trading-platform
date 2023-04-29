@@ -15,15 +15,15 @@ public class MD5Utils {
 
     private static final String salt = "bistu";
 
-    String md5Password;
+
 
     /**
      * 对输入的密码进行加密
      * @param userPassword 用户输入的密码
      * @return 加密后的密码
      */
-    public String Encryption(String userPassword) {
-
+    public static String Encryption(String userPassword) {
+        String md5Password;
         userPassword = DigestUtils.md5DigestAsHex(userPassword.getBytes());
         userPassword = salt.charAt(0) + salt.charAt(1) + userPassword + salt.charAt(2) + userPassword.charAt(3) + userPassword.charAt(4);
         md5Password = DigestUtils.md5DigestAsHex(userPassword.getBytes());

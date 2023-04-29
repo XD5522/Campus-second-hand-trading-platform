@@ -26,8 +26,6 @@ public class UserLoginController {
     @Autowired
     private IUserLoginService iUserLoginService;
 
-    @Autowired
-    private MD5Utils md5Utils;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -41,7 +39,7 @@ public class UserLoginController {
     String Login(@RequestBody LoginDataDto loginDataDto){
 
         //MD5加密
-        String md5Password = md5Utils.Encryption(loginDataDto.getUserPassword());
+        String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
 
         //加密后检查是否存在该用户名和密码的账户
         UserAccount userAccount = iUserLoginService.getByUserName(loginDataDto.getUserName());

@@ -43,6 +43,9 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
         // 将 JWT 存入 Redis，设置过期时间
+        redisTemplate.opsForSet().add(userId,token);
+        redisTemplate.expire(userId, expirationTimeMillis, TimeUnit.MILLISECONDS);
+
         redisTemplate.opsForValue().set(token, token);
         redisTemplate.expire(token, expirationTimeMillis, TimeUnit.MILLISECONDS);
         return token;

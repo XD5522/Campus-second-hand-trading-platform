@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
 * Description:administrator entity
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 * @author cc
 * @since JDK17
 */
+@Data
 @TableName("administrators")
 public class Administrators implements Serializable {
 
@@ -26,47 +28,7 @@ public class Administrators implements Serializable {
 
     private String name;
 
-    private String sessionId;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAdminAccount() {
-        return adminAccount;
-    }
-
-    public void setAdminAccount(String adminAccount) {
-        this.adminAccount = adminAccount;
-    }
-
-    public String getAdminPassword() {
-        return adminPassword;
-    }
-
-    public void setAdminPassword(String adminPassword) {
-        this.adminPassword = adminPassword;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
 
     @Override
     public String toString() {
@@ -75,7 +37,6 @@ public class Administrators implements Serializable {
         ", adminAccount = " + adminAccount +
         ", adminPassword = " + adminPassword +
         ", name = " + name +
-        ", sessionId = " + sessionId +
         "}";
     }
 }
