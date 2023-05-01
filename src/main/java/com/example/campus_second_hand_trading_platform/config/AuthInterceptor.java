@@ -26,12 +26,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String tk = redisTemplate.opsForValue().get(token).toString();
-        log.info(tk);
-        if (tk == null) {
-            // 如果用户的认证信息无效，可以直接返回错误信息或者跳转到登录页面
-            return false;
-        }
+//
         // 用户的认证信息有效，放行请求
         return true;
     }

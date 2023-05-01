@@ -17,8 +17,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdministratorsServiceImpl extends ServiceImpl<AdminMapper, Administrators> implements IAdministratorsService {
+    private final AdminMapper adminMapper;
+
     @Autowired
-    private AdminMapper adminMapper;
+    public AdministratorsServiceImpl(AdminMapper adminMapper) {
+        this.adminMapper = adminMapper;
+    }
+
     public Administrators getByAccount(String account){
         return adminMapper.getByAccount(account);
     }

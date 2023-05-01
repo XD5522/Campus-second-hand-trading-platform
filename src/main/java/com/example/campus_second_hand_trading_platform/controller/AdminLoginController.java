@@ -2,7 +2,6 @@ package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
 import com.example.campus_second_hand_trading_platform.domain.dto.AdminDto;
-import com.example.campus_second_hand_trading_platform.domain.vo.AdminVo;
 import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
 import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
@@ -10,11 +9,8 @@ import com.example.campus_second_hand_trading_platform.utils.MD5Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
 * Description:用户登录控制器
@@ -29,10 +25,14 @@ import java.util.List;
 public class AdminLoginController {
 
 
+    private final IAdministratorsService administratorsService;
+    private final  JwtUtils jwtUtils;
+
     @Autowired
-    IAdministratorsService administratorsService;
-    @Autowired
-    JwtUtils jwtUtils;
+    public AdminLoginController(IAdministratorsService administratorsService, JwtUtils jwtUtils) {
+        this.administratorsService = administratorsService;
+        this.jwtUtils = jwtUtils;
+    }
 
     /**
      * 登录接口
