@@ -31,14 +31,17 @@
         <result property="trading" column="trading"/>
         <result property="state" column="state"/>
     </resultMap>
-    <select id="SelectProductByName" parameterType="String" resultMap="productVoMap">
+    <select id="SearchProducts" parameterType="String" resultMap="productVoMap">
         SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id
-        where product.name like CONCAT('%',#{name},'%')
         ORDER BY CASE
                      WHEN product.name = #{name} THEN 1
                      WHEN product.name LIKE CONCAT(#{name}, '%') THEN 2
                      WHEN product.name LIKE CONCAT('%', #{name}) THEN 3
                      ELSE 4
                      END
+    </select>
+
+    <select id="SelectProductByName" >
+
     </select>
 </mapper>

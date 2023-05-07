@@ -36,9 +36,10 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<?> GetProductById(HttpServletRequest request, @RequestParam String name){
 
-        List<ProductVo> products = productService.SelectProductByName(name);
+        List<ProductVo> products = productService.SearchProducts(name);
         log.info(name);
         return ResponseEntity.ok(products);
     }
+
 
 }

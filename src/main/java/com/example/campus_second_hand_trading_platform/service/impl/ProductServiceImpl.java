@@ -30,8 +30,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         this.productRepository = productRepository;
     }
 
-    public List<ProductVo> SelectProductByName(String name){
+    public List<ProductVo> SearchProducts(String name){
         log.info(name);
-        return productRepository.SelectProductByName(name);
+        return productRepository.SearchProducts(name);
     }
 }

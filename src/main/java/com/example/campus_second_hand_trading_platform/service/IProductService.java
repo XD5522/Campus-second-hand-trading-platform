@@ -15,5 +15,5 @@ import java.util.List;
  * @since 2023-05-06
  */
 public interface IProductService extends IService<Product> {
-    public List<ProductVo> SelectProductByName(String name);
+    public List<ProductVo> SearchProducts(String name);
 }

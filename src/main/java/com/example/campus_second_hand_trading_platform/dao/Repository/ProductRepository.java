@@ -16,7 +16,7 @@ public class ProductRepository {
         this.productMapper = productMapper;
     }
 
-    public List<ProductVo> SelectProductByName(String name){
-        return productMapper.SelectProductByName(name);
+    public List<ProductVo> SearchProducts(String name){
+        return productMapper.SearchProducts(name);
     }
 }
