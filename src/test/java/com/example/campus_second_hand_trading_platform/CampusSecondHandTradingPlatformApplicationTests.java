@@ -37,7 +37,7 @@ class CampusSecondHandTradingPlatformApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src\\main\\resources\\generator")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder .addInclude("user_account"); // 设置过滤表前缀
+                    builder .addInclude("product"); // 设置过滤表前缀
                 })
                 .execute();
     }
@@ -56,6 +56,12 @@ class CampusSecondHandTradingPlatformApplicationTests {
     void pathtest(){
 
         System.out.println(homeDir + imageStoragePath + "/");
+    }
+
+    @Test
+    void locktest(){
+        Object lock = new Object();
+        
     }
 
 }

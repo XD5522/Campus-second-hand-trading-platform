@@ -3,6 +3,7 @@ package com.example.campus_second_hand_trading_platform.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.UUID;
 
 @RestController
@@ -22,7 +24,7 @@ public class ImageController {
     private String imageStoragePath;
 
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+    public String uploadImage(HttpRequest httpRequest, @RequestParam("file") MultipartFile file) throws IOException {
         // 检查上传的文件是否为空
         if (file.isEmpty()) {
             return "上传的文件为空";
