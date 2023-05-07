@@ -4,6 +4,10 @@ import lombok.Data;
 
 @Data
 public class ProductVo {
+    private Integer id;
+    
+    private Integer userId;
+
     private String userName;
 
     private String name;
@@ -16,7 +20,7 @@ public class ProductVo {
 
     private Integer hisSales;
 
-    private Object size;
+    private String size;
 
     private String type;
 
@@ -26,5 +30,6 @@ public class ProductVo {
 
     private String state;
 
-
+    public ProductVo() {
+    }
 }

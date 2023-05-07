@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.ProductMapper">
+    <resultMap id="productMap" type="com.example.campus_second_hand_trading_platform.dao.entity.Product">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="intro" column="intro"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="hisSales" column="his_sales"/>
+        <result property="size" column="size"/>
+        <result property="type" column="type"/>
+        <result property="star" column="star"/>
+        <result property="trading" column="trading"/>
+        <result property="state" column="state"/>
+        <result property="flag" column="flag"/>
+    </resultMap>
+    <resultMap id="productVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.ProductVo">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="name" column="name"/>
+        <result property="intro" column="intro"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="hisSales" column="his_sales"/>
+        <result property="size" column="size"/>
+        <result property="type" column="type"/>
+        <result property="star" column="star"/>
+        <result property="trading" column="trading"/>
+        <result property="state" column="state"/>
+    </resultMap>
+    <select id="SelectProductByName" parameterType="String" resultMap="productVoMap">
+        SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id
+        where product.name like CONCAT('%',#{name},'%')
+        ORDER BY CASE
+                     WHEN product.name = #{name} THEN 1
+                     WHEN product.name LIKE CONCAT(#{name}, '%') THEN 2
+                     WHEN product.name LIKE CONCAT('%', #{name}) THEN 3
+                     ELSE 4
+                     END
+    </select>
+</mapper>

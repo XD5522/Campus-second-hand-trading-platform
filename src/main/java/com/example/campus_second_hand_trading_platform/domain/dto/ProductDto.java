@@ -16,7 +16,7 @@ public class ProductDto {
 
     private Integer hisSales;
 
-    private Object size;
+    private String size;
 
     private String type;
 

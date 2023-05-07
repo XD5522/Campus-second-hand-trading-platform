@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * </p>
  *
- * @author qionghua
+ * @author cc
  * @since 2023-05-06
  */
 @TableName("product")
@@ -35,7 +35,7 @@ public class Product implements Serializable {
 
     private Integer hisSales;
 
-    private Object size;
+    private String size;
 
     private String type;
 
@@ -47,6 +47,8 @@ public class Product implements Serializable {
 
     private Integer flag;
 
+    public Product() {
+    }
 
     @Override
     public String toString() {
