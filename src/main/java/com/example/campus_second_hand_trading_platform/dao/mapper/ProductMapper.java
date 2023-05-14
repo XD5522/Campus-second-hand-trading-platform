@@ -19,4 +19,5 @@ import java.util.List;
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
     List<ProductVo> SearchProducts(String name);
+    ProductVo SelectProductById(int id);
 }

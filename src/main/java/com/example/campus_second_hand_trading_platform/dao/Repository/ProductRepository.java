@@ -19,4 +19,7 @@ public class ProductRepository {
     public List<ProductVo> SearchProducts(String name){
         return productMapper.SearchProducts(name);
     }
+    public ProductVo SelectProductById(int id){
+        return productMapper.SelectProductById(id);
+    }
 }

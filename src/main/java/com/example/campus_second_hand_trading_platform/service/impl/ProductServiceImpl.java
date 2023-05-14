@@ -34,4 +34,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         log.info(name);
         return productRepository.SearchProducts(name);
     }
+
+    public ProductVo SelectProductById(int id){
+        return productRepository.SelectProductById(id);
+    }
 }
