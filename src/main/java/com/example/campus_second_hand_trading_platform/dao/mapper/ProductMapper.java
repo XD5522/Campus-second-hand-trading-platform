@@ -2,6 +2,7 @@ package com.example.campus_second_hand_trading_platform.dao.mapper;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.campus_second_hand_trading_platform.domain.dto.AddProductDTO;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
 
