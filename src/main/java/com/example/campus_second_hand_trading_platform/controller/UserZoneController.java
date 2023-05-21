@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.example.campus_second_hand_trading_platform.config.CommonResult;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.example.campus_second_hand_trading_platform.domain.dto.AddProductDTO;
 import com.example.campus_second_hand_trading_platform.service.IAddProductService;
@@ -18,13 +19,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserZoneController {
     @Autowired
     IAddProductService addProductService;
+
     @PostMapping("/AddNewProduct")
-    public void AddNewProduct(@RequestBody AddProductDTO data){
+    public CommonResult AddNewProduct(@RequestBody AddProductDTO data){
         Product product = new Product();
         BeanUtils.copyProperties(data,product);
         log.info(product.toString());
+
         if(addProductService.save(product)){
-            log.info("添加商品成功,商品名为:"+data.getName());
+            return CommonResult.success(product);
+        }else{
+            log.debug("插入失败",product);
+            return CommonResult.failed("插入失败");
         }
     }
 }

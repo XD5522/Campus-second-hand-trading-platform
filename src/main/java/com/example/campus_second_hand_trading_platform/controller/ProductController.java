@@ -1,6 +1,7 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.Repository.ProductRepository;
+import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.example.campus_second_hand_trading_platform.domain.dto.searchDto;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
@@ -39,6 +40,13 @@ public class ProductController {
     public ResponseEntity<?> GetProductById(HttpServletRequest request, @RequestParam int id){
         ProductVo product = productService.SelectProductById(id);
         return ResponseEntity.ok(product);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> Save(HttpServletRequest request,@RequestBody Product product){
+        log.info(product.toString());
+        productService.save(product);
+        return ResponseEntity.ok("11");
     }
 
 

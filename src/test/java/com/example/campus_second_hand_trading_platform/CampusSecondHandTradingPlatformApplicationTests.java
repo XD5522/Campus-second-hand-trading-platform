@@ -27,7 +27,7 @@ class CampusSecondHandTradingPlatformApplicationTests {
     void contextLoads() {
         FastAutoGenerator.create("jdbc:mysql://101.43.208.136:3306/2020011236", "2020011236", "NxcKw6kNaEt2jxKW")
                 .globalConfig(builder -> {
-                    builder.author("qionghua") // 设置作者
+                    builder.author("cc") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
                             .outputDir("src\\main\\resources\\generator"); // 指定输出目录
@@ -37,7 +37,7 @@ class CampusSecondHandTradingPlatformApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src\\main\\resources\\generator")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder .addInclude("product"); // 设置过滤表前缀
+                    builder .addInclude("order"); // 设置过滤表前缀
                 })
                 .execute();
     }
