@@ -35,6 +35,11 @@ public class OrderController {
         return CommonResult.success(service.GetOrderList(id));
     }
 
+    /**
+     * 更新订单状态
+     * @param orderdto
+     * @return 更新成功/失败
+     */
     @PostMapping("/update")
     public CommonResult<?> Update(@RequestBody Order orderdto){
         log.info(orderdto.toString());
