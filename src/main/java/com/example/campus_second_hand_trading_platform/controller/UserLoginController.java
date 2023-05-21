@@ -36,7 +36,7 @@ public class UserLoginController {
      * @return token令牌
      */
     @PostMapping()
-    String Login(@RequestBody LoginDataDto loginDataDto){
+    public String Login(@RequestBody LoginDataDto loginDataDto){
 
         //MD5加密
         String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());

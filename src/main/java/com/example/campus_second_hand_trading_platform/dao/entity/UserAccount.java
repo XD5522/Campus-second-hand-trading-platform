@@ -3,6 +3,7 @@ package com.example.campus_second_hand_trading_platform.dao.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDto;
 
 /**
  * TODO
@@ -26,6 +27,13 @@ public class UserAccount {
     private String userPassword;
 
     private Integer flag;
+
+    public UserAccount(RegisterDataDto registerDataDto, int userId) {
+
+        userAccount = registerDataDto.getUserName();
+        userPassword = registerDataDto.getPassword();
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;

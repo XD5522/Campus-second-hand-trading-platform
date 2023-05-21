@@ -1,6 +1,7 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.example.campus_second_hand_trading_platform.dao.Repository.UserRepository;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
@@ -27,7 +28,61 @@ import java.util.List;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserRepository userRepository;
+
     public List<User> getByName(String name){
         return userMapper.getByName(name);
     }
+
+    /**
+     * 通过用户名获取用户账户信息
+     * @param userName 用户名
+     * @return
+     */
+    public User getByUserName(String userName) {
+
+        return userRepository.getByUserName(userName);
+    }
+
+    /**
+     * 通过手机号获取用户账户信息
+     * @param phone 手机号
+     * @return
+     */
+    public User getByPhone(String phone) {
+
+        return userRepository.getByPhone(phone);
+    }
+
+    /**
+     * 检查是否存在使用该用户名的用户账户
+     * @param userName 用户名
+     * @return
+     */
+    public boolean checkUserName(String userName) {
+
+        User user = getByUserName(userName);
+
+        //判断找到的用户信息是否为空
+        if(user != null) return true;
+        return false;
+    }
+
+    /**
+     * 检查是否存在使用该手机号的用户账户
+     * @param phone 手机号
+     * @return
+     */
+    public boolean checkPhone(String phone) {
+
+        User user = getByPhone(phone);
+
+        //判断找到的用户信息是否为空
+        if(user != null) return true;
+        return false;
+
+    }
+
 }

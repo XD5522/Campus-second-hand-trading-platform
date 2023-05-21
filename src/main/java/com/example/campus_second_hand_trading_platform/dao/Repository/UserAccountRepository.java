@@ -27,4 +27,14 @@ public class UserAccountRepository {
 
         return userAccountMapper.getByUserName(userName);
     }
+
+    /**
+     * 添加一个用户账户
+     * @param userAccount 用户账户信息
+     * @return
+     */
+    public int insertUserAccount(UserAccount userAccount) {
+
+        return userAccountMapper.insertUserAccount(userAccount);
+    }
 }
