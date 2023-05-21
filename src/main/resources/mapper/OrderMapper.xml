@@ -3,7 +3,7 @@
 <mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.OrderMapper">
     <resultMap id="OrderVo" type="com.example.campus_second_hand_trading_platform.domain.vo.OrderVo">
         <id property="id" column="id"/>
-        <result property="product_id" column="user_id"/>
+        <result property="product_id" column="product_id"/>
         <result property="product_name" column="name"/>
         <result property="create_time" column="create_time"/>
         <result property="finish_time" column="finish_time"/>
