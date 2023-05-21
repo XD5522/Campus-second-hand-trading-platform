@@ -16,4 +16,13 @@ import java.util.List;
 
 public interface IUserService extends IService<User> {
     public List<User> getByName(String name);
+
+    public User getByUserName(String userName);
+
+    public User getByPhone(String phone);
+
+    public boolean checkUserName(String userName);
+
+    public boolean checkPhone(String phone);
+
 }

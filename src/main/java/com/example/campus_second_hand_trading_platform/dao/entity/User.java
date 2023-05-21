@@ -3,6 +3,8 @@ package com.example.campus_second_hand_trading_platform.dao.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDto;
+
 import java.io.Serializable;
 
 /**
@@ -52,6 +54,21 @@ public class User implements Serializable {
     private String wechat;
 
     private Integer score;
+
+    public User() {
+    }
+
+    public User(RegisterDataDto registerDataDto) {
+
+        userName = registerDataDto.getUserName();
+        name = registerDataDto.getName();
+        city = registerDataDto.getCity();
+        phone = registerDataDto.getPhone();
+        gender = registerDataDto.getGender();
+        bankCard = registerDataDto.getBankCard();
+        email = registerDataDto.getEmail();
+
+    }
 
     public Integer getId() {
         return id;
