@@ -5,11 +5,8 @@ import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import com.example.campus_second_hand_trading_platform.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 /**
@@ -21,7 +18,7 @@ import java.util.List;
  * @since 2023-05-21
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
@@ -34,7 +31,7 @@ public class OrderController {
      */
     @GetMapping("/GetOrderList")
     public CommonResult<List<OrderVo>> GetOrderListById(@RequestParam int id){
-        log.info("id=",id);
+        log.info(String.valueOf(id));
         return CommonResult.success(service.GetOrderList(id));
     }
 }

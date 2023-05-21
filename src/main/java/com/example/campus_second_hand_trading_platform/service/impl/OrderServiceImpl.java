@@ -27,9 +27,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     OrderMapper orderMapper;
     @Override
     public List<OrderVo> GetOrderList(int id) {
-        List<OrderVo> orderVoList;
-        List<Order> orderList = orderMapper.GetOrderListById(id);
-        orderVoList = BeanUtils.copyPropertiesList(orderList,OrderVo.class);
+        List<OrderVo> orderVoList = orderMapper.GetOrderListById(id);
         return orderVoList;
     }
 }
