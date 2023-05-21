@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import com.example.campus_second_hand_trading_platform.service.IOrderService;
@@ -31,7 +32,17 @@ public class OrderController {
      */
     @GetMapping("/GetOrderList")
     public CommonResult<List<OrderVo>> GetOrderListById(@RequestParam int id){
-        log.info(String.valueOf(id));
         return CommonResult.success(service.GetOrderList(id));
+    }
+
+    @PostMapping("/update")
+    public CommonResult<?> Update(@RequestBody Order orderdto){
+        log.info(orderdto.toString());
+        if(service.updateOrder(orderdto)==1){
+            return CommonResult.success(orderdto,"update success");
+        }else{
+            log.debug("update fail",orderdto);
+            return CommonResult.failed("update fail");
+        }
     }
 }
