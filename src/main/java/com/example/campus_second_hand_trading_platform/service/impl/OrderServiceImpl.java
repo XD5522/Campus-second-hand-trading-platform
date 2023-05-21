@@ -8,6 +8,7 @@ import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import com.example.campus_second_hand_trading_platform.service.IOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
-
+    @Autowired
     OrderMapper orderMapper;
     @Override
     public List<OrderVo> GetOrderList(int id) {

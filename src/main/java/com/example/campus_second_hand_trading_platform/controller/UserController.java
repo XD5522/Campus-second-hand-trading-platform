@@ -60,8 +60,8 @@ public class UserController {
         return userDtos;
     }
 
-    @GetMapping("/wallet/add")
-    public CommonResult<?> getWallet(){
-
-    }
+//    @GetMapping("/wallet/add")
+//    public CommonResult<?> getWallet(){
+//
+//    }
 }
