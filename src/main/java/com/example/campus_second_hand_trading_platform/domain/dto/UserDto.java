@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.domain.dto;
 
+
 public class UserDto {
 
     private String userName;

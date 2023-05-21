@@ -33,7 +33,7 @@ public class UserController {
     private UserMapper userMapper;
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto){
-        System.out.println(userDto.getName());
+        System.out.println(userDto.getUserName());
         User user = new User();
         BeanUtils.copyProperties(userDto,user);
         userService.save(user);
