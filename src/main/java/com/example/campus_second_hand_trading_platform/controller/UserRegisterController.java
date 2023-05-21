@@ -48,7 +48,7 @@ public class UserRegisterController {
             log.info(registerDataDto.toString());
 
             // 将注册输入的密码进行md5加密
-            String md5PassWord = MD5Utils.Encryption(registerDataDto.getPassword());
+            String md5PassWord = md5Utils.Encryption(registerDataDto.getPassword());
             registerDataDto.setPassword(md5PassWord);
 
             iUserRegisterService.insertUser(registerDataDto);

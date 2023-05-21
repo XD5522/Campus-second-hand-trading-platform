@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDto;
+import io.swagger.annotations.ApiModel;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.Serializable;
 
 /**
  * TODO
@@ -13,7 +17,8 @@ import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDt
  * @Date 2023/4/20 11:41
  **/
 @TableName("user_account")
-public class UserAccount {
+@ApiModel(value = "UserAccount对象", description = "")
+public class UserAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,13 +33,16 @@ public class UserAccount {
 
     private Integer flag;
 
+    public UserAccount() {
+
+    }
+
     public UserAccount(RegisterDataDto registerDataDto, int userId) {
 
         userAccount = registerDataDto.getUserName();
         userPassword = registerDataDto.getPassword();
         this.userId = userId;
     }
-
     public Integer getId() {
         return id;
     }
@@ -85,5 +93,4 @@ public class UserAccount {
                 ", flag = " + flag +
                 "}";
     }
-
 }
