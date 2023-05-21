@@ -23,7 +23,7 @@ public class Product implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer userId;
+    private Integer user_id;
 
     private String name;
 
@@ -54,7 +54,7 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" +
                 "id = " + id +
-                ", userId = " + userId +
+                ", userId = " + user_id +
                 ", name = " + name +
                 ", intro = " + intro +
                 ", price = " + price +

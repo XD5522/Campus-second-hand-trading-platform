@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.example.campus_second_hand_trading_platform.config.CommonResult;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
 import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
@@ -22,7 +23,7 @@ import java.util.List;
  * @since 2023-04-03
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 @CrossOrigin
 public class UserController {
     @Autowired
@@ -58,6 +59,5 @@ public class UserController {
         List<UserDto> userDtos = BeanUtils.copyPropertiesList(users,UserDto.class);;
         return userDtos;
     }
-
 
 }

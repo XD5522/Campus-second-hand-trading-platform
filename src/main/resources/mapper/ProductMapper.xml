@@ -45,4 +45,5 @@
         SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id
         WHERE product.id=#{id} AND product.state = 'normal'
     </select>
+
 </mapper>

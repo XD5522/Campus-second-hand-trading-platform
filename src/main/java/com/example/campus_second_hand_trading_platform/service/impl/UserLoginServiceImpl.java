@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  **/
 
 @Service
-public class UserLoginService extends ServiceImpl<UserAccountMapper, UserAccount> implements IUserLoginService {
+public class UserLoginServiceImpl extends ServiceImpl<UserAccountMapper, UserAccount> implements IUserLoginService {
 
     @Autowired
     private UserAccountRepository userAccountRepository;
