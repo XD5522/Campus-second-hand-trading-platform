@@ -19,4 +19,8 @@
     <update id="updateOrder">
         update `order` set state = #{state} where id = #{id}
     </update>
+    <select id="GetPendingList" parameterType="Int" resultMap="OrderVo">
+        select `order`.*,name from `order` join product p on `order`.product_id = p.id
+        where `order`.buyer = #{id} and `order`.state = '待退货'
+    </select>
 </mapper>
