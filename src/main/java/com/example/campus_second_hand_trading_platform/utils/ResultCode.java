@@ -1,4 +1,4 @@
-package com.example.campus_second_hand_trading_platform.config;
+package com.example.campus_second_hand_trading_platform.utils;
 
 /**
  * 枚举了一些常用API操作码

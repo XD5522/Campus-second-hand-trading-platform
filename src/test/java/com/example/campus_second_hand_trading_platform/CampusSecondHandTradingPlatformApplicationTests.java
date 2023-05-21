@@ -34,6 +34,7 @@ class CampusSecondHandTradingPlatformApplicationTests {
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example.campus_second_hand_trading_platform") // 设置父包名
+
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src\\main\\resources\\generator")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {

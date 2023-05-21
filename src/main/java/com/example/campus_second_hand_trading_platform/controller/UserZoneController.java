@@ -1,6 +1,6 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
-import com.example.campus_second_hand_trading_platform.config.CommonResult;
+import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.example.campus_second_hand_trading_platform.domain.dto.AddProductDTO;
 import com.example.campus_second_hand_trading_platform.service.IAddProductService;

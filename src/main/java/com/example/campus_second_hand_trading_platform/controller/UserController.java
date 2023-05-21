@@ -1,11 +1,11 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
-import com.example.campus_second_hand_trading_platform.config.CommonResult;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
 import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
+import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,4 +60,8 @@ public class UserController {
         return userDtos;
     }
 
+    @GetMapping("/wallet/add")
+    public CommonResult<?> getWallet(){
+
+    }
 }
