@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.CommentMapper">
+    <resultMap id="CommentVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.CommentVo">
+        <id property="id" column="id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="user_name" column="name"/>
+        <result property="product_id" column="product_id"/>
+        <result property="type" column="type"/>
+        <result property="content" column="content"/>
+        <result property="img" column="img"/>
+        <result property="time" column="time"/>
+    </resultMap>
+    <select id="GetListByPD" parameterType="Int" resultMap="CommentVoMap">
+        select comment.*,name from comment join user u on comment.user_id = u.id
+        where product_id = #{product_id}
+    </select>
+</mapper>

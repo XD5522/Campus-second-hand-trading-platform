@@ -34,4 +34,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public int updateOrder(Order order) {
         return mapper.updateOrder(order.getId(),order.getState());
     }
+
+    @Override
+    public List<OrderVo> GetPendingList(int id) {
+        return mapper.GetPendingList(id);
+    }
 }

@@ -38,7 +38,7 @@ class CampusSecondHandTradingPlatformApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src\\main\\resources\\generator")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder .addInclude("user_account"); // 设置过滤表前缀
+                    builder .addInclude("comment"); // 设置过滤表前缀
                 })
                 .execute();
     }

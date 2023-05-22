@@ -35,14 +35,28 @@ public class OrderController {
         return CommonResult.success(service.GetOrderList(id));
     }
 
+    /**
+     * 更新订单状态
+     * @param orderdto
+     * @return 更新成功/失败
+     */
     @PostMapping("/update")
     public CommonResult<?> Update(@RequestBody Order orderdto){
-        log.info(orderdto.toString());
         if(service.updateOrder(orderdto)==1){
             return CommonResult.success(orderdto,"update success");
         }else{
             log.debug("update fail",orderdto);
             return CommonResult.failed("update fail");
         }
+    }
+
+    /**
+     * 获取待处理的退货列表
+     * @param id
+     * @return 订单列表
+     */
+    @GetMapping("/GetPendingList")
+    public CommonResult<List<OrderVo>> GetPendingList(@RequestParam int id){
+        return CommonResult.success(service.GetPendingList(id));
     }
 }

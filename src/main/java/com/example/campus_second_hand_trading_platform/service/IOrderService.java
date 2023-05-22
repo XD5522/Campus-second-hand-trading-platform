@@ -28,4 +28,11 @@ public interface IOrderService extends IService<Order> {
      * @return 数据库受影响行数
      */
     public int updateOrder(Order order);
+
+    /**
+     * 查询用户待处理的退货订单列表
+     * @param id
+     * @return 订单列表
+     */
+    public List<OrderVo> GetPendingList(int id);
 }
