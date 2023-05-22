@@ -1,6 +1,7 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
+import com.example.campus_second_hand_trading_platform.domain.ResultInfo;
 import com.example.campus_second_hand_trading_platform.domain.dto.LoginDataDto;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 
 @Slf4j
-@RequestMapping("/api/login")
+@RequestMapping("/user")
 @RestController
 @CrossOrigin
 public class UserLoginController {
@@ -35,14 +36,13 @@ public class UserLoginController {
     /**
      * 用户登录
      * @param loginDataDto 前端传来的登陆数据
-     * @return token令牌
+     * @return 带token令牌的信息
      */
-    @PostMapping()
-    public String Login(@RequestBody LoginDataDto loginDataDto){
-
+    @PostMapping("login")
+    public ResultInfo Login(@RequestBody LoginDataDto loginDataDto){
         //MD5加密
         String md5Password = md5Utils.Encryption(loginDataDto.getUserPassword());
-
+        log.info(md5Password.toString());
         //加密后检查是否存在该用户名和密码的账户
         UserAccount userAccount = iUserLoginService.getByUserName(loginDataDto.getUserName());
 
@@ -51,6 +51,7 @@ public class UserLoginController {
         if(userAccount == null) {
             //用户不存在
             log.info("用户不存在，登陆失败");
+            return ResultInfo.fail();
         }
         else {
             //用户存在，开始验证密码
@@ -58,14 +59,14 @@ public class UserLoginController {
             if(md5Password.equals(userAccount.getUserPassword())) {
                 //生成token
                 token = jwtUtils.saveToken(userAccount.getUserId().toString(), userAccount.getUserAccount(), 3600L);
-                log.info(token.toString());
+
             }
             else {
                 log.info("密码不正确");
             }
         }
         log.info(loginDataDto.toString());
-
-        return token;
+        //log.info(jwtUtils.getUserAccountByToken(token).toString());
+        return ResultInfo.success(token);
     }
 }

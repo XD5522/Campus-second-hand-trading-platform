@@ -1,8 +1,10 @@
 package com.example.campus_second_hand_trading_platform.utils;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -51,6 +53,43 @@ public class JwtUtils {
         redisTemplate.expire(token, expirationMs, TimeUnit.MILLISECONDS);
         log.info(token);
         return token;
+    }
+
+    /**
+     * 从token中获取登录用户名
+     * @param token 客户端传入的token
+     * @return
+     */
+    public String getUserAccountByToken(String token) {
+        String userAccount;
+        String secretKey = KEY; // 私钥，需要保密
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        userAccount = claims.getSubject();
+        return userAccount;
+    }
+
+    /**
+     * 判断token是否过期
+     * @param token 客户端传入的token
+     * @return
+     */
+    public boolean isTokenExpired(String token) {
+        String secretKey = KEY;
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        Date expirationDate = claims.getExpiration();
+        return expirationDate.before(new Date());
+    }
+
+    /**
+     * 验证token是否有效
+     * @param token 客户端传入的token
+     * @param data 数据库中找到的数据
+     * @return
+     */
+
+    public boolean verifyToken(String token, String data) {
+        String userAccount = getUserAccountByToken(token);
+        return userAccount.equals(data);
     }
 
     public boolean isTokenExists(HttpServletRequest request) {

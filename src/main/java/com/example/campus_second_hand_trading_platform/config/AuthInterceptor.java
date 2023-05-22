@@ -22,7 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         String uri = request.getRequestURI();
         log.info(uri);
-        if (uri.equals("/api/login") || uri.equals("/error") || uri.equals("/admin/login")){
+        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login")){
             return true;
         }
 
