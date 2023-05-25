@@ -55,6 +55,10 @@ public class JwtUtils {
         return token;
     }
 
+
+
+
+
     /**
      * 从token中获取登录用户名
      * @param token 客户端传入的token
@@ -103,4 +107,20 @@ public class JwtUtils {
         // 从 Redis 中删除 JWT
         redisTemplate.delete(jwtToken);
     }
+
+//    private String generateToken(Map<String, Object> claims) {
+//        return Jwts.builder()
+//                .setClaims(claims)
+//                .setExpiration(generateExpirationDate())
+//                .signWith(SignatureAlgorithm.HS512, secret)
+//                .compact();
+//    }
+//
+//    public String generateToken(User userDetails) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
+//        claims.put(CLAIM_KEY_CREATED, new Date());
+//        return generateToken(claims);
+//    }
+
 }

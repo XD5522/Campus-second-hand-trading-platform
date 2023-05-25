@@ -22,8 +22,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param userName
      * @return
      */
-    @Select("select * from user_account where user_account = #{userName}")
-    public UserAccount getByUserName(@Param("userName") String userName);
+    public UserAccount getByUserName(String userName);
 
     /**
      * 添加一个用户账户
