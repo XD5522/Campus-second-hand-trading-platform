@@ -6,6 +6,7 @@ import com.example.campus_second_hand_trading_platform.domain.dto.searchDto;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
+import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +31,34 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> SearchProductByName(HttpServletRequest request, @RequestParam String name){
+    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name){
         List<ProductVo> products = productService.SearchProducts(name);
         log.info(name);
-        return ResponseEntity.ok(products);
+        return CommonResult.success(products);
     }
 
     @GetMapping
-    public ResponseEntity<?> GetProductById(HttpServletRequest request, @RequestParam int id){
-        ProductVo product = productService.SelectProductById(id);
-        return ResponseEntity.ok(product);
+    public CommonResult<?> getProductById(HttpServletRequest request, @RequestParam int id){
+        try{
+            ProductVo product = productService.SelectProductById(id);
+            return CommonResult.success(product);
+        }
+        catch (Exception e){
+            return CommonResult.failed("搜索失败");
+        }
     }
 
     @PostMapping
-    public ResponseEntity<?> Save(HttpServletRequest request,@RequestBody Product product){
+    public CommonResult<?> save(HttpServletRequest request,@RequestBody Product product){
         log.info(product.toString());
-        productService.save(product);
-        return ResponseEntity.ok("11");
+        try {
+            productService.save(product);
+        }
+        catch (Exception e){
+            return CommonResult.failed("添加失败");
+        }
+
+        return CommonResult.success("11");
     }
 
 

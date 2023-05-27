@@ -1,9 +1,9 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
-import com.example.campus_second_hand_trading_platform.domain.ResultInfo;
 import com.example.campus_second_hand_trading_platform.domain.dto.LoginDataDto;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
+import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import com.example.campus_second_hand_trading_platform.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +27,6 @@ public class UserLoginController {
     @Autowired
     private IUserLoginService iUserLoginService;
 
-    @Autowired
-    private MD5Utils md5Utils;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -39,9 +37,9 @@ public class UserLoginController {
      * @return 带token令牌的信息
      */
     @PostMapping("login")
-    public ResultInfo Login(@RequestBody LoginDataDto loginDataDto){
+    public CommonResult<?> Login(@RequestBody LoginDataDto loginDataDto){
         //MD5加密
-        String md5Password = md5Utils.Encryption(loginDataDto.getUserPassword());
+        String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
         log.info(md5Password.toString());
         //加密后检查是否存在该用户名和密码的账户
         UserAccount userAccount = iUserLoginService.getByUserName(loginDataDto.getUserName());
@@ -51,7 +49,7 @@ public class UserLoginController {
         if(userAccount == null) {
             //用户不存在
             log.info("用户不存在，登陆失败");
-            return ResultInfo.fail();
+            return CommonResult.failed();
         }
         else {
             //用户存在，开始验证密码
@@ -67,6 +65,6 @@ public class UserLoginController {
         }
         log.info(loginDataDto.toString());
         //log.info(jwtUtils.getUserAccountByToken(token).toString());
-        return ResultInfo.success(token);
+        return CommonResult.success(token);
     }
 }

@@ -3,7 +3,10 @@
 
 #spring datasource & jpa config
 spring:
-
+  servlet:
+    multipart:
+      enabled: true #开启文件上传
+      max-file-size: 10MB #限制文件上传大小为10M
   mvc:
     servlet:
       load-on-startup=1:
@@ -44,4 +47,11 @@ image:
   home: /www/wwwroot/Campus-second-hand-trading-platform
   storage:
     path: /images
+
+#Minio
+minio:
+  endpoint: http://101.43.208.136:9090
+  bucketName: mall
+  accessKey: minioadmin
+  secretKey: minioadmin
 
