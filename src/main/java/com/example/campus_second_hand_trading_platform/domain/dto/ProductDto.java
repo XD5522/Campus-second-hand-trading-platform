@@ -26,5 +26,7 @@ public class ProductDto {
 
     private String trading;
 
+    private String img;
+
     private String state;
 }

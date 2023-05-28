@@ -30,6 +30,8 @@ public class ProductVo {
 
     private String state;
 
+    private String img;
+
     public ProductVo() {
     }
 }

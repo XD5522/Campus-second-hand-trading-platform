@@ -14,6 +14,7 @@
         <result property="star" column="star"/>
         <result property="trading" column="trading"/>
         <result property="state" column="state"/>
+        <result property="img" column="img"/>
         <result property="flag" column="flag"/>
     </resultMap>
     <resultMap id="productVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.ProductVo">
@@ -30,6 +31,7 @@
         <result property="star" column="star"/>
         <result property="trading" column="trading"/>
         <result property="state" column="state"/>
+        <result property="img" column="img"/>
     </resultMap>
     <select id="SearchProducts" parameterType="String" resultMap="productVoMap">
         SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'normal'

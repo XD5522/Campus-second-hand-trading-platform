@@ -44,7 +44,7 @@ mybatis-plus:
 
 #images
 image:
-  endpoint: http:/101.43.208.136:9090/mall
+  endpoint: http:/101.43.208.136:9090/mall/
 
 
 #Minio

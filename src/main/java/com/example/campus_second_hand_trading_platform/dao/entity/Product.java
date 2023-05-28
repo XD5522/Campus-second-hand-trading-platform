@@ -45,27 +45,9 @@ public class Product implements Serializable {
 
     private String state;
 
+    private String img;
+
     private Integer flag;
 
-    public Product() {
-    }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id = " + id +
-                ", userId = " + user_id +
-                ", name = " + name +
-                ", intro = " + intro +
-                ", price = " + price +
-                ", inventory = " + stock +
-                ", hisSales = " + hisSales +
-                ", size = " + size +
-                ", type = " + type +
-                ", star = " + star +
-                ", trading = " + trading +
-                ", state = " + state +
-                ", flag = " + flag +
-                "}";
-    }
 }
