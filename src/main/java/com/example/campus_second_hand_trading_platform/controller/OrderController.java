@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
@@ -7,7 +8,6 @@ import com.example.campus_second_hand_trading_platform.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import java.util.List;
 /**
@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
@@ -32,7 +33,23 @@ public class OrderController {
      */
     @GetMapping("/GetOrderList")
     public CommonResult<List<OrderVo>> GetOrderListById(@RequestParam int id){
+        log.debug("GetOrderList: id="+String.valueOf(id));
         return CommonResult.success(service.GetOrderList(id));
+    }
+
+    @GetMapping("GetOrderListByPage")
+    public CommonResult<IPage<OrderVo>> GetOrderListByPage(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum){
+        return CommonResult.success(service.GetOrderListByPage(Id,PageSize,PageNum));
+    }
+
+    @GetMapping("GetOrderListByPage&State")
+    public CommonResult<IPage<OrderVo>> GetOrderListByPageAndState(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum,@RequestParam String State){
+        return CommonResult.success(service.GetOrderListByPageAndState(Id,PageSize,PageNum,State));
+    }
+
+    @GetMapping("GetOrderUnfinishedListByPage")
+    public CommonResult<IPage<OrderVo>> GetOrderUnfinishedListByPage(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum){
+        return CommonResult.success(service.GetOrderUnfinishedListByPage(Id,PageSize,PageNum));
     }
 
     @PostMapping("/update")
