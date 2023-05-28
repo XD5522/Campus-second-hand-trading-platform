@@ -3,12 +3,14 @@ package com.example.campus_second_hand_trading_platform.config;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.dialect.pagination.LimitOffsetLimitHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/**
+ * @author cc
+ */
 @Component
 @Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
@@ -22,7 +24,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         String uri = request.getRequestURI();
         log.info(uri);
-        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login")){
+        if ("/user/login".equals(uri) || "/error".equals(uri) || "/admin/login".equals(uri)){
             return true;
         }
 

@@ -3,8 +3,10 @@ package com.example.campus_second_hand_trading_platform;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,12 +18,13 @@ import java.util.Collections;
 import java.util.Enumeration;
 
 @SpringBootTest
+@Slf4j
+
 class CampusSecondHandTradingPlatformApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
-    @Autowired
-    HttpSession session;
+
 
     @Test
     void contextLoads() {
@@ -44,25 +47,33 @@ class CampusSecondHandTradingPlatformApplicationTests {
     }
     @Test
     void redis(){
-            redisTemplate.opsForValue().set("1","1");
-            session.setAttribute("2","2");
+
     }
-    @Value("${image.home}")
-    private String homeDir;
-
-    @Value("${image.storage.path}")
-    private String imageStoragePath;
-
-    @Test
-    void pathtest(){
-
-        System.out.println(homeDir + imageStoragePath + "/");
-    }
+//    @Value("${image.home}")
+//    private String homeDir;
+//
+//    @Value("${image.storage.path}")
+//    private String imageStoragePath;
+//
+//    @Test
+//    void pathtest(){
+//
+//        System.out.println(homeDir + imageStoragePath + "/");
+//    }
 
     @Test
     void locktest(){
-        Object lock = new Object();
-        
+        User user = new User();
+        user.setUserName("cc");
+        redisTemplate.opsForHash().put("b'\\xac\\xed\\x00\\x05t\\x00\\x9beyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxaW9uZ2h1YSIsImlzcyI6ImMyMjVjYyIsImlhdCI6MTY4NTE3MzQ5NywiZXhwIjoxNjg1MTc3MDk3fQ.jB81NztBsSod9pXmNyqbIg_L5w05C06fx5mMUR1qm3E'","info",user);
+        //redisTemplate.opsForHash().put("hashValue","map2","map2-2");
+
+    }
+
+    @Test
+    void get(){
+        Object obn = redisTemplate.opsForHash().get("b'\\xac\\xed\\x00\\x05t\\x00\\x9beyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxaW9uZ2h1YSIsImlzcyI6ImMyMjVjYyIsImlhdCI6MTY4NTE3MzQ5NywiZXhwIjoxNjg1MTc3MDk3fQ.jB81NztBsSod9pXmNyqbIg_L5w05C06fx5mMUR1qm3E'","map1").toString();
+        log.info(obn.toString());
     }
 
 }

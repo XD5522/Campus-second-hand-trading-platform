@@ -1,7 +1,9 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.service.MinioService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
+import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,12 +25,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class MinioController {
     @Autowired
     MinioService minioService;
+    @Autowired
+    JwtUtils jwtUtils;
     @PostMapping("/upload")
     @ApiOperation(value = "file")
-    public CommonResult<?> upLoad(HttpServletRequest request, @RequestParam("file")MultipartFile file){
+    public CommonResult<?> upLoad(HttpServletRequest request, @RequestParam("file")MultipartFile file,@RequestParam("token")String token){
         try{
             minioService.upload(file);
-            return CommonResult.success(1);
+            Object user = jwtUtils.get(token,"info");
+
+            return CommonResult.success(user);
         }
         catch (Exception e){
             return CommonResult.failed("1");

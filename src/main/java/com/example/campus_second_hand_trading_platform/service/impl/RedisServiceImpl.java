@@ -2,15 +2,24 @@ package com.example.campus_second_hand_trading_platform.service.impl;
 
 import com.example.campus_second_hand_trading_platform.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisKeyValueTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author cc
+ */
 @Service
 public class RedisServiceImpl implements RedisService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public void set(String key, String value) {
@@ -36,5 +45,8 @@ public class RedisServiceImpl implements RedisService {
     public Long increment(String key, long delta) {
         return stringRedisTemplate.opsForValue().increment(key,delta);
     }
+
+
+
 
 }

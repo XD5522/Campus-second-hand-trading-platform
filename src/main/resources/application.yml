@@ -44,9 +44,8 @@ mybatis-plus:
 
 #images
 image:
-  home: /www/wwwroot/Campus-second-hand-trading-platform
-  storage:
-    path: /images
+  endpoint: http:/101.43.208.136:9090/mall
+
 
 #Minio
 minio:

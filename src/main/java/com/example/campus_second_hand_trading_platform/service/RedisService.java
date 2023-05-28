@@ -1,5 +1,7 @@
 package com.example.campus_second_hand_trading_platform.service;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
+
 public interface RedisService {
     /**
      * 存储数据
@@ -26,4 +28,6 @@ public interface RedisService {
      * @param delta 自增步长
      */
     Long increment(String key, long delta);
+
+
 }
