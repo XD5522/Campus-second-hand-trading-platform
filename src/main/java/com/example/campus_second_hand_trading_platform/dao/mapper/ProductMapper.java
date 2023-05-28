@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.dao.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.campus_second_hand_trading_platform.domain.dto.AddProductDTO;
@@ -19,6 +20,6 @@ import java.util.List;
  */
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
-    List<ProductVo> SearchProducts(String name);
+    List<ProductVo> searchProducts(IPage<ProductVo> page,String name);
     ProductVo SelectProductById(int id);
 }

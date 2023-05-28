@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping("/search")
     public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name){
-        IPage<List<ProductVo>> products = productService.SearchProducts(name);
+        List<ProductVo> products = productService.SearchProducts(name,1,1);
         log.info(name);
         return CommonResult.success(products);
     }
