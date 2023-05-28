@@ -1,6 +1,6 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
-import com.example.campus_second_hand_trading_platform.dao.Repository.ProductRepository;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.example.campus_second_hand_trading_platform.dao.mapper.ProductMapper;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
@@ -23,19 +23,19 @@ import java.util.List;
 @Service
 @Slf4j
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
-    ProductRepository productRepository;
+    ProductMapper productMapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductMapper productMapper) {
+        this.productMapper=productMapper;
     }
 
-    public List<ProductVo> SearchProducts(String name){
+    public IPage<List<ProductVo>> SearchProducts(String name){
         log.info(name);
-        return productRepository.SearchProducts(name);
+        return productMapper.SearchProducts(name);
     }
 
     public ProductVo SelectProductById(int id){
-        return productRepository.SelectProductById(id);
+        return productMapper.SelectProductById(id);
     }
 }
