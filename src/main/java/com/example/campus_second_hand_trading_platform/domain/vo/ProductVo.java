@@ -2,8 +2,13 @@ package com.example.campus_second_hand_trading_platform.domain.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
+/**
+ * @author cc
+ */
 @Data
-public class ProductVo {
+public class ProductVo implements Serializable {
     private Integer id;
     
     private Integer userId;

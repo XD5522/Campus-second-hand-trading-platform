@@ -27,6 +27,7 @@ public class UserLoginServiceImpl extends ServiceImpl<UserAccountMapper, UserAcc
      * @param userName 用户输入的用户名
      * @return 账户信息
      */
+    @Override
     public UserAccount getByUserName(String userName) {
         return userAccountRepository.getByUserName(userName);
     }
