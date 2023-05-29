@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDto;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
  * @since 2023-04-04
  */
 @TableName("user")
+@Data
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +56,8 @@ public class User implements Serializable {
     private String wechat;
 
     private Integer score;
+
+    private String img;
 
     public User() {
     }
