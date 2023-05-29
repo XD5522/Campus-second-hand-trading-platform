@@ -1,5 +1,7 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.example.campus_second_hand_trading_platform.dao.mapper.OrderMapper;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
@@ -38,5 +40,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public List<OrderVo> GetPendingList(int id) {
         return mapper.GetPendingList(id);
+    }
+
+    @Override
+    public IPage<OrderVo> GetOrderListByPage(int Id,int PageSize,int PageNum) {
+        IPage<OrderVo> page = new Page<>(PageNum,PageSize);
+        return mapper.GetOrderListByPage(page,Id);
+    }
+
+    @Override
+    public IPage<OrderVo> GetOrderListByPageAndState(int Id, int PageSize, int PageNum, String State) {
+        IPage<OrderVo> page = new Page<>(PageNum,PageSize);
+        return mapper.GetOrderListByPageAndState(page,Id,State);
+    }
+
+    @Override
+    public IPage<OrderVo> GetOrderUnfinishedListByPage(int Id, int PageSize, int PageNum) {
+        IPage<OrderVo> page = new Page<>(PageNum,PageSize);
+        return mapper.GetOrderUnfinishedListByPage(page,Id);
     }
 }

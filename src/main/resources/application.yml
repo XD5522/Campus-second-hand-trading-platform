@@ -1,6 +1,5 @@
 
 
-
 #spring datasource & jpa config
 spring:
   servlet:
@@ -54,3 +53,4 @@ minio:
   accessKey: minioadmin
   secretKey: minioadmin
 
+debug: true
