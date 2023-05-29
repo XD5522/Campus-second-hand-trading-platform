@@ -1,7 +1,6 @@
 package com.example.campus_second_hand_trading_platform.utils;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
-import com.example.campus_second_hand_trading_platform.service.RedisService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,11 +34,11 @@ public class JwtUtils {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Autowired
-    RedisService redisService;
 
-    public String saveToken(String userId,String userAccount,long expirationTimeMillis) {
+    public String saveToken(User user,String userAccount,long expirationTimeMillis) {
         //过期时间
+        String userId = user.getId().toString();
+        log.info(userId);
         long expirationMs = expirationTimeMillis*1000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationMs);
         // 使用私钥签名 JWT Token
@@ -55,6 +54,7 @@ public class JwtUtils {
         redisTemplate.opsForSet().add(userId,token);
         redisTemplate.expire(userId, expirationMs, TimeUnit.MILLISECONDS);
         redisTemplate.opsForHash().put(token, "token",token);
+        redisTemplate.opsForHash().put(token,"info",user);
         redisTemplate.expire(token, expirationMs, TimeUnit.MILLISECONDS);
         log.info(token);
         return token;
@@ -126,13 +126,5 @@ public class JwtUtils {
 //        claims.put(CLAIM_KEY_CREATED, new Date());
 //        return generateToken(claims);
 //    }
-    public void save(String token,String info,User user){
-         redisTemplate.opsForHash().put(token,info,user);
-         redisTemplate.expire(token, 3600000L, TimeUnit.MILLISECONDS);
-    }
-    public Object get(String token,String info){
-        redisTemplate.expire(token, 3600000L, TimeUnit.MILLISECONDS);
-        return  redisTemplate.opsForHash().get(token,info);
-    }
 
 }

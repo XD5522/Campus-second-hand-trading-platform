@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,14 +27,13 @@ public class MinioController {
     @Autowired
     MinioService minioService;
     @Autowired
-    JwtUtils jwtUtils;
+    RedisTemplate redisTemplate;
     @PostMapping("/upload")
     @ApiOperation(value = "file")
     public CommonResult<?> upLoad(HttpServletRequest request, @RequestParam("file")MultipartFile file,@RequestParam("token")String token){
         try{
-            minioService.upload(file);
-            Object user = jwtUtils.get(token,"info");
-
+            minioService.upload(file,"user");
+            Object user = redisTemplate.opsForHash().get(token,"info");
             return CommonResult.success(user);
         }
         catch (Exception e){

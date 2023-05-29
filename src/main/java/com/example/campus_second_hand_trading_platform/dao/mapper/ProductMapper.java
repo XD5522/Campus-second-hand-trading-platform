@@ -20,6 +20,6 @@ import java.util.List;
  */
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
-    List<ProductVo> searchProducts(IPage<ProductVo> page,String name);
+    IPage<ProductVo> searchProducts(IPage<ProductVo> page,String name);
     ProductVo SelectProductById(int id);
 }

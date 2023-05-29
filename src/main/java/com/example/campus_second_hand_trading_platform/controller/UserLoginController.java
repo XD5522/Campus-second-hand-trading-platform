@@ -65,8 +65,7 @@ public class UserLoginController {
             log.info("用户存在");
             if(md5Password.equals(userAccount.getUserPassword())) {
                 //生成token
-                token = jwtUtils.saveToken(userAccount.getUserId().toString(), userAccount.getUserAccount(), 3600L);
-                jwtUtils.save(token,"info",user);
+                token = jwtUtils.saveToken(user, userAccount.getUserAccount(), 3600L);
             }
             else {
                 log.info("密码不正确");

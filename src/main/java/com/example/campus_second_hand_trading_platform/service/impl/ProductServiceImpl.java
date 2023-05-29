@@ -31,12 +31,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         this.productMapper=productMapper;
     }
 
-    public List<ProductVo> SearchProducts(String name,int current,int num){
+    @Override
+    public IPage<ProductVo> SearchProducts(String name,int current,int num){
         IPage<ProductVo> page = new Page<ProductVo>(current,num);
         log.info(name);
         return productMapper.searchProducts(page,name);
     }
 
+    @Override
     public ProductVo SelectProductById(int id){
         return productMapper.SelectProductById(id);
     }
