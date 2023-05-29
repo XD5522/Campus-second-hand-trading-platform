@@ -55,6 +55,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
+    public OrderVo GetOrderDetail(int order_id) {
+        return null;
+    }
+
+    @Override
     public IPage<OrderVo> GetOrderUnfinishedListByPage(int Id, int PageSize, int PageNum) {
         IPage<OrderVo> page = new Page<>(PageNum,PageSize);
         return mapper.GetOrderUnfinishedListByPage(page,Id);
