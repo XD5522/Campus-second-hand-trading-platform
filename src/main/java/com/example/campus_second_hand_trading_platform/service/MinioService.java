@@ -6,6 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @author cc
  */
 public interface MinioService {
-    public void upload(MultipartFile file,String dir);
+    public String upload(MultipartFile file,String dir,int id);
     public void delete(String imgName,String dir);
 }

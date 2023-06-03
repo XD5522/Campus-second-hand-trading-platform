@@ -27,7 +27,8 @@ public class MinioServiceImpl implements MinioService {
     @Value("${minio.secretKey}")
     private String SECRET_KEY;
     @Override
-    public void upload(MultipartFile file,String dir) {
+    public String upload(MultipartFile file,String dir,int id) {
+        String objectName="";
         try {
             //创建一个MinIO的Java客户端
             MinioClient minioClient = new MinioClient(ENDPOINT, ACCESS_KEY, SECRET_KEY);
@@ -41,21 +42,23 @@ public class MinioServiceImpl implements MinioService {
             }
             String filename = file.getOriginalFilename();
             // 设置存储对象名称
-            String objectName = dir.format(dir + "/" + filename);
+            objectName = "/"+dir+"/"+id+"_"+filename;
+            log.info(objectName);
             // 使用putObject上传一个文件到存储桶中
             minioClient.putObject(BUCKET_NAME, objectName, file.getInputStream(), file.getContentType());
             log.info("文件上传成功!");
         } catch (Exception e) {
             log.info("上传发生错误: {}！", e.getMessage());
         }
+        return objectName;
     }
 
     @Override
     public void delete(String imgName,String dir) {
         try {
-            String objectName = dir.format(dir + "/" + imgName);
+            log.info(imgName);
             MinioClient minioClient = new MinioClient(ENDPOINT, ACCESS_KEY, SECRET_KEY);
-            minioClient.removeObject(BUCKET_NAME, objectName);
+            minioClient.removeObject(BUCKET_NAME, imgName);
         } catch (Exception e) {
             e.printStackTrace();
         }

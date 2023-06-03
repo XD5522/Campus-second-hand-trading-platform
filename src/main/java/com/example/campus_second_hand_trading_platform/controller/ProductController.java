@@ -2,6 +2,7 @@ package com.example.campus_second_hand_trading_platform.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
+import com.example.campus_second_hand_trading_platform.domain.dto.ProductDto;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
@@ -39,9 +40,9 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name,@RequestParam int current,@RequestParam int num){
-        IPage<ProductVo> products = productService.SearchProducts(name,current,num);
-        log.info(name);
+    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name,@RequestParam int current,@RequestParam int num,@RequestParam String order){
+        IPage<ProductVo> products = productService.SearchProducts(name,order,current,num);
+        log.info(order);
         return CommonResult.success(products);
     }
 
@@ -63,7 +64,7 @@ public class ProductController {
             log.info(productVo.toString());
             redisTemplate.opsForHash().put("product",id, productVo);
             log.info("添加成功");
-            redisTemplate.expire("product",3600000, TimeUnit.MILLISECONDS);
+            redisTemplate.expire("product",1800000, TimeUnit.MILLISECONDS);
             return CommonResult.success(productVo);
         }
         catch (Exception e){
@@ -72,14 +73,16 @@ public class ProductController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/updateImg")
     public CommonResult<?> updateImg(HttpServletRequest request,@RequestParam int id, @RequestParam(required = false) MultipartFile file){
 //        log.info(product.toString());
-        String imgName = productService.getById(id).getImg();
+        Product product = productService.getById(id);
+        String imgName = product.getImg();
         try {
 //            productService.save(product);
             minioService.delete(imgName,"product");
-            minioService.upload(file,"product");
+            product.setImg(minioService.upload(file,"product",product.getId()));
+            productService.updateById(product);
             redisTemplate.opsForHash().delete("product",id);
         }
         catch (Exception e){
@@ -89,6 +92,21 @@ public class ProductController {
 
         return CommonResult.success(imgName);
     }
+    @PostMapping("/update")
+    public CommonResult<?> update(HttpServletRequest request, @RequestBody ProductDto product ){
+//        log.info(product.toString());
+        try {
+//
+
+        }
+        catch (Exception e){
+            log.info(e.getMessage());
+            return CommonResult.failed("修改失败");
+        }
+
+        return CommonResult.success("");
+    }
+
 
 
 }

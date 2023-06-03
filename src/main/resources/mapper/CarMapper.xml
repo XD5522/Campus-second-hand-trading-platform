@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.ProductMapper">
+    <resultMap id="carMap" type="com.example.campus_second_hand_trading_platform.dao.entity.Car">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+
+    </resultMap>
+    <resultMap id="carVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.CarVo">
+        <id property="id" column="id"/>
+        <result property="productId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="userName" column="user_name"/>
+        <result property="num" column="num"/>
+        <result property="price" column="price"/>
+        <result property="joinTime" column="join_time"/>
+        <result property="img" column="img"/>
+    </resultMap>
+
+    <select id="getCarByUserId" resultMap="carVoMap">
+        select car.*,p.id,p.name,user_name,p.price,p.img from car join user on car.user_id = user.id join product p on car.product_id = p.id
+        where car.user_id=#{id}
+    </select>
+
+</mapper>

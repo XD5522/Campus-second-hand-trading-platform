@@ -32,7 +32,7 @@ public class MinioController {
     @ApiOperation(value = "file")
     public CommonResult<?> upLoad(HttpServletRequest request, @RequestParam("file")MultipartFile file,@RequestParam("token")String token){
         try{
-            minioService.upload(file,"user");
+            minioService.upload(file,"user",1);
             Object user = redisTemplate.opsForHash().get(token,"info");
             return CommonResult.success(user);
         }

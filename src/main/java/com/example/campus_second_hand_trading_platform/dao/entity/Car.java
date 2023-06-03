@@ -12,6 +12,7 @@ public class Car {
     private Integer id;
     private Integer productId;
     private Integer userId;
+    private Integer num;
     private LocalDateTime createTime;
     private Integer flag;
 

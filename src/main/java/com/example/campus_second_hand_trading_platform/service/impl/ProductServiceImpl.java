@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
@@ -32,10 +33,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public IPage<ProductVo> SearchProducts(String name,int current,int num){
+    public IPage<ProductVo> SearchProducts(String name,String order,int current,int num){
         IPage<ProductVo> page = new Page<ProductVo>(current,num);
+        QueryWrapper<ProductVo> wrapper = new QueryWrapper<>();
         log.info(name);
-        return productMapper.searchProducts(page,name);
+        return productMapper.searchProducts(page,name,order);
     }
 
     @Override

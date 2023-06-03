@@ -9,4 +9,5 @@ import lombok.Data;
 public class CarDto {
     private int productId;
     private int userId;
+    private int num;
 }
