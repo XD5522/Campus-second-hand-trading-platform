@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.campus_second_hand_trading_platform.domain.dto.AddProductDTO;
+import com.example.campus_second_hand_trading_platform.domain.vo.ProductCardVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,4 +23,7 @@ import java.util.List;
 public interface ProductMapper extends BaseMapper<Product> {
     IPage<ProductVo> searchProducts(IPage<ProductVo> page,String name);
     ProductVo SelectProductById(int id);
+
+    IPage<ProductCardVo> SelectProductByUserId(IPage<ProductCardVo> page,int id);
+    int ChangeProductState(int id,String state);
 }

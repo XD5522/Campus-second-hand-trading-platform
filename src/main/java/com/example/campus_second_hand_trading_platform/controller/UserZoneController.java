@@ -1,7 +1,9 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
+import com.example.campus_second_hand_trading_platform.domain.vo.ProductCardVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.UserMsgVo;
+import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
@@ -11,7 +13,7 @@ import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 /**
  * 用户个人中心的功能接口
  */
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserZoneController {
     @Autowired
     IAddProductService addProductService;
+    @Autowired
+    IProductService productService;
     @Autowired
     IUserService userService;
 
@@ -51,5 +55,20 @@ public class UserZoneController {
         UserMsgVo userMsgVo = new UserMsgVo();
         BeanUtils.copyProperties(user,userMsgVo);
         return CommonResult.success(userMsgVo);
+    }
+
+    /**
+     * 通过用户id获取用户的在售商品列表
+     * @param user_id
+     * @return
+     */
+    @GetMapping("GetPDList")
+    public CommonResult getProudctList(@RequestParam int user_id,@RequestParam int PageSize, @RequestParam int PageNum){
+        return CommonResult.success(productService.SelectProductByUserId(user_id,PageSize,PageNum));
+    }
+
+    @PostMapping("ChangePDState")
+    public CommonResult ChangeProductState(@RequestParam int product_id,@RequestParam String state){
+        return CommonResult.success(productService.ChangeProductState(product_id,state));
     }
 }

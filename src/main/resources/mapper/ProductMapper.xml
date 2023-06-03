@@ -33,6 +33,18 @@
         <result property="state" column="state"/>
         <result property="img" column="img"/>
     </resultMap>
+    <resultMap id="productCardVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.ProductCardVo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="hisSales" column="his_sales"/>
+        <result property="star" column="star"/>
+        <result property="state" column="state"/>
+        <result property="img" column="img"/>
+    </resultMap>
+
+
     <select id="searchProducts" parameterType="String" resultMap="productVoMap">
         SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'normal'
         ORDER BY CASE
@@ -48,4 +60,13 @@
         WHERE product.id=#{id} AND product.state = 'normal'
     </select>
 
+    <select id="SelectProductByUserId" parameterType="Int" resultMap="productCardVoMap">
+        SELECT product.* FROM product
+        WHERE user_id=#{id} AND product.state!='ban' AND product.state!='audit'
+    </select>
+
+    <update id="ChangeProductState" >
+        UPDATE product set product.state=#{state}
+        WHERE product.id = #{id}
+    </update>
 </mapper>
