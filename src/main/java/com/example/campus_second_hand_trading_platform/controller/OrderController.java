@@ -10,14 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-/**
- * <p>
- * 订单表 前端控制器
- * </p>
- *
- * @author cc
- * @since 2023-05-21
- */
+
 @Slf4j
 @RestController
 @CrossOrigin
@@ -50,6 +43,11 @@ public class OrderController {
     @GetMapping("GetOrderUnfinishedListByPage")
     public CommonResult<IPage<OrderVo>> GetOrderUnfinishedListByPage(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum){
         return CommonResult.success(service.GetOrderUnfinishedListByPage(Id,PageSize,PageNum));
+    }
+
+    @GetMapping("GetOrderDetail")
+    public CommonResult GetOrderDetail(@RequestParam int order_id){
+        return CommonResult.success(service.GetOrderDetail(order_id));
     }
 
     @PostMapping("/update")

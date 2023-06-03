@@ -58,6 +58,13 @@ public interface IOrderService extends IService<Order> {
     public IPage<OrderVo> GetOrderListByPageAndState(int Id,int PageSize,int PageNum,String State);
 
     /**
+     * 通过订单id获取订单详细信息
+     * @param order_id
+     * @return
+     */
+    public OrderVo GetOrderDetail(int order_id);
+
+    /**
      * 通过用户id进行分页查询，查找未完成的订单
      * @param Id
      * @param PageSize

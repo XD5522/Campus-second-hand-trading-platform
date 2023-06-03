@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Product;
 import com.example.campus_second_hand_trading_platform.dao.mapper.ProductMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.ProductCardVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,4 +45,17 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     public ProductVo SelectProductById(int id){
         return productMapper.SelectProductById(id);
     }
+
+    @Override
+    public IPage<ProductCardVo> SelectProductByUserId(int user_id, int PageSize, int PageNum) {
+        IPage<ProductCardVo> page = new Page<>(PageNum,PageSize);
+        return productMapper.SelectProductByUserId(page,user_id);
+    }
+
+    @Override
+    public int ChangeProductState(int product_id, String state) {
+        return productMapper.ChangeProductState(product_id,state);
+    }
+
+
 }
