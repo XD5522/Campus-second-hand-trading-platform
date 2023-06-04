@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.dao.Repository;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserAccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,22 @@ public class UserAccountRepository {
 
     /**
      * 通过用户输入的登陆数据获取
-     * @param userName 用户输入的用户名
+     * @param id 用户的id
      * @return 账户信息
      */
-    public UserAccount getByUserName(String userName) {
+    public UserAccount getById(Integer id) {
 
-        return userAccountMapper.getByUserName(userName);
+        return userAccountMapper.getById(id);
+    }
+
+    /**
+     * 通过用户的账户名来获取用户账户信息
+     * @param userAccount
+     * @return
+     */
+    public UserAccount getByUserAccount(String userAccount) {
+
+        return userAccountMapper.getByUserAccount(userAccount);
     }
 
     /**
