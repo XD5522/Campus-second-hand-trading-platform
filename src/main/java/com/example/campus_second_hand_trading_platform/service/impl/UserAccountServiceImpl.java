@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper, UserAccount> implements IUserAccountService {
     @Autowired
     private UserAccountRepository userAccountRepository;
-    public UserAccount getById(Integer id) {
-        return userAccountRepository.getById(id);
+    public UserAccount getByUserId(Integer id) {
+        return userAccountRepository.getByUserId(id);
     }
 
     public UserAccount getByUserAccount(String userAccount) {

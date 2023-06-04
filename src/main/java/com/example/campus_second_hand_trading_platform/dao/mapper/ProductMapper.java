@@ -26,4 +26,6 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     IPage<ProductCardVo> SelectProductByUserId(IPage<ProductCardVo> page,int id);
     int ChangeProductState(int id,String state);
+
+    int getUserCountByProduct(int productId);
 }
