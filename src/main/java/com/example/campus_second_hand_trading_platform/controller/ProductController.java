@@ -75,6 +75,15 @@ public class ProductController {
         }
     }
 
+    /**
+     * 商品图片上传
+     * @param file
+     * @return 图片相对地址
+     */
+    @PostMapping("uploadImg")
+    public CommonResult upload( @RequestParam MultipartFile file){
+        return CommonResult.success(minioService.upload(file,"product",1));
+    }
     @PostMapping("/updateImg")
     public CommonResult<?> updateImg(HttpServletRequest request,@RequestParam int id, @RequestParam(required = false) MultipartFile file){
 //        log.info(product.toString());

@@ -15,4 +15,5 @@ public class AddProductDTO {
     private String  size;//商品尺寸
     private Object  star;//商品类型
     private String  trading;//交易方式
+    private String  img;//图片链接
 }

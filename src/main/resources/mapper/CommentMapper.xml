@@ -4,15 +4,54 @@
     <resultMap id="CommentVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.CommentVo">
         <id property="id" column="id"/>
         <result property="user_id" column="user_id"/>
-        <result property="user_name" column="name"/>
-        <result property="product_id" column="product_id"/>
-        <result property="type" column="type"/>
-        <result property="content" column="content"/>
+        <result property="user_name" column="user_name"/>
         <result property="img" column="img"/>
+        <result property="product_id" column="product_id"/>
+        <result property="product_name" column="product_name"/>
+        <result property="content" column="content"/>
+        <result property="star" column="star"/>
         <result property="time" column="time"/>
     </resultMap>
-    <select id="GetListByPD" parameterType="Int" resultMap="CommentVoMap">
-        select comment.*,name from comment join user u on comment.user_id = u.id
-        where product_id = #{product_id}
+    <select id="GetListByUser" resultMap="CommentVoMap">
+        select c.*,p.name as product_name,u.* from comment c
+            join product p on p.id = c.product_id
+            join user u on u.id = c.user_id
+        where c.user_id = #{id}
+    </select>
+    <select id="GetListByPD" resultMap="CommentVoMap">
+        select c.*,p.name as product_name,u.* from comment c
+                          join product p on p.id = c.product_id
+                          join user u on u.id = c.user_id
+        where c.product_id = #{id}
+    </select>
+    <select id="GetPersonCommentA" resultMap="CommentVoMap">
+        select e.id as id,
+               e.commenter as user_id,
+               user_name,
+               u.img as img,
+               product_id,
+               p.name as product_name,
+               e.content as content,
+               e.star as star,
+               e.time as time
+            from evaluate e
+            join user u on e.commenter = u.id
+            join product p on p.id = e.product_id
+        where e.commenter = #{id}
+    </select>
+    <select id="GetPersonCommentB" resultMap="CommentVoMap">
+        select e.id as id,
+               e.commenter as user_id,
+               user_name,
+               u.img as img,
+               product_id,
+               p.name as product_name,
+               e.content as content,
+               e.star as star,
+               e.time as time
+        from evaluate e
+                 join user u on e.commenter = u.id
+                 join product p on p.id = e.product_id
+        where e.commentee = #{id}
     </select>
 </mapper>

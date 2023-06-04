@@ -97,7 +97,7 @@ public class JwtUtils {
      */
     public boolean verifyToken(String token, String data) {
         String userAccount = getUserAccountByToken(token);
-        return userAccount.equals(data);
+        return userAccount.equals(data) && !isTokenExpired(token);
     }
 
     public boolean isTokenExists(HttpServletRequest request) {

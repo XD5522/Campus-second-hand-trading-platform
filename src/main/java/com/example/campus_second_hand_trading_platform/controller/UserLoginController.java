@@ -3,9 +3,10 @@ package com.example.campus_second_hand_trading_platform.controller;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.domain.dto.LoginDataDto;
+import com.example.campus_second_hand_trading_platform.domain.dto.LoginDto;
+import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
-import com.example.campus_second_hand_trading_platform.service.impl.UserServiceImpl;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import com.example.campus_second_hand_trading_platform.utils.MD5Utils;
@@ -29,35 +30,41 @@ public class UserLoginController {
 
     @Autowired
     private IUserLoginService iUserLoginService;
-
+    @Autowired
+    private IUserService iUserService;
+    @Autowired
+    private IUserAccountService iUserAccountService;
 
     @Autowired
     private JwtUtils jwtUtils;
-
-    @Autowired
-    IUserService userService;
 
     /**
      * 用户登录
      * @param loginDataDto 前端传来的登陆数据
      * @return 带token令牌的信息
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public CommonResult<?> Login(@RequestBody LoginDataDto loginDataDto){
         //MD5加密
-        String md5Password =loginDataDto.getUserPassword();
-        //String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
+        String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
         log.info(md5Password.toString());
         //加密后检查是否存在该用户名和密码的账户
-        UserAccount userAccount = iUserLoginService.getByUserName(loginDataDto.getUserName());
-        log.info(userAccount.getUserId().toString());
-        User user = userService.getById(userAccount.getUserId());
+
+        User user = iUserService.getByUserName(loginDataDto.getUserName());
+        if(user == null) {
+            //用户不存在
+            log.info("用户不存在，登陆失败");
+            return CommonResult.failed();
+        }
         log.info(user.toString());
+
+        UserAccount userAccount = iUserAccountService.getByUserId(user.getId());
+
         String token = "";
 
         if(userAccount == null) {
-            //用户不存在
-            log.info("用户不存在，登陆失败");
+            //用户账户不存在
+            log.info("用户账户不存在，登陆失败");
             return CommonResult.failed();
         }
         else {
@@ -66,13 +73,30 @@ public class UserLoginController {
             if(md5Password.equals(userAccount.getUserPassword())) {
                 //生成token
                 token = jwtUtils.saveToken(user, userAccount.getUserAccount(), 3600L);
+
             }
             else {
                 log.info("密码不正确");
+                return CommonResult.failed();
             }
         }
         log.info(loginDataDto.toString());
         //log.info(jwtUtils.getUserAccountByToken(token).toString());
         return CommonResult.success(token);
+    }
+
+    /**
+     * 通过Token获取用户ID
+     * @param LoginDto
+     * @return
+     */
+    @PostMapping("/getUserInfo")
+    public CommonResult<?> getUserIdByToken(@RequestBody LoginDto loginDto) {
+        log.info(loginDto.getToken());
+        String userAccount;
+        userAccount = jwtUtils.getUserAccountByToken(loginDto.getToken());
+        UserAccount data = iUserAccountService.getByUserAccount(userAccount);
+        log.info(data.getUserId().toString());
+        return CommonResult.success(data.getUserId());
     }
 }

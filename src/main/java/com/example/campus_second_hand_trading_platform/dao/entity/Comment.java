@@ -7,10 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class Comment {
     int id;         //评论id
-    int user_id;    //
+    int user_id;
+    Object star;
     int product_id;
-    String type;
-    int content;
-    String img;
+    String content;
     LocalDateTime time;
 }
