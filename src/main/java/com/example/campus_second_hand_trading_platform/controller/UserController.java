@@ -8,9 +8,11 @@ import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.service.MinioService;
 import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +38,8 @@ public class UserController {
     private UserMapper userMapper;
     @Autowired
     MinioService minioService;
+    @Autowired
+    RedisTemplate redisTemplate;
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto){
         System.out.println(userDto.getUserName());
@@ -61,7 +65,7 @@ public class UserController {
     @GetMapping("/getbyname")
     public List<UserDto> getuserbyname(@RequestParam String name){
         List<User> users = userService.getByName(name);
-        List<UserDto> userDtos = BeanUtils.copyPropertiesList(users,UserDto.class);;
+        List<UserDto> userDtos = BeanUtils.copyPropertiesList(users,UserDto.class);
         return userDtos;
     }
 
@@ -84,10 +88,13 @@ public class UserController {
      * @return 200
      */
     @PostMapping("ChangeUserMsg")
-    public CommonResult ChangeUserMsg(@RequestBody ChangeUserMsgVo changeUserMsgVo){
+    public CommonResult ChangeUserMsg(HttpServletRequest request, @RequestBody ChangeUserMsgVo changeUserMsgVo){
         User user = new User();
         BeanUtils.copyProperties(changeUserMsgVo,user);
-        return CommonResult.success(userService.updateById(user));
+        userService.updateById(user);
+        redisTemplate.opsForHash().delete(request.getHeader("token"),"info");
+        redisTemplate.opsForHash().put(request.getHeader("token"),"info",user);
+        return CommonResult.success(user);
     }
 
     /**
