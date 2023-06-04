@@ -22,8 +22,8 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param id
      * @return
      */
-    @Select("select * from user_account where id = #{id}")
-    public UserAccount getById(@Param("id") Integer id);
+    @Select("select * from user_account where user_id = #{id}")
+    public UserAccount getByUserId(@Param("id") Integer id);
 
     @Select("select * from user_account where user_account = #{userAccount}")
     public UserAccount getByUserAccount(@Param("userAccount") String userAccount);

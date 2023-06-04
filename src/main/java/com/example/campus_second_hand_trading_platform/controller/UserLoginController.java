@@ -3,6 +3,7 @@ package com.example.campus_second_hand_trading_platform.controller;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.domain.dto.LoginDataDto;
+import com.example.campus_second_hand_trading_platform.domain.dto.LoginDto;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
@@ -42,7 +43,7 @@ public class UserLoginController {
      * @param loginDataDto 前端传来的登陆数据
      * @return 带token令牌的信息
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public CommonResult<?> Login(@RequestBody LoginDataDto loginDataDto){
         //MD5加密
         String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
@@ -55,8 +56,9 @@ public class UserLoginController {
             log.info("用户不存在，登陆失败");
             return CommonResult.failed();
         }
+        log.info(user.toString());
 
-        UserAccount userAccount = iUserAccountService.getById(user.getId());
+        UserAccount userAccount = iUserAccountService.getByUserId(user.getId());
 
         String token = "";
 
@@ -81,5 +83,20 @@ public class UserLoginController {
         log.info(loginDataDto.toString());
         //log.info(jwtUtils.getUserAccountByToken(token).toString());
         return CommonResult.success(token);
+    }
+
+    /**
+     * 通过Token获取用户ID
+     * @param LoginDto
+     * @return
+     */
+    @PostMapping("/getUserInfo")
+    public CommonResult<?> getUserIdByToken(@RequestBody LoginDto loginDto) {
+        log.info(loginDto.getToken());
+        String userAccount;
+        userAccount = jwtUtils.getUserAccountByToken(loginDto.getToken());
+        UserAccount data = iUserAccountService.getByUserAccount(userAccount);
+        log.info(data.getUserId().toString());
+        return CommonResult.success(data.getUserId());
     }
 }

@@ -24,9 +24,9 @@ public class UserAccountRepository {
      * @param id 用户的id
      * @return 账户信息
      */
-    public UserAccount getById(Integer id) {
+    public UserAccount getByUserId(Integer id) {
 
-        return userAccountMapper.getById(id);
+        return userAccountMapper.getByUserId(id);
     }
 
     /**

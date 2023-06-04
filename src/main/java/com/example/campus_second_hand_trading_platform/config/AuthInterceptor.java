@@ -33,15 +33,23 @@ public class AuthInterceptor implements HandlerInterceptor {
         log.info(request.toString());
         String token = request.getHeader("token");
         String uri = request.getRequestURI();
+        log.info(token);
         log.info(uri);
         if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register")){
             //boolean test = jwtUtils.verifyToken(token, jwtUtils.getUserAccountByToken(token));
             return true;
         }
         else {
+            String method;
+            method = request.getMethod();
+            if ("OPTIONS".equals(method)) {
+                return true;
+            }
             if(token != null) {
                 String userAccount = jwtUtils.getUserAccountByToken(token);
                 UserAccount data = iUserAccountService.getByUserAccount(userAccount);
+                log.info(userAccount);
+                log.info(data.toString());
                 return jwtUtils.verifyToken(token, data.getUserAccount().toString());
             }
         }

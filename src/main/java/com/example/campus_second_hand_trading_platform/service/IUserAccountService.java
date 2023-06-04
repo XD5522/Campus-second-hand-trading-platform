@@ -12,7 +12,7 @@ import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
  **/
 public interface IUserAccountService {
 
-    public UserAccount getById(Integer id);
+    public UserAccount getByUserId(Integer id);
 
     public UserAccount getByUserAccount(String userAccount);
 }
