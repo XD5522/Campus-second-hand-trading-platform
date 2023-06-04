@@ -72,6 +72,12 @@ public class ProductController {
             return CommonResult.failed("搜索失败");
         }
     }
+
+    /**
+     * 商品图片上传
+     * @param file
+     * @return 图片相对地址
+     */
     @PostMapping("uploadImg")
     public CommonResult upload( @RequestParam MultipartFile file){
         return CommonResult.success(minioService.upload(file,"product",1));
