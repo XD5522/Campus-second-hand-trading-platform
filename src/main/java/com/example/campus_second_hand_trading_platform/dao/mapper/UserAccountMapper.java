@@ -18,12 +18,15 @@ import org.apache.ibatis.annotations.Select;
 public interface UserAccountMapper extends BaseMapper<UserAccount> {
 
     /**
-     * 根据用户名查找用户账户
-     * @param userName
+     * 根据用户id查找用户账户
+     * @param id
      * @return
      */
-    @Select("select * from user_account where user_account = #{userName}")
-    public UserAccount getByUserName(@Param("userName") String userName);
+    @Select("select * from user_account where id = #{id}")
+    public UserAccount getById(@Param("id") Integer id);
+
+    @Select("select * from user_account where user_account = #{userAccount}")
+    public UserAccount getByUserAccount(@Param("userAccount") String userAccount);
 
     /**
      * 添加一个用户账户
