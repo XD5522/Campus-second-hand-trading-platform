@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@CrossOrigin
 @Slf4j
 @RequestMapping("/comment")
 public class CommentController {
@@ -31,8 +32,31 @@ public class CommentController {
         }
     }
 
+    /**
+     * 通过商品id查找商品的评论列表
+     * @param product_id
+     * @return
+     */
     @GetMapping("/GetList")
     public CommonResult<List<CommentVo>> GetListByPD(@RequestParam int product_id){
         return CommonResult.success(service.GetListByPD(product_id));
+    }
+
+    /**
+     * 通过用户id搜索用户的商品评论列表(分页查询)
+     * @param user_id
+     * @param PageSize
+     * @param PageNum
+     * @return 商品评论列表和分页信息
+     */
+    @GetMapping("/GetListByUser")
+    public CommonResult GetListByUser(@RequestParam int user_id,@RequestParam int PageSize,@RequestParam int PageNum){
+        return CommonResult.success(service.GetListByUser(user_id,PageSize,PageNum));
+    }
+
+    @GetMapping("GetPersonComment")
+    public CommonResult GetPersonComment(@RequestParam int user_id, @RequestParam int PageSize,
+                                         @RequestParam int PageNum, @RequestParam String State){
+        return CommonResult.success(service.GetPersonComment(user_id,PageSize,PageNum,State));
     }
 }
