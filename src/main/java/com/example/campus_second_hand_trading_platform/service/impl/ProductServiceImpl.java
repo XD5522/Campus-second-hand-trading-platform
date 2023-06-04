@@ -36,7 +36,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public IPage<ProductVo> SearchProducts(String name,String order,int current,int num){
         IPage<ProductVo> page = new Page<ProductVo>(current,num);
-        QueryWrapper<ProductVo> wrapper = new QueryWrapper<>();
         log.info(name);
         return productMapper.searchProducts(page,name,order);
     }
@@ -55,6 +54,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public int ChangeProductState(int product_id, String state) {
         return productMapper.ChangeProductState(product_id,state);
+    }
+
+    @Override
+    public int getUserCountByProduct(int productId) {
+        return productMapper.getUserCountByProduct(productId);
     }
 
 

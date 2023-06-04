@@ -55,6 +55,8 @@ public class ProductController {
                     log.info(product.toString());
                     ProductVo productVo = new ProductVo();
                     BeanUtils.copyProperties(product,productVo);
+
+                    productVo.setUserCount(productService.getUserCountByProduct(id));
                     log.info("缓存击中");
                     return  CommonResult.success(productVo);
                 }
@@ -106,6 +108,7 @@ public class ProductController {
 
         return CommonResult.success("");
     }
+
 
 
 

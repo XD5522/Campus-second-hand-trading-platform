@@ -36,6 +36,7 @@ public class ProductVo implements Serializable {
     private String state;
 
     private String img;
+    private Integer userCount;
 
     public ProductVo() {
     }

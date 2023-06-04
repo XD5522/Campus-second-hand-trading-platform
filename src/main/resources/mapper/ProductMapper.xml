@@ -48,6 +48,7 @@
     <select id="searchProducts" parameterType="String" resultMap="productVoMap">
         SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'normal'
         where product.name like CONCAT('%',#{name}, '%')
+        order by ${order} DESC
     </select>
 
     <select id="SelectProductById" parameterType="Int" resultMap="productVoMap">
@@ -64,4 +65,10 @@
         UPDATE product set product.state=#{state}
         WHERE product.id = #{id}
     </update>
+
+    <select id="getUserCountByProduct" parameterType="int" resultType="int">
+        SELECT COUNT(DISTINCT buyer)
+        FROM `order`
+        WHERE product_id = #{productId}
+    </select>
 </mapper>

@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class OrderVo {
-    private Integer id;
     private Integer product_id;
     private String product_name;
     private LocalDateTime create_time;

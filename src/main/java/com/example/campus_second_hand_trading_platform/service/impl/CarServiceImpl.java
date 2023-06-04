@@ -23,6 +23,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper,Car> implements CarSer
 
         log.info(String.valueOf(id));
 
+
         return carMapper.getCarByUserId(page,id);
     }
+
+
 }
