@@ -35,4 +35,6 @@ public interface IProductService extends IService<Product> {
      * @param state
      */
     public int ChangeProductState(int product_id,String state);
+
+    public int getUserCountByProduct(int productId);
 }

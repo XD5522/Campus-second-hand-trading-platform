@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author cc
- * @since 2023-05-21
+ * @since 2023-06-04
  */
 @ApiModel(value = "Order对象", description = "订单表")
 public class Order implements Serializable {
@@ -27,6 +27,12 @@ public class Order implements Serializable {
     @ApiModelProperty("商品id")
     private Integer productId;
 
+    @ApiModelProperty("买家id")
+    private Integer buyer;
+
+    @ApiModelProperty("卖家id")
+    private Integer seller;
+
     @ApiModelProperty("订单创建时间")
     private LocalDateTime createTime;
 
@@ -36,11 +42,18 @@ public class Order implements Serializable {
     @ApiModelProperty("交易方式")
     private String trading;
 
-    @ApiModelProperty("买家id")
-    private Integer buyer;
+    @ApiModelProperty("优惠券")
+    private Integer couponId;
 
-    @ApiModelProperty("卖家id")
-    private Integer seller;
+    private String productName;
+
+    private Integer productNum;
+
+    @ApiModelProperty("优惠券金额")
+    private Object couponPrice;
+
+    @ApiModelProperty("总价")
+    private Object total;
 
     private String state;
 
@@ -60,6 +73,22 @@ public class Order implements Serializable {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public Integer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Integer buyer) {
+        this.buyer = buyer;
+    }
+
+    public Integer getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Integer seller) {
+        this.seller = seller;
     }
 
     public LocalDateTime getCreateTime() {
@@ -86,20 +115,44 @@ public class Order implements Serializable {
         this.trading = trading;
     }
 
-    public Integer getBuyer() {
-        return buyer;
+    public Integer getCouponId() {
+        return couponId;
     }
 
-    public void setBuyer(Integer buyer) {
-        this.buyer = buyer;
+    public void setCouponId(Integer couponId) {
+        this.couponId = couponId;
     }
 
-    public Integer getSeller() {
-        return seller;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setSeller(Integer seller) {
-        this.seller = seller;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Integer getProductNum() {
+        return productNum;
+    }
+
+    public void setProductNum(Integer productNum) {
+        this.productNum = productNum;
+    }
+
+    public Object getCouponPrice() {
+        return couponPrice;
+    }
+
+    public void setCouponPrice(Object couponPrice) {
+        this.couponPrice = couponPrice;
+    }
+
+    public Object getTotal() {
+        return total;
+    }
+
+    public void setTotal(Object total) {
+        this.total = total;
     }
 
     public String getState() {
@@ -123,11 +176,16 @@ public class Order implements Serializable {
         return "Order{" +
         "id = " + id +
         ", productId = " + productId +
+        ", buyer = " + buyer +
+        ", seller = " + seller +
         ", createTime = " + createTime +
         ", finishTime = " + finishTime +
         ", trading = " + trading +
-        ", buyer = " + buyer +
-        ", seller = " + seller +
+        ", couponId = " + couponId +
+        ", productName = " + productName +
+        ", productNum = " + productNum +
+        ", couponPrice = " + couponPrice +
+        ", total = " + total +
         ", state = " + state +
         ", flag = " + flag +
         "}";

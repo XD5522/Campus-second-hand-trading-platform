@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author cc
  */
@@ -43,20 +45,48 @@ public class CarController {
         }
     }
 
+    /**
+     *
+     * @param request
+     * @param current
+     * @param num
+     * @return
+     */
     @GetMapping
     public CommonResult<?> getCarList(HttpServletRequest request,@RequestParam int current,@RequestParam int num){
         String token = request.getHeader("token");
         User user = new User();
-        Object object = redisTemplate.opsForHash().get(token,"token");
+        Object object = redisTemplate.opsForHash().get(token,"info");
         IPage<CarVo> carList;
         try{
             BeanUtils.copyProperties(object,user);
+            log.info(user.toString());
             carList = carService.getCarByUserId(user.getId(), current,num);
+            log.info(carList.toString());
             return CommonResult.success(carList);
         }
         catch (Exception e){
             log.info(e.getMessage());
             return CommonResult.failed(e.getMessage());
+        }
+    }
+
+    @DeleteMapping
+    public CommonResult<?> deleteProductFromCar(HttpServletRequest request,@RequestBody List<Integer> ids){
+        log.info(ids.toString());
+        try{
+            boolean result = carService.removeBatchByIds(ids);
+            if(result){
+                return CommonResult.success(ids);
+
+            }
+            else{
+                return CommonResult.failed("删除失败");
+            }
+        }
+        catch (Exception e){
+            log.info("删除失败"+e.getMessage());
+            return CommonResult.failed("删除失败");
         }
     }
 
