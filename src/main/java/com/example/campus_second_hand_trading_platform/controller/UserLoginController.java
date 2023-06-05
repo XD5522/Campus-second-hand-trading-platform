@@ -45,6 +45,9 @@ public class UserLoginController {
      */
     @PostMapping("/login")
     public CommonResult<?> Login(@RequestBody LoginDataDto loginDataDto){
+
+        log.info(loginDataDto.getUserPassword());
+
         //MD5加密
         String md5Password = MD5Utils.Encryption(loginDataDto.getUserPassword());
         log.info(md5Password.toString());
@@ -87,7 +90,7 @@ public class UserLoginController {
 
     /**
      * 通过Token获取用户ID
-     * @param LoginDto
+     * @param loginDto
      * @return
      */
     @PostMapping("/getUserInfo")
