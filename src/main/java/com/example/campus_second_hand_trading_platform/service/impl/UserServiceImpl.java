@@ -100,9 +100,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @param userName
      * @return
      */
-    public boolean updateUserState(String userName) {
+    public boolean passUser(String userName) {
 
-        return userRepository.updateUserState(userName);
+        return userRepository.passUser(userName);
+    }
+
+    public boolean banUser(String userName) {
+
+        return userRepository.banUser(userName);
     }
 
 }

@@ -64,9 +64,20 @@ public class UserRepository {
      * @param userName
      * @return
      */
-    public boolean updateUserState(String userName) {
+    public boolean passUser(String userName) {
 
-        if(userMapper.updateUserState(userName) == 1) return true;
+        if(userMapper.passUser(userName) == 1) return true;
+        return false;
+    }
+
+    /**
+     * 修改用户的状态为封禁
+     * @param userName
+     * @return
+     */
+    public boolean banUser(String userName) {
+
+        if(userMapper.banUser(userName) == 1) return true;
         return false;
     }
 }

@@ -28,5 +28,7 @@ public interface IUserService extends IService<User> {
 
     public List<UserVo> getAllUser();
 
-    public boolean updateUserState(String userName);
+    public boolean passUser(String userName);
+
+    public boolean banUser(String userName);
 }

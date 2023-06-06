@@ -47,9 +47,21 @@ public class AdminController {
 
         log.info(userName.toString());
 
-        if(iUserService.updateUserState(userName)) {
+        if(iUserService.passUser(userName)) {
             log.info("审核通过");
             return CommonResult.success("审核通过");
+        }
+        return CommonResult.failed();
+    }
+
+    @PostMapping("/banUser")
+    public CommonResult<?> banUser(@RequestParam String userName) {
+
+        log.info(userName.toString());
+
+        if(iUserService.banUser(userName)) {
+            log.info("封禁成功");
+            return CommonResult.success("封禁成功");
         }
         return CommonResult.failed();
     }

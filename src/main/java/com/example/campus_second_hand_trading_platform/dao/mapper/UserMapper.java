@@ -79,5 +79,13 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
     @Update("update user set state = '正常' where user_name = #{userName}")
-    public int updateUserState(@Param("userName") String userName);
+    public int passUser(@Param("userName") String userName);
+
+    /**
+     * 修改用户的状态为封禁
+     * @param userName
+     * @return
+     */
+    @Update("update user set state = '封禁' where user_name = #{userName}")
+    public int banUser(@Param("userName") String userName);
 }
