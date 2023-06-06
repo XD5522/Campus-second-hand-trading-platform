@@ -1,9 +1,11 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
+import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
+import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,9 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private IUserService iUserService;
+
+    @Autowired
+    private IUserAccountService iUserAccountService;
 
     @Autowired
     private IProductService iProductService;
@@ -62,6 +67,21 @@ public class AdminController {
         if(iUserService.banUser(userName)) {
             log.info("封禁成功");
             return CommonResult.success("封禁成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @PostMapping("/deleteUser")
+    public CommonResult<?> deleteUser(@RequestParam String userName) {
+
+        log.info(userName.toString());
+
+        User user;
+        user = iUserService.getByUserName(userName);
+
+        if(iUserService.deleteUser(userName) && iUserAccountService.deleteUserAccount(user.getId())) {
+            log.info("删除成功");
+            return CommonResult.success("删除成功");
         }
         return CommonResult.failed();
     }

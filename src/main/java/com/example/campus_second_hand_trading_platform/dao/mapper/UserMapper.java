@@ -70,7 +70,7 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "bank_card", property = "bankCard"),
             }
     )
-    @Select("select * from user")
+    @Select("select * from user where flag = 0")
     public List<UserVo> getAllUser();
 
     /**
@@ -88,4 +88,12 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Update("update user set state = '封禁' where user_name = #{userName}")
     public int banUser(@Param("userName") String userName);
+
+    /**
+     * 删除用户
+     * @param userName
+     * @return
+     */
+    @Update("update user set flag = 1 where user_name = #{userName}")
+    public int deleteUser(@Param("userName") String userName);
 }

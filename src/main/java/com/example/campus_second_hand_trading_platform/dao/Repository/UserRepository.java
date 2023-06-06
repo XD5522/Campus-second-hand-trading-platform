@@ -80,4 +80,15 @@ public class UserRepository {
         if(userMapper.banUser(userName) == 1) return true;
         return false;
     }
+
+    /**
+     * 删除用户
+     * @param userName
+     * @return
+     */
+    public boolean deleteUser(String userName) {
+
+        if(userMapper.deleteUser(userName) == 1) return true;
+        return false;
+    }
 }

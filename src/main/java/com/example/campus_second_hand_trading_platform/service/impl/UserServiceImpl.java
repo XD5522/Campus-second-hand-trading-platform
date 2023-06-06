@@ -105,9 +105,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userRepository.passUser(userName);
     }
 
+    /**
+     * 修改用户的状态为封禁
+     * @param userName
+     * @return
+     */
     public boolean banUser(String userName) {
 
         return userRepository.banUser(userName);
     }
 
+    /**
+     * 删除用户
+     * @param userName
+     * @return
+     */
+    public boolean deleteUser(String userName) {
+
+        return userRepository.deleteUser(userName);
+    }
 }

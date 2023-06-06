@@ -24,7 +24,7 @@ public class UserAccountRepository {
      * @param id 用户的id
      * @return 账户信息
      */
-    public UserAccount getByUserId(Integer id) {
+    public UserAccount getByUserId(int id) {
 
         return userAccountMapper.getByUserId(id);
     }
@@ -48,4 +48,16 @@ public class UserAccountRepository {
 
         return userAccountMapper.insertUserAccount(userAccount);
     }
+
+    /**
+     * 删除一个账户
+     * @param userId
+     * @return
+     */
+    public boolean deleteUserAccount(int userId) {
+
+        if(userAccountMapper.deleteUserAccount(userId) == 1) return true;
+        return false;
+    }
+
 }

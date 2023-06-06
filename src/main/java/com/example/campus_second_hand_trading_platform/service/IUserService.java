@@ -31,4 +31,6 @@ public interface IUserService extends IService<User> {
     public boolean passUser(String userName);
 
     public boolean banUser(String userName);
+
+    public boolean deleteUser(String userName);
 }
