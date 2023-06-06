@@ -35,4 +35,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
         if(state.equals("ER")) return mapper.GetPersonCommentA(page,user_id);//commenter
         else return mapper.GetPersonCommentB(page,user_id);//commentee
     }
+
+    @Override
+    public CommentVo GetCommentByOrder(int user_id, int product_id) {
+        return mapper.GetCommentByOrder(user_id,product_id);
+    }
 }
