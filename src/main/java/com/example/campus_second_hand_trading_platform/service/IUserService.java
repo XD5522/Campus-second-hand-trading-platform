@@ -2,6 +2,7 @@ package com.example.campus_second_hand_trading_platform.service;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 
 import java.util.List;
 
@@ -25,4 +26,7 @@ public interface IUserService extends IService<User> {
 
     public boolean checkPhone(String phone);
 
+    public List<UserVo> getAllUser();
+
+    public boolean updateUserState(String userName);
 }

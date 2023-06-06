@@ -2,8 +2,11 @@ package com.example.campus_second_hand_trading_platform.dao.Repository;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * TODO
@@ -45,5 +48,25 @@ public class UserRepository {
     public int insertUser(User user) {
 
         return userMapper.insertUser(user);
+    }
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    public List<UserVo> getAllUser() {
+
+        return userMapper.getAllUser();
+    }
+
+    /**
+     * 修改用户的状态为正常
+     * @param userName
+     * @return
+     */
+    public boolean updateUserState(String userName) {
+
+        if(userMapper.updateUserState(userName) == 1) return true;
+        return false;
     }
 }
