@@ -12,6 +12,29 @@
         <result property="seller" column="seller"/>
         <result property="state" column="state"/>
     </resultMap>
+    <resultMap id="OrderDetailVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.OrderDetailVo">
+        <id property="id" column="id"/>
+        <result property="create_time" column="create_time"/>
+        <result property="finish_time" column="finish_time"/>
+        <result property="seller_id" column="seller_id"/>
+        <result property="seller_name" column="seller_name"/>
+        <result property="seller_img" column="seller_img"/>
+        <result property="buyer_id" column="buyer_id"/>
+        <result property="buyer_name" column="buyer_name"/>
+        <result property="buyer_img" column="buyer_img"/>
+        <result property="address" column="address"/>
+        <result property="product_id" column="product_id"/>
+        <result property="product_name" column="product_name"/>
+        <result property="product_img" column="product_img"/>
+        <result property="product_num" column="product_num"/>
+        <result property="price" column="price"/>
+        <result property="coupon_id" column="coupon_id"/>
+        <result property="coupon_type" column="coupon_type"/>
+        <result property="total" column="total"/>
+        <result property="buyer_payout" column="buyer_payout"/>
+        <result property="trading" column="trading"/>
+        <result property="state" column="state"/>
+    </resultMap>
     <select id="GetOrderListById" parameterType="Int" resultMap="OrderVo">
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id}
@@ -35,5 +58,34 @@
     <select id="GetPendingList" parameterType="Int" resultMap="OrderVo">
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id} and `order`.state = '待退货'
+    </select>
+    <select id="GetOrderDetail" resultMap="OrderDetailVoMap">
+        select o.id,
+               o.create_time,
+               o.finish_time,
+               o.seller as seller_id,
+               seller.user_name as seller_name,
+               seller.img as seller_img,
+               o.buyer as buyer_id,
+               buyer.user_name as buyer_name,
+               buyer.img as buyer_img,
+               o.address,
+               o.product_id,
+               p.name as product_name,
+               p.img as product_img,
+               p.price,
+               o.product_num,
+               o.coupon_id,
+               c.type as coupon_type,
+               o.total,
+               o.buyer_payout,
+               o.trading,
+               o.state
+        from `order` o
+            join coupon c on c.id = o.coupon_id
+            join user seller on seller.id = o.seller
+            join user buyer on buyer.id = o.buyer
+            join product p on p.id = o.product_id
+        where o.id = #{id}
     </select>
 </mapper>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.example.campus_second_hand_trading_platform.dao.mapper.OrderMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.OrderDetailVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import com.example.campus_second_hand_trading_platform.service.IOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -55,8 +56,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public OrderVo GetOrderDetail(int order_id) {
-        return null;
+    public OrderDetailVo GetOrderDetail(int order_id) {
+        return mapper.GetOrderDetail(order_id);
     }
 
     @Override
