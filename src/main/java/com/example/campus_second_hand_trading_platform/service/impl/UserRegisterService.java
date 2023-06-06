@@ -47,12 +47,11 @@ public class UserRegisterService extends ServiceImpl<UserMapper, User> implement
      */
     public int insertUserAccount(RegisterDataDto registerDataDto) {
 
-        /**
-         * TODO
-         * 随机生成用户ID
-         */
+        User user;
+        user = userRepository.getByUserName(registerDataDto.getUserName());
 
-        int userId = 2;
+        int userId;
+        userId = user.getId();
 
         UserAccount userAccount = new UserAccount(registerDataDto, userId);
 

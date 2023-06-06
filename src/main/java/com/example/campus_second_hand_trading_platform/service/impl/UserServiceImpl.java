@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.campus_second_hand_trading_platform.dao.Repository.UserRepository;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowire;
@@ -83,6 +84,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(user != null) return true;
         return false;
 
+    }
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    public List<UserVo> getAllUser() {
+
+        return userRepository.getAllUser();
+    }
+
+    /**
+     * 修改用户的状态为正常
+     * @param userName
+     * @return
+     */
+    public boolean updateUserState(String userName) {
+
+        return userRepository.updateUserState(userName);
     }
 
 }

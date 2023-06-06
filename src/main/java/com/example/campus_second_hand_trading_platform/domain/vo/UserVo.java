@@ -1,6 +1,7 @@
 package com.example.campus_second_hand_trading_platform.domain.vo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
  * TODO
@@ -9,14 +10,22 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @Author qionghua
  * @Date 2023/4/21 11:42
  **/
-@TableName("user_account")
+@Data
 public class UserVo {
+
+    private int id;
 
     private String userName;
 
     private String name;
 
     private String type;
+
+    private String state;
+
+    private String phone;
+
+    private String bankCard;
 
     public String getUserName() {
         return userName;

@@ -35,7 +35,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         log.info(token);
         log.info(uri);
-        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register")){
+        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register") || uri.equals("/admin/getUserData") || uri.equals("/admin/passUser")){
             //boolean test = jwtUtils.verifyToken(token, jwtUtils.getUserAccountByToken(token));
             return true;
         }
@@ -45,7 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             if ("OPTIONS".equals(method)) {
                 return true;
             }
-            if(token != null) {
+            else if(token != null) {
                 String userAccount = jwtUtils.getUserAccountByToken(token);
                 UserAccount data = iUserAccountService.getByUserAccount(userAccount);
                 log.info(userAccount);

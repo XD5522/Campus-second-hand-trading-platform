@@ -2,10 +2,8 @@ package com.example.campus_second_hand_trading_platform.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
+import org.apache.ibatis.annotations.*;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Repository;
 
@@ -57,4 +55,29 @@ public interface UserMapper extends BaseMapper<User> {
             "#{user.gender},#{user.bankCard},#{user.email})")
     public int insertUser(@Param("user") User user);
 
+    /**
+     * 获取所有用户
+     * @return
+     */
+    @Results(
+            {
+                    @Result(column = "id", property = "id"),
+                    @Result(column = "user_name", property = "userName"),
+                    @Result(column = "name", property = "name"),
+                    @Result(column = "type", property = "type"),
+                    @Result(column = "state", property = "state"),
+                    @Result(column = "phone", property = "phone"),
+                    @Result(column = "bank_card", property = "bankCard"),
+            }
+    )
+    @Select("select * from user")
+    public List<UserVo> getAllUser();
+
+    /**
+     * 修改用户的状态为正常
+     * @param userName
+     * @return
+     */
+    @Update("update user set state = '正常' where user_name = #{userName}")
+    public int updateUserState(@Param("userName") String userName);
 }
