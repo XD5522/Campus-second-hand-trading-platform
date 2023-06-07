@@ -1,6 +1,7 @@
 package com.example.campus_second_hand_trading_platform.config;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
@@ -54,7 +55,8 @@ public class AuthInterceptor implements HandlerInterceptor {
                 String type = request.getHeader("type");
                 log.info(type);
                 if ("user".equals(type)) {
-                    UserAccount data = (UserAccount) redisTemplate.opsForHash().get(token, "info");
+                    User user = (User) redisTemplate.opsForHash().get(token, "info");
+                    UserAccount data = iUserAccountService.getByUserId(user.getId());
                     log.info(data.toString());
                     return jwtUtils.verifyToken(token, data.getUserAccount().toString());
                 }
