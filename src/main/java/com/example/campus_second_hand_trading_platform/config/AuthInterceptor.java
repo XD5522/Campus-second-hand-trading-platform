@@ -1,6 +1,8 @@
 package com.example.campus_second_hand_trading_platform.config;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
+import com.example.campus_second_hand_trading_platform.service.IAdministratorsService;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
 import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
@@ -26,6 +28,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Autowired
     private IUserAccountService iUserAccountService;
 
+    @Autowired
+    private IAdministratorsService iAdministratorsService;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,7 +40,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         log.info(token);
         log.info(uri);
-        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register") || uri.equals("/admin/getUserData") || uri.equals("/admin/passUser") || uri.equals("/admin/banUser") || uri.equals("/admin/deleteUser")){
+        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register")){
             //boolean test = jwtUtils.verifyToken(token, jwtUtils.getUserAccountByToken(token));
             return true;
         }
@@ -45,12 +50,19 @@ public class AuthInterceptor implements HandlerInterceptor {
             if ("OPTIONS".equals(method)) {
                 return true;
             }
-            else if(token != null) {
-                String userAccount = jwtUtils.getUserAccountByToken(token);
-                UserAccount data = iUserAccountService.getByUserAccount(userAccount);
-                log.info(userAccount);
-                log.info(data.toString());
-                return jwtUtils.verifyToken(token, data.getUserAccount().toString());
+            if(token != null && jwtUtils.isTokenExists(request)) {
+                String type = request.getHeader("type");
+                log.info(type);
+                if ("user".equals(type)) {
+                    UserAccount data = (UserAccount) redisTemplate.opsForHash().get(token, "info");
+                    log.info(data.toString());
+                    return jwtUtils.verifyToken(token, data.getUserAccount().toString());
+                }
+                else if("admin".equals(type)) {
+                    Administrators data = (Administrators) redisTemplate.opsForHash().get(token,"info");
+                    log.info(data.toString());
+                    return jwtUtils.verifyAdminToken(token, data.getAdminAccount().toString());
+                }
             }
         }
         log.info("false");

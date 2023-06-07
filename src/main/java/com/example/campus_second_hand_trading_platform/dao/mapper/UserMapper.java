@@ -70,8 +70,26 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "bank_card", property = "bankCard"),
             }
     )
-    @Select("select * from user where flag = 0")
+    @Select("select * from user where flag = 0 and (state != 'audit' and state != '审核未通过')")
     public List<UserVo> getAllUser();
+
+    /**
+     * 获取待审核用户
+     * @return
+     */
+    @Results(
+            {
+                    @Result(column = "id", property = "id"),
+                    @Result(column = "user_name", property = "userName"),
+                    @Result(column = "name", property = "name"),
+                    @Result(column = "type", property = "type"),
+                    @Result(column = "state", property = "state"),
+                    @Result(column = "phone", property = "phone"),
+                    @Result(column = "bank_card", property = "bankCard"),
+            }
+    )
+    @Select("select * from user where flag = 0 and state = 'audit'")
+    public List<UserVo> getAuditUser();
 
     /**
      * 修改用户的状态为正常

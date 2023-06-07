@@ -96,6 +96,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     /**
+     * 获取待审核用户信息
+     * @return
+     */
+    public List<UserVo> getAuditUser() {
+
+        return userRepository.getAuditUser();
+    }
+
+    /**
      * 修改用户的状态为正常
      * @param userName
      * @return

@@ -35,10 +35,22 @@ public class AdminController {
     @Autowired
     private IProductService iProductService;
 
+    /**
+     * 获取通过审核的用户
+     * @return
+     */
+
     @GetMapping("/getUserData")
     public CommonResult<List<UserVo>> getAllUser() {
         List<UserVo> data;
         data = iUserService.getAllUser();
+        return CommonResult.success(data);
+    }
+
+    @GetMapping("/getAuditUserData")
+    public CommonResult<List<UserVo>> getAuditUser() {
+        List<UserVo> data;
+        data = iUserService.getAuditUser();
         return CommonResult.success(data);
     }
 

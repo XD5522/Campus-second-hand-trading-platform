@@ -60,6 +60,15 @@ public class UserRepository {
     }
 
     /**
+     * 获取待审核用户信息
+     * @return
+     */
+    public List<UserVo> getAuditUser() {
+
+        return userMapper.getAuditUser();
+    }
+
+    /**
      * 修改用户的状态为正常
      * @param userName
      * @return
