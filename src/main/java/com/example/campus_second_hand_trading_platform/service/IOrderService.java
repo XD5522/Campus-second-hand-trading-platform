@@ -73,4 +73,18 @@ public interface IOrderService extends IService<Order> {
      * @return
      */
     public IPage<OrderVo> GetOrderUnfinishedListByPage(int Id, int PageSize, int PageNum);
+
+    /**
+     * 订单取消业务
+     * @param order_id
+     * @return
+     */
+    public int OrderCancel(int order_id);
+
+    /**
+     * 退货业务
+     * @param order_id
+     * @return
+     */
+    public int ProductReturn(int order_id);
 }

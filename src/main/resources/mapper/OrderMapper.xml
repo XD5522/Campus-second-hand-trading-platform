@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.OrderMapper">
+    <resultMap id="OrderMap" type="com.example.campus_second_hand_trading_platform.dao.entity.Order">
+        <id property="id" column="id"/>
+        <result property="productId" column="productId"/>
+        <result property="buyer" column="buyer"/>
+        <result property="seller" column="seller"/>
+        <result property="createTime" column="createTime"/>
+        <result property="finishTime" column="finishTime"/>
+        <result property="trading" column="trading"/>
+        <result property="couponId" column="couponId"/>
+        <result property="productName" column="productName"/>
+        <result property="productNum" column="productNum"/>
+        <result property="couponPrice" column="couponPrice"/>
+        <result property="buyer_payout" column="buyer_payout"/>
+        <result property="seller_income" column="seller_income"/>
+        <result property="total" column="total"/>
+        <result property="state" column="state"/>
+        <result property="flag" column="flag"/>
+    </resultMap>
     <resultMap id="OrderVo" type="com.example.campus_second_hand_trading_platform.domain.vo.OrderVo">
         <id property="id" column="id"/>
         <result property="product_id" column="product_id"/>
@@ -51,7 +69,6 @@
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id} and `order`.state!='已完成' and `order`.state!='已退货'
     </select>
-
     <update id="updateOrder">
         update `order` set state = #{state} where id = #{id}
     </update>
@@ -87,5 +104,8 @@
             join user buyer on buyer.id = o.buyer
             join product p on p.id = o.product_id
         where o.id = #{id}
+    </select>
+    <select id="GetById" resultMap="OrderMap">
+        select * from `order` where id = #{id} and flag = 0
     </select>
 </mapper>

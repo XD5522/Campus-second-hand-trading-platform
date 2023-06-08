@@ -61,4 +61,24 @@ public class OrderController {
         }
     }
 
+    /**
+     * 提供把订单状态修改成完成的接口
+     * @param order_id
+     */
+    @GetMapping("/finishOrder")
+    public CommonResult OrderFinish(@RequestParam int order_id) {
+        Order order = new Order();
+        order.setId(order_id);
+        order.setState("已完成");
+        return CommonResult.success(service.updateOrder(order));
+    }
+    @GetMapping("/cancelOrder")
+    public CommonResult OrderCancel(@RequestParam int order_id){
+        return CommonResult.success(service.OrderCancel(order_id));
+    }
+
+    @GetMapping("/returnProduct")
+    public CommonResult ProductReturn(@RequestParam int order_id){
+        return CommonResult.success(service.ProductReturn(order_id));
+    }
 }

@@ -3,11 +3,14 @@ package com.example.campus_second_hand_trading_platform.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
+import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.mapper.OrderMapper;
+import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderDetailVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import com.example.campus_second_hand_trading_platform.service.IOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.campus_second_hand_trading_platform.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,8 @@ import java.util.Map;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
     @Autowired
     OrderMapper mapper;
+    @Autowired
+    IUserService userService;
     @Override
     public List<OrderVo> GetOrderList(int id) {
         List<OrderVo> orderVoList = mapper.GetOrderListById(id);
@@ -35,6 +40,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public int updateOrder(Order order) {
+        log.info("orderID",order.getId());
+        log.info("orderState",order.getState());
         return mapper.updateOrder(order.getId(),order.getState());
     }
 
@@ -64,5 +71,33 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public IPage<OrderVo> GetOrderUnfinishedListByPage(int Id, int PageSize, int PageNum) {
         IPage<OrderVo> page = new Page<>(PageNum,PageSize);
         return mapper.GetOrderUnfinishedListByPage(page,Id);
+    }
+
+    @Override
+    public int OrderCancel(int order_id) {
+        Order order = mapper.GetById(order_id);
+        int buyer_id = order.getBuyer();
+        int seller_id = order.getSeller();
+        User buyer = userService.getById(buyer_id);
+        User seller = userService.getById(seller_id);
+        buyer.setWallet(buyer.getWallet()+order.getBuyer_payout());
+        seller.setWallet(seller.getWallet()-order.getSeller_income());
+        userService.updateById(buyer);
+        userService.updateById(seller);
+        order.setId(order_id);
+        order.setState("已取消");
+        return updateOrder(order);
+    }
+
+    @Override
+    public int ProductReturn(int order_id) {
+        Order order = mapper.GetById(order_id);
+        int buyer_id = order.getBuyer();
+        User buyer = userService.getById(buyer_id);
+        buyer.setWallet(buyer.getWallet()+order.getBuyer_payout());
+        userService.updateById(buyer);
+        order.setId(order_id);
+        order.setState("待退货");
+        return updateOrder(order);
     }
 }
