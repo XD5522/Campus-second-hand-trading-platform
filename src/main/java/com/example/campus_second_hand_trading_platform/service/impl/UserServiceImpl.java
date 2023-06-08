@@ -115,6 +115,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     /**
+     * 修改用户的状态为审核未通过
+     * @param userName
+     * @return
+     */
+    public boolean noPassUser(String userName) {
+
+        return userRepository.noPassUser(userName);
+    }
+
+    /**
      * 修改用户的状态为封禁
      * @param userName
      * @return
@@ -132,5 +142,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public boolean deleteUser(String userName) {
 
         return userRepository.deleteUser(userName);
+    }
+
+    /**
+     * 分页查询含有搜索框输入的用户名的用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<UserVo> searchUser(String searchText, int start, int pageSize) {
+
+        return userRepository.searchUser(searchText, start, pageSize);
+    }
+
+    /**
+     * 分页查询含有搜索框输入的用户名的待审核用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<UserVo> searchAuditUser(String searchText, int start, int pageSize) {
+
+        return userRepository.searchAuditUser(searchText, start, pageSize);
     }
 }

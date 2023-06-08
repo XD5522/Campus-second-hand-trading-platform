@@ -23,9 +23,9 @@ public class UserVo {
 
     private String state;
 
-    private String phone;
+    private String city;
 
-    private String bankCard;
+    private String img;
 
     public String getUserName() {
         return userName;

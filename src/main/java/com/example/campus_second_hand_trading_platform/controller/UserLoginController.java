@@ -3,7 +3,6 @@ package com.example.campus_second_hand_trading_platform.controller;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.domain.dto.LoginDataDto;
-import com.example.campus_second_hand_trading_platform.domain.dto.LoginDto;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserLoginService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
@@ -12,6 +11,7 @@ import com.example.campus_second_hand_trading_platform.utils.JwtUtils;
 import com.example.campus_second_hand_trading_platform.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -37,6 +37,9 @@ public class UserLoginController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 用户登录
@@ -90,16 +93,14 @@ public class UserLoginController {
 
     /**
      * 通过Token获取用户ID
-     * @param loginDto
+     * @param token
      * @return
      */
     @PostMapping("/getUserInfo")
-    public CommonResult<?> getUserIdByToken(@RequestBody LoginDto loginDto) {
-        log.info(loginDto.getToken());
-        String userAccount;
-        userAccount = jwtUtils.getUserAccountByToken(loginDto.getToken());
-        UserAccount data = iUserAccountService.getByUserAccount(userAccount);
-        log.info(data.getUserId().toString());
-        return CommonResult.success(data.getUserId());
+    public CommonResult<?> getUserIdByToken(@RequestParam String token) {
+        log.info(token);
+        User data = (User) redisTemplate.opsForHash().get(token, "info");
+        log.info(data.getId().toString());
+        return CommonResult.success(data.getId());
     }
 }

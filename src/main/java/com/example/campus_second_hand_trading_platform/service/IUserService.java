@@ -32,7 +32,13 @@ public interface IUserService extends IService<User> {
 
     public boolean passUser(String userName);
 
+    public boolean noPassUser(String userName);
+
     public boolean banUser(String userName);
 
     public boolean deleteUser(String userName);
+
+    public List<UserVo> searchUser(String searchText, int start, int pageSize);
+
+    public List<UserVo> searchAuditUser(String searchText, int start, int pageSize);
 }

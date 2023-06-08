@@ -1,13 +1,16 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
+import com.example.campus_second_hand_trading_platform.domain.vo.ProductVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +50,11 @@ public class AdminController {
         return CommonResult.success(data);
     }
 
+    /**
+     * 获取还未审核和未通过审核的用户
+     * @return
+     */
+
     @GetMapping("/getAuditUserData")
     public CommonResult<List<UserVo>> getAuditUser() {
         List<UserVo> data;
@@ -67,6 +75,23 @@ public class AdminController {
         if(iUserService.passUser(userName)) {
             log.info("审核通过");
             return CommonResult.success("审核通过");
+        }
+        return CommonResult.failed();
+    }
+
+    /**
+     * 用户不通过审核
+     * @param userName
+     * @return
+     */
+    @PostMapping("/noPassUser")
+    public CommonResult<?> noPassUser(@RequestParam String userName) {
+
+        log.info(userName.toString());
+
+        if(iUserService.noPassUser(userName)) {
+            log.info("审核未通过");
+            return CommonResult.success("审核未通过");
         }
         return CommonResult.failed();
     }
@@ -96,5 +121,30 @@ public class AdminController {
             return CommonResult.success("删除成功");
         }
         return CommonResult.failed();
+    }
+
+    @GetMapping("/searchUser")
+    public CommonResult<List<UserVo>> searchUser(@RequestParam String searchText, @RequestParam int page, @RequestParam int pageSize) {
+        int start = (page - 1) * pageSize;
+        log.info(String.valueOf(start));
+        List<UserVo> data;
+        data = iUserService.searchUser(searchText, start, pageSize);
+        return CommonResult.success(data);
+    }
+
+    @GetMapping("/searchAuditUser")
+    public CommonResult<List<UserVo>> searchAuditUser(@RequestParam String searchText, @RequestParam int page, @RequestParam int pageSize) {
+        int start = (page - 1) * pageSize;
+        log.info(String.valueOf(start));
+        List<UserVo> data;
+        data = iUserService.searchAuditUser(searchText, start, pageSize);
+        return CommonResult.success(data);
+    }
+
+    @GetMapping("/searchProject")
+    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order){
+        IPage<ProductVo> products = iProductService.SearchProducts(name,order,current,num);
+        log.info(order);
+        return CommonResult.success(products);
     }
 }

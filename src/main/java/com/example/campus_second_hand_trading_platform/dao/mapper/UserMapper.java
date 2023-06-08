@@ -66,8 +66,8 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "name", property = "name"),
                     @Result(column = "type", property = "type"),
                     @Result(column = "state", property = "state"),
-                    @Result(column = "phone", property = "phone"),
-                    @Result(column = "bank_card", property = "bankCard"),
+                    @Result(column = "city", property = "city"),
+                    @Result(column = "img", property = "img"),
             }
     )
     @Select("select * from user where flag = 0 and (state != 'audit' and state != '审核未通过')")
@@ -84,11 +84,11 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "name", property = "name"),
                     @Result(column = "type", property = "type"),
                     @Result(column = "state", property = "state"),
-                    @Result(column = "phone", property = "phone"),
-                    @Result(column = "bank_card", property = "bankCard"),
+                    @Result(column = "city", property = "city"),
+                    @Result(column = "img", property = "img"),
             }
     )
-    @Select("select * from user where flag = 0 and state = 'audit'")
+    @Select("select * from user where flag = 0 and (state = 'audit' or state = '审核未通过') ")
     public List<UserVo> getAuditUser();
 
     /**
@@ -98,6 +98,14 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Update("update user set state = '正常' where user_name = #{userName}")
     public int passUser(@Param("userName") String userName);
+
+    /**
+     * 修改用户的状态为审核未通过
+     * @param userName
+     * @return
+     */
+    @Update("update user set state = '审核未通过' where user_name = #{userName}")
+    public int noPassUser(@Param("userName") String userName);
 
     /**
      * 修改用户的状态为封禁
@@ -114,4 +122,48 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Update("update user set flag = 1 where user_name = #{userName}")
     public int deleteUser(@Param("userName") String userName);
+
+    /**
+     * 分页查询含有搜索框输入的用户名的用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+
+    @Results(
+            {
+                    @Result(column = "id", property = "id"),
+                    @Result(column = "user_name", property = "userName"),
+                    @Result(column = "name", property = "name"),
+                    @Result(column = "type", property = "type"),
+                    @Result(column = "state", property = "state"),
+                    @Result(column = "city", property = "city"),
+                    @Result(column = "img", property = "img"),
+            }
+    )
+    @Select("select * from user where (user_name like CONCAT('%', #{searchText}, '%') and flag = 0 and (state != 'audit' and state != '审核未通过')) limit #{start}, #{pageSize}")
+    public List<UserVo> searchUser(@Param("searchText") String searchText, @Param("start") int start, @Param("pageSize") int pageSize);
+
+    /**
+     * 分页查询含有搜索框输入的用户名的待审核用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+
+    @Results(
+            {
+                    @Result(column = "id", property = "id"),
+                    @Result(column = "user_name", property = "userName"),
+                    @Result(column = "name", property = "name"),
+                    @Result(column = "type", property = "type"),
+                    @Result(column = "state", property = "state"),
+                    @Result(column = "city", property = "city"),
+                    @Result(column = "img", property = "img"),
+            }
+    )
+    @Select("select * from user where (user_name like CONCAT('%', #{searchText}, '%') and flag = 0 and (state = 'audit' or state = '审核未通过')) limit #{start}, #{pageSize}")
+    public List<UserVo> searchAuditUser(@Param("searchText") String searchText, @Param("start") int start, @Param("pageSize") int pageSize);
 }
