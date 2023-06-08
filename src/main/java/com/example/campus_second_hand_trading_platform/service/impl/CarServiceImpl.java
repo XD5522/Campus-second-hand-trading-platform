@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class CarServiceImpl extends ServiceImpl<CarMapper,Car> implements CarService {
@@ -25,6 +27,11 @@ public class CarServiceImpl extends ServiceImpl<CarMapper,Car> implements CarSer
 
 
         return carMapper.getCarByUserId(page,id);
+    }
+
+    @Override
+    public List<CarVo> getCarByIds(List<Integer> ids) {
+        return carMapper.getCarByIds(ids);
     }
 
 

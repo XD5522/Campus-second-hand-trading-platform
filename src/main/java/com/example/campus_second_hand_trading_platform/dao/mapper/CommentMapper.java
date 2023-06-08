@@ -24,4 +24,6 @@ public interface CommentMapper extends BaseMapper<Comment> {
     public IPage<CommentVo> GetPersonCommentA(IPage<CommentVo> page,int id);
     //商家评论客户
     public IPage<CommentVo> GetPersonCommentB(IPage<CommentVo> page,int id);
+
+    public IPage<CommentVo> getProductComments(IPage<CommentVo> page,int id);
 }

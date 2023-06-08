@@ -8,6 +8,13 @@
 <!--    <select id="getByName" parameterType="String" resultType="com.example.campus_second_hand_trading_platform.dao.entity.User">-->
 <!--        select * from t_user where name = #{0}-->
 <!--    </select>-->
-
+    <update id="setWallet">
+        UPDATE user set user.wallet=#{price}
+        WHERE id = #{id}
+    </update>
+    <update id="setScore">
+        UPDATE user set user.score=#{score}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

@@ -30,32 +30,33 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 检查用户的身份认证信息
-        log.info(request.toString());
-        String token = request.getHeader("token");
-        String uri = request.getRequestURI();
-        log.info(token);
-        log.info(uri);
-        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register")){
-            //boolean test = jwtUtils.verifyToken(token, jwtUtils.getUserAccountByToken(token));
-            return true;
-        }
-        else {
-            String method;
-            method = request.getMethod();
-            if ("OPTIONS".equals(method)) {
-                return true;
-            }
-            if(token != null) {
-                String userAccount = jwtUtils.getUserAccountByToken(token);
-                UserAccount data = iUserAccountService.getByUserAccount(userAccount);
-                log.info(userAccount);
-                log.info(data.toString());
-                return jwtUtils.verifyToken(token, data.getUserAccount().toString());
-            }
-        }
-        log.info("false");
-        // 用户的认证信息有效，放行请求
-        return false;
+//        log.info(request.toString());
+//        String token = request.getHeader("token");
+//        String uri = request.getRequestURI();
+//        log.info(token);
+//        log.info(uri);
+//        if (uri.equals("/user/login") || uri.equals("/error") || uri.equals("/admin/login") || uri.equals("/user/register")){
+//            //boolean test = jwtUtils.verifyToken(token, jwtUtils.getUserAccountByToken(token));
+//            return true;
+//        }
+//        else {
+//            String method;
+//            method = request.getMethod();
+//            if ("OPTIONS".equals(method)) {
+//                return true;
+//            }
+//            if(token != null) {
+//                String userAccount = jwtUtils.getUserAccountByToken(token);
+//                UserAccount data = iUserAccountService.getByUserAccount(userAccount);
+//                log.info(userAccount);
+//                log.info(data.toString());
+//                return jwtUtils.verifyToken(token, data.getUserAccount().toString());
+//            }
+//        }
+//        log.info("false");
+//        // 用户的认证信息有效，放行请求
+//        return false;
+        return true;
     }
 
     // 其他方法

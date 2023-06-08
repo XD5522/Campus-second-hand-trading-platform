@@ -6,11 +6,14 @@ import com.example.campus_second_hand_trading_platform.dao.entity.Car;
 import com.example.campus_second_hand_trading_platform.domain.vo.CarVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author 16646
  */
 @Mapper
 public interface CarMapper extends BaseMapper<Car> {
     IPage<CarVo> getCarByUserId(IPage<CarVo> page, int userId);
+    List<CarVo> getCarByIds(List<Integer> ids);
 
 }

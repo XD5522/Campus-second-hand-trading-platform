@@ -34,10 +34,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public IPage<ProductVo> SearchProducts(String name,String order,int current,int num){
+    public IPage<ProductVo> SearchProducts(String name,String order,String asc,int current,int num){
         IPage<ProductVo> page = new Page<ProductVo>(current,num);
         log.info(name);
-        return productMapper.searchProducts(page,name,order);
+        return productMapper.searchProducts(page,name,order,asc);
     }
 
     @Override

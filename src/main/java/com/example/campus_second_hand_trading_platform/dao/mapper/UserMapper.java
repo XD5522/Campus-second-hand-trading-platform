@@ -57,4 +57,9 @@ public interface UserMapper extends BaseMapper<User> {
             "#{user.gender},#{user.bankCard},#{user.email})")
     public int insertUser(@Param("user") User user);
 
+
+    public void buyProduct(int id,double price);
+    public void setWallet(int id,double price);
+
+    public void setScore(int id,int score);
 }

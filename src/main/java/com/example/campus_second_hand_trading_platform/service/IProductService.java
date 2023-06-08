@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2023-05-06
  */
 public interface IProductService extends IService<Product> {
-    public IPage<ProductVo> SearchProducts(String name,String order,int current,int num);
+    public IPage<ProductVo> SearchProducts(String name,String order,String asc,int current,int num);
     public ProductVo SelectProductById(int id);
 
     /**

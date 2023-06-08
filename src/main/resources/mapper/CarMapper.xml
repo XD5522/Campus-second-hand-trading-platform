@@ -8,7 +8,8 @@
     </resultMap>
     <resultMap id="carVoMap" type="com.example.campus_second_hand_trading_platform.domain.vo.CarVo">
         <id property="id" column="id"/>
-        <result property="productId" column="user_id"/>
+        <result property="sellerId" column="seller_id"/>
+        <result property="productId" column="product_id"/>
         <result property="name" column="name"/>
         <result property="userName" column="user_name"/>
         <result property="num" column="num"/>
@@ -18,8 +19,19 @@
     </resultMap>
 
     <select id="getCarByUserId" resultMap="carVoMap">
-        select car.*,p.id,p.name,user_name,p.price,p.img from car join user on car.user_id = user.id join product p on car.product_id = p.id
-        where car.user_id=#{userId}
+        select car.*,p.user_id as seller_id,p.name,user_name,p.price,p.img from car join user on car.user_id = user.id join product p on car.product_id = p.id
+        where car.user_id=#{userId} and car.flag=0
+    </select>
+    <select id="getCarByIds" resultMap="carVoMap">
+        SELECT car.*, p.user_id as seller_id, p.name, user.user_name, p.price, p.img
+        FROM car
+        JOIN user ON car.user_id = user.id
+        JOIN product p ON car.product_id = p.id
+        WHERE car.id IN
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND car.flag = 0
     </select>
 
 

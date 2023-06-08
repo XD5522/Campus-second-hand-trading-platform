@@ -21,11 +21,13 @@ import java.util.List;
  */
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
-    IPage<ProductVo> searchProducts(IPage<ProductVo> page,String name,String order);
+    IPage<ProductVo> searchProducts(IPage<ProductVo> page,String name,String order,String asc);
     ProductVo SelectProductById(int id);
 
     IPage<ProductCardVo> SelectProductByUserId(IPage<ProductCardVo> page,int id);
     int ChangeProductState(int id,String state);
 
     int getUserCountByProduct(int productId);
+
+    void sellProduct(int id,int stock,int hisSale);
 }

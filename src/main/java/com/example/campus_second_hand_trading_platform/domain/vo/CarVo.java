@@ -10,11 +10,12 @@ import java.time.LocalDateTime;
 @Data
 public class CarVo {
     private int id;
+    private int sellerId;
     private int productId;
     private String name;
     private String userName;
     private int num;
-    private Object price;
+    private double price;
     private LocalDateTime joinTime;
     private String img;
 }

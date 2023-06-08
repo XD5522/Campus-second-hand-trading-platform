@@ -36,4 +36,12 @@
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id} and `order`.state = '待退货'
     </select>
+    <insert id="insertOrder" parameterType="com.example.campus_second_hand_trading_platform.dao.entity.Order">
+        INSERT INTO `order` (product_id, buyer, seller, trading, coupon_id,
+                             buyer_name, product_name, address, phone, product_num, coupon_price, buyer_payout,
+                             seller_income, total)
+        VALUES (#{productId}, #{buyer}, #{seller},  #{trading},
+                #{couponId}, #{buyerName}, #{productName}, #{address}, #{phone}, #{productNum},
+                #{couponPrice}, #{buyerPayout}, #{sellerIncome}, #{total})
+    </insert>
 </mapper>

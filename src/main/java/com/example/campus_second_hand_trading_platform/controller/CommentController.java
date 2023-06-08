@@ -59,4 +59,18 @@ public class CommentController {
                                          @RequestParam int PageNum, @RequestParam String State){
         return CommonResult.success(service.GetPersonComment(user_id,PageSize,PageNum,State));
     }
+
+
+    @GetMapping("getProductComments")
+    public CommonResult<?> getProductComments(@RequestParam int id,@RequestParam int current,@RequestParam int num){
+
+        try{
+            return CommonResult.success(service.getProductComments(id,current,num));
+        }catch (Exception e){
+            log.info(e.getMessage());
+            return CommonResult.failed("商品评论获取失败");
+        }
+
+
+    }
 }

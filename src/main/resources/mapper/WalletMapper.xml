@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus_second_hand_trading_platform.dao.mapper.WalletMapper">
+    <resultMap id="BaseMap" type="com.example.campus_second_hand_trading_platform.domain.vo.RecordVo">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="value" column="value"/>
+        <result property="time" column="time"/>
+        <result property="flag" column="flag"/>
+    </resultMap>
+    <resultMap id="recordMap" type="com.example.campus_second_hand_trading_platform.domain.vo.RecordVo">
+        <id property="id" column="product_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="value" column="total"/>
+        <result property="time" column="time"/>
+        <result property="flag" column="flag"/>
+    </resultMap>
+    <select id="getRecharge" resultMap="BaseMap">
+        select * from money where user_id = #{id}
+    </select>
+    <select id="getMoney" resultMap="BaseMap">
+        select * from money where user_id = #{id}
+    </select>
+    <select id="getIncome" resultMap="recordMap">
+        select product_id,seller as user_id,seller_income as total,create_time as time from `order` where seller = #{id}
+    </select>
+    <select id="getPayout" resultMap="recordMap">
+        select product_id,buyer as user_id,buyer_payout as total,create_time as time from `order` where buyer = #{id}
+    </select>
+
+</mapper>

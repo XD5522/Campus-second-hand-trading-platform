@@ -89,5 +89,30 @@ public class CarController {
             return CommonResult.failed("删除失败");
         }
     }
+    @PostMapping("upCar")
+    public CommonResult<?> updateProductFromCar(@RequestParam int id,@RequestParam int num){
+        Car car = carService.getById(id);
+        log.info(String.valueOf(id));
+        log.info(carService.getById(id).toString());
+        car.setNum(num);
+        try{
+            carService.updateById(car);
+            return CommonResult.success(car);
+        }
+        catch (Exception e){
+            log.info("修改失败"+e.getMessage());
+            return CommonResult.failed("修改失败");
+        }
+    }
+
+    @PostMapping("getCarByIds")
+    public CommonResult<?> getCarByIds(@RequestBody List<Integer> ids){
+        List<CarVo> cars;
+        log.info(ids.toString());
+        cars = carService.getCarByIds(ids);
+        log.info(cars.toString());
+        return CommonResult.success(cars);
+    }
+
 
 }

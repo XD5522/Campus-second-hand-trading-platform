@@ -40,8 +40,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name,@RequestParam int current,@RequestParam int num,@RequestParam String order){
-        IPage<ProductVo> products = productService.SearchProducts(name,order,current,num);
+    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name,@RequestParam int current,@RequestParam int num,@RequestParam String order,@RequestParam String asc){
+        IPage<ProductVo> products = productService.SearchProducts(name,order,asc,current,num);
         log.info(order);
         return CommonResult.success(products);
     }
@@ -55,15 +55,15 @@ public class ProductController {
                     log.info(product.toString());
                     ProductVo productVo = new ProductVo();
                     BeanUtils.copyProperties(product,productVo);
-
-                    productVo.setUserCount(productService.getUserCountByProduct(id));
                     log.info("缓存击中");
+                    productVo.setUserCount(productService.getUserCountByProduct(id));
                     return  CommonResult.success(productVo);
                 }
             }
             log.info("数据库查询");
             ProductVo productVo = productService.SelectProductById(id);
             log.info(productVo.toString());
+            productVo.setUserCount(productService.getUserCountByProduct(id));
             redisTemplate.opsForHash().put("product",id, productVo);
             log.info("添加成功");
             redisTemplate.expire("product",1800000, TimeUnit.MILLISECONDS);
@@ -75,15 +75,6 @@ public class ProductController {
         }
     }
 
-    /**
-     * 商品图片上传
-     * @param file
-     * @return 图片相对地址
-     */
-    @PostMapping("uploadImg")
-    public CommonResult upload( @RequestParam MultipartFile file){
-        return CommonResult.success(minioService.upload(file,"product",1));
-    }
     @PostMapping("/updateImg")
     public CommonResult<?> updateImg(HttpServletRequest request,@RequestParam int id, @RequestParam(required = false) MultipartFile file){
 //        log.info(product.toString());
@@ -117,7 +108,6 @@ public class ProductController {
 
         return CommonResult.success("");
     }
-
 
 
 

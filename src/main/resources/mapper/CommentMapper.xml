@@ -54,4 +54,10 @@
                  join product p on p.id = e.product_id
         where e.commentee = #{id}
     </select>
+
+    <select id="getProductComments" resultMap="CommentVoMap">
+        select comment.*,u.id as user_id,comment.product_id,user_name,p.name as product_name,u.img
+        from comment join product p on p.id = comment.product_id join user u on comment.user_id = u.id
+        where product_id = #{id} and comment.flag = 0
+    </select>
 </mapper>

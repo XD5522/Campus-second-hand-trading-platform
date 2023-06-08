@@ -50,15 +50,22 @@ public class Order implements Serializable {
     @ApiModelProperty("优惠券")
     private Integer couponId;
 
+    private String buyerName;
+
     private String productName;
+
+    private String address;
+    private String phone;
 
     private Integer productNum;
 
     @ApiModelProperty("优惠券金额")
-    private Object couponPrice;
+    private double couponPrice;
+    private double buyerPayout;
+    private double sellerIncome;
 
     @ApiModelProperty("总价")
-    private Object total;
+    private double total;
 
     private String state;
 

@@ -35,4 +35,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
         if(state.equals("ER")) return mapper.GetPersonCommentA(page,user_id);//commenter
         else return mapper.GetPersonCommentB(page,user_id);//commentee
     }
+
+    @Override
+    public IPage<CommentVo> getProductComments(int id, int current, int num) {
+        IPage<CommentVo> page = new Page<>(current,num);
+        return mapper.getProductComments(page,id);
+    }
+
+
 }
