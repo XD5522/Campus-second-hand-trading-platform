@@ -18,4 +18,5 @@ public interface ICommentService extends IService<Comment> {
     public IPage<CommentVo> GetPersonComment(int user_id,int pageSize, int pageNum,String state);
 
     public IPage<CommentVo> getProductComments(int id,int current,int num);
+    public CommentVo GetCommentByOrder(int user_id,int product_id);
 }

@@ -54,6 +54,14 @@ public class CommentController {
         return CommonResult.success(service.GetListByUser(user_id,PageSize,PageNum));
     }
 
+    /**
+     * 获取对个人的评价的接口
+     * @param user_id
+     * @param PageSize
+     * @param PageNum
+     * @param State
+     * @return 评论信息
+     */
     @GetMapping("GetPersonComment")
     public CommonResult GetPersonComment(@RequestParam int user_id, @RequestParam int PageSize,
                                          @RequestParam int PageNum, @RequestParam String State){
@@ -72,5 +80,16 @@ public class CommentController {
         }
 
 
+    }
+
+    /**
+     * 通过用户id和商品id搜索评论的接口
+     * @param user_id
+     * @param product_id
+     * @return 评论
+     */
+    @GetMapping("GetOrderComment")
+    public CommonResult GetCommentByOrder(@RequestParam int user_id,@RequestParam int product_id){
+        return CommonResult.success(service.GetCommentByOrder(user_id,product_id));
     }
 }

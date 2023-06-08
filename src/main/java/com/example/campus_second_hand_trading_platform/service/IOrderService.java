@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.campus_second_hand_trading_platform.domain.vo.OrderDetailVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 
 
@@ -62,7 +63,7 @@ public interface IOrderService extends IService<Order> {
      * @param order_id
      * @return
      */
-    public OrderVo GetOrderDetail(int order_id);
+    public OrderDetailVo GetOrderDetail(int order_id);
 
     /**
      * 通过用户id进行分页查询，查找未完成的订单
@@ -72,4 +73,18 @@ public interface IOrderService extends IService<Order> {
      * @return
      */
     public IPage<OrderVo> GetOrderUnfinishedListByPage(int Id, int PageSize, int PageNum);
+
+    /**
+     * 订单取消业务
+     * @param order_id
+     * @return
+     */
+    public int OrderCancel(int order_id);
+
+    /**
+     * 退货业务
+     * @param order_id
+     * @return
+     */
+    public int ProductReturn(int order_id);
 }

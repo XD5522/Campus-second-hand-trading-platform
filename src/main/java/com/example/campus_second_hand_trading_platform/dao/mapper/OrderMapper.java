@@ -3,6 +3,7 @@ package com.example.campus_second_hand_trading_platform.dao.mapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.campus_second_hand_trading_platform.dao.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.OrderDetailVo;
 import com.example.campus_second_hand_trading_platform.domain.vo.OrderVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface OrderMapper extends BaseMapper<Order> {
     IPage<OrderVo> GetOrderUnfinishedListByPage(IPage<OrderVo> page,int id);
 
     void insertOrder(Order order);
+    Order GetById(int id);
+    OrderDetailVo GetOrderDetail(int id);
 }

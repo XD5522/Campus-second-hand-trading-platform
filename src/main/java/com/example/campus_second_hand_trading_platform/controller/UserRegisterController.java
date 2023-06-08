@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2023/4/23 20:37
  **/
 @Slf4j
-@RequestMapping("/user/register")
+@RequestMapping("/user")
 @RestController
 @CrossOrigin
 public class UserRegisterController {
@@ -36,7 +36,7 @@ public class UserRegisterController {
      * @param registerDataDto
      * @return
      */
-    @PostMapping()
+    @PostMapping("/register")
     public CommonResult<?> Register(@RequestBody RegisterDataDto registerDataDto) {
 
         log.info(registerDataDto.toString());

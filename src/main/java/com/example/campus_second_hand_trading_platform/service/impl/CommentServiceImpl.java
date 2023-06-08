@@ -43,4 +43,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper,Comment> imple
     }
 
 
+
+    @Override
+    public CommentVo GetCommentByOrder(int user_id, int product_id) {
+        return mapper.GetCommentByOrder(user_id,product_id);
+    }
 }

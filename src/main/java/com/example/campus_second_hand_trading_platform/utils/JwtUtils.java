@@ -1,5 +1,6 @@
 package com.example.campus_second_hand_trading_platform.utils;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.Administrators;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -60,9 +61,38 @@ public class JwtUtils {
         return token;
     }
 
+    /**
+     * 生成管理员的token
+     * @param administrators
+     * @param adminAccount
+     * @param expirationTimeMillis
+     * @return
+     */
 
-
-
+    public String adminToken(Administrators administrators, String adminAccount, long expirationTimeMillis) {
+        //过期时间
+        String adminId = administrators.getId().toString();
+        log.info(adminId);
+        long expirationMs = expirationTimeMillis*1000;
+        Date expirationDate = new Date(System.currentTimeMillis() + expirationMs);
+        // 使用私钥签名 JWT Token
+        String secretKey = KEY; // 私钥，需要保密
+        String token = Jwts.builder()
+                .setSubject(adminAccount)
+                .setIssuer(ISS)
+                .setIssuedAt(new Date())
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+        // 将 JWT 存入 Redis，设置过期时间
+        redisTemplate.opsForSet().add(adminId,token);
+        redisTemplate.expire(adminId, expirationMs, TimeUnit.MILLISECONDS);
+        redisTemplate.opsForHash().put(token, "token",token);
+        redisTemplate.opsForHash().put(token,"info",administrators);
+        redisTemplate.expire(token, expirationMs, TimeUnit.MILLISECONDS);
+        log.info(token);
+        return token;
+    }
 
     /**
      * 从token中获取登录用户名
@@ -75,6 +105,19 @@ public class JwtUtils {
         Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
         userAccount = claims.getSubject();
         return userAccount;
+    }
+
+    /**
+     * 从token中获取管理员账户
+     * @param token 客户端传入的token
+     * @return
+     */
+    public String getAdminAccountByToken(String token) {
+        String adminAccount;
+        String secretKey = KEY; // 私钥，需要保密
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        adminAccount = claims.getSubject();
+        return adminAccount;
     }
 
     /**
@@ -100,9 +143,20 @@ public class JwtUtils {
         return userAccount.equals(data) && !isTokenExpired(token);
     }
 
+    /**
+     * 验证管理员token是否有效
+     * @param token 客户端传入的token
+     * @param data 数据库中找到的数据
+     * @return
+     */
+    public boolean verifyAdminToken(String token, String data) {
+        String adminAccount = getAdminAccountByToken(token);
+        return adminAccount.equals(data) && !isTokenExpired(token);
+    }
+
     public boolean isTokenExists(HttpServletRequest request) {
         // 判断 JWT 是否存在于 Redis 中
-        String jwtToken = request.getHeader("***");
+        String jwtToken = request.getHeader("token");
 
         return redisTemplate.hasKey(jwtToken);
     }

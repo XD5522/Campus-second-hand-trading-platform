@@ -19,11 +19,20 @@ import org.springframework.stereotype.Service;
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper, UserAccount> implements IUserAccountService {
     @Autowired
     private UserAccountRepository userAccountRepository;
-    public UserAccount getByUserId(Integer id) {
+    public UserAccount getByUserId(int id) {
         return userAccountRepository.getByUserId(id);
     }
 
     public UserAccount getByUserAccount(String userAccount) {
         return userAccountRepository.getByUserAccount(userAccount);
+    }
+
+    /**
+     * 删除一个账户
+     * @param userId
+     * @return
+     */
+    public boolean deleteUserAccount(int userId) {
+        return userAccountRepository.deleteUserAccount(userId);
     }
 }

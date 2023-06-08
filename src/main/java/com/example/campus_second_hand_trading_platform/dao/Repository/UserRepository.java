@@ -2,8 +2,11 @@ package com.example.campus_second_hand_trading_platform.dao.Repository;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
+import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * TODO
@@ -45,5 +48,91 @@ public class UserRepository {
     public int insertUser(User user) {
 
         return userMapper.insertUser(user);
+    }
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    public List<UserVo> getAllUser() {
+
+        return userMapper.getAllUser();
+    }
+
+    /**
+     * 获取待审核用户信息
+     * @return
+     */
+    public List<UserVo> getAuditUser() {
+
+        return userMapper.getAuditUser();
+    }
+
+    /**
+     * 修改用户的状态为正常
+     * @param userName
+     * @return
+     */
+    public boolean passUser(String userName) {
+
+        if(userMapper.passUser(userName) == 1) return true;
+        return false;
+    }
+
+    /**
+     * 修改用户的状态为审核未通过
+     * @param userName
+     * @return
+     */
+    public boolean noPassUser(String userName) {
+
+        if(userMapper.noPassUser(userName) == 1) return true;
+        return false;
+    }
+
+    /**
+     * 修改用户的状态为封禁
+     * @param userName
+     * @return
+     */
+    public boolean banUser(String userName) {
+
+        if(userMapper.banUser(userName) == 1) return true;
+        return false;
+    }
+
+    /**
+     * 删除用户
+     * @param userName
+     * @return
+     */
+    public boolean deleteUser(String userName) {
+
+        if(userMapper.deleteUser(userName) == 1) return true;
+        return false;
+    }
+
+    /**
+     * 分页查询含有搜索框输入的用户名的用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<UserVo> searchUser(String searchText, int start, int pageSize) {
+
+        return userMapper.searchUser(searchText, start, pageSize);
+    }
+
+    /**
+     * 分页查询含有搜索框输入的用户名的待审核用户
+     * @param searchText
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<UserVo> searchAuditUser(String searchText, int start, int pageSize) {
+
+        return userMapper.searchAuditUser(searchText, start, pageSize);
     }
 }

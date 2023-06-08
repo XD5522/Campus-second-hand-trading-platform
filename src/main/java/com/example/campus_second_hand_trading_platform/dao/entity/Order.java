@@ -59,6 +59,10 @@ public class Order implements Serializable {
 
     private Integer productNum;
 
+    private Integer buyer_payout;
+
+    private Integer seller_income;
+
     @ApiModelProperty("优惠券金额")
     private double couponPrice;
     private double buyerPayout;
