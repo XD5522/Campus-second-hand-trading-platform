@@ -142,8 +142,8 @@ public class AdminController {
     }
 
     @GetMapping("/searchProject")
-    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order){
-        IPage<ProductVo> products = iProductService.SearchProducts(name,order,current,num);
+    public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order, @RequestParam String asc){
+        IPage<ProductVo> products = iProductService.SearchProducts(name, order, asc, current, num);
         log.info(order);
         return CommonResult.success(products);
     }
