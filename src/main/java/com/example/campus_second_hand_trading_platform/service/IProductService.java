@@ -18,6 +18,9 @@ import java.util.List;
  */
 public interface IProductService extends IService<Product> {
     public IPage<ProductVo> SearchProducts(String name,String order,String asc,int current,int num);
+
+    public IPage<ProductVo> SearchAuditProducts(String name,String order,String asc,int current,int num);
+
     public ProductVo SelectProductById(int id);
 
     /**
@@ -37,4 +40,11 @@ public interface IProductService extends IService<Product> {
     public int ChangeProductState(int product_id,String state);
 
     public int getUserCountByProduct(int productId);
+
+    /**
+     * 删除商品
+     * @param productId
+     * @return
+     */
+    public int deleteProduct(int productId);
 }

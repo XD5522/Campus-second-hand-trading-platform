@@ -22,6 +22,9 @@ import java.util.List;
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
     IPage<ProductVo> searchProducts(IPage<ProductVo> page,String name,String order,String asc);
+
+    IPage<ProductVo> searchAuditProducts(IPage<ProductVo> page,String name,String order,String asc);
+
     ProductVo SelectProductById(int id);
 
     IPage<ProductCardVo> SelectProductByUserId(IPage<ProductCardVo> page,int id);
@@ -30,4 +33,6 @@ public interface ProductMapper extends BaseMapper<Product> {
     int getUserCountByProduct(int productId);
 
     void sellProduct(int id,int stock,int hisSale);
+
+    int deleteProduct(int id);
 }

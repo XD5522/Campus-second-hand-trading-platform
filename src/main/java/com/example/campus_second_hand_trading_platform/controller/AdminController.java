@@ -148,6 +148,40 @@ public class AdminController {
         return CommonResult.success(products);
     }
 
+    @GetMapping("/searchAuditProduct")
+    public CommonResult<?> searchAuditProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order, @RequestParam String asc){
+        IPage<ProductVo> products = iProductService.SearchAuditProducts(name, order, asc, current, num);
+        log.info(order);
+        return CommonResult.success(products);
+    }
+
+    @PostMapping("/releaseProduct")
+    public CommonResult<?> releaseProduct(@RequestParam int productId, @RequestParam String state) {
+        if(iProductService.ChangeProductState(productId, state) == 1) {
+            log.info("发布成功");
+            return CommonResult.success("发布成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @PostMapping("/downProduct")
+    public CommonResult<?> downProduct(@RequestParam int productId, @RequestParam String state) {
+        if(iProductService.ChangeProductState(productId, state) == 1) {
+            log.info("下架成功");
+            return CommonResult.success("下架成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @PostMapping("/deleteProduct")
+    public CommonResult<?> deleteProduct(@RequestParam int productId) {
+        if(iProductService.deleteProduct(productId) == 1) {
+            log.info("删除成功");
+            return CommonResult.success("删除成功");
+        }
+        return CommonResult.failed();
+    }
+
     @PostMapping("/edit")
     public CommonResult<?> edit(@RequestBody UserDto userDto) {
 

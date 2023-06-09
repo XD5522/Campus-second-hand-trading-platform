@@ -41,6 +41,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    public IPage<ProductVo> SearchAuditProducts(String name,String order,String asc,int current,int num){
+        IPage<ProductVo> page = new Page<ProductVo>(current,num);
+        log.info(name);
+        return productMapper.searchAuditProducts(page,name,order,asc);
+    }
+
+    @Override
     public ProductVo SelectProductById(int id){
         return productMapper.SelectProductById(id);
     }
@@ -61,5 +68,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return productMapper.getUserCountByProduct(productId);
     }
 
+    public int deleteProduct(int productId) {
+        return productMapper.deleteProduct(productId);
+    }
 
 }
