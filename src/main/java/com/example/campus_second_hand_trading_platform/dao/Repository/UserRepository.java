@@ -135,4 +135,25 @@ public class UserRepository {
 
         return userMapper.searchAuditUser(searchText, start, pageSize);
     }
+
+    /**
+     * 编辑用户的信息
+     * @param user
+     * @return
+     */
+
+    public boolean editMessage(User user) {
+
+        return userMapper.editMessage(user) == 1;
+    }
+
+    /**
+     * 重置用户所在账户的密码
+     * @param userId
+     * @return
+     */
+    public boolean resetPassword(int userId, String resetPassword) {
+
+        return userMapper.resetPassword(userId, resetPassword) == 1;
+    }
 }

@@ -171,4 +171,15 @@ public interface UserMapper extends BaseMapper<User> {
     public void setWallet(int id,double price);
 
     public void setScore(int id,int score);
+
+    @Update("update user set " +
+            "user_name = #{user.userName}, " +
+            "name = #{user.name}, " +
+            "city = #{user.city}, " +
+            "type = #{user.type} " +
+            "where user_name = #{user.userName}")
+    public int editMessage(@Param("user") User user);
+
+    @Update("update user_account set user_password = #{resetPassword} where user_id = #{userId}")
+    public int resetPassword(@Param("userId") int userId, @Param("resetPassword") String resetPassword);
 }

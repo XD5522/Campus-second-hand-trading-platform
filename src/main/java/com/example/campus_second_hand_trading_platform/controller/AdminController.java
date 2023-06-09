@@ -141,10 +141,32 @@ public class AdminController {
         return CommonResult.success(data);
     }
 
-    @GetMapping("/searchProject")
+    @GetMapping("/searchProduct")
     public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order, @RequestParam String asc){
         IPage<ProductVo> products = iProductService.SearchProducts(name, order, asc, current, num);
         log.info(order);
         return CommonResult.success(products);
     }
+
+    @PostMapping("/edit")
+    public CommonResult<?> edit(@RequestBody UserDto userDto) {
+
+        if(iUserService.editMessage(userDto)) {
+            log.info("修改成功");
+            return CommonResult.success("修改成功");
+        }
+        return CommonResult.failed();
+    }
+
+    @PostMapping("/reset")
+    public CommonResult<?> reset(@RequestParam String userName) {
+
+        User user = iUserService.getByUserName(userName);
+        if(iUserService.resetPassword(user.getId())) {
+            log.info("重置成功");
+            return CommonResult.success("重置成功");
+        }
+        return CommonResult.failed();
+    }
+
 }
