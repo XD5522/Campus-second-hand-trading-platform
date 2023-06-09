@@ -40,8 +40,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public int updateOrder(Order order) {
-        log.info("orderID",order.getId());
-        log.info("orderState",order.getState());
         return mapper.updateOrder(order.getId(),order.getState());
     }
 
@@ -60,6 +58,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public IPage<OrderVo> GetOrderListByPageAndState(int Id, int PageSize, int PageNum, String State) {
         IPage<OrderVo> page = new Page<>(PageNum,PageSize);
         return mapper.GetOrderListByPageAndState(page,Id,State);
+    }
+
+    @Override
+    public IPage<OrderVo> SellerGetOrderListByState(int id, int pageSize, int pageNum, String state) {
+        IPage<OrderVo> page = new Page<>(pageNum,pageSize);
+        return mapper.SellerGetOrderListByState(page,id,state);
     }
 
     @Override
@@ -92,12 +96,35 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public int ProductReturn(int order_id) {
         Order order = mapper.GetById(order_id);
-        int buyer_id = order.getBuyer();
-        User buyer = userService.getById(buyer_id);
-        buyer.setWallet(buyer.getWallet()+order.getBuyer_payout());
-        userService.updateById(buyer);
+        int seller_id = order.getSeller();
+        User seller = userService.getById(seller_id);
+        seller.setWallet(seller.getWallet()-order.getSeller_income());
+        userService.updateById(seller);
         order.setId(order_id);
         order.setState("待退货");
         return updateOrder(order);
+    }
+
+    @Override
+    public int SellerOperation(int order_id, String operation) {
+        if(operation.equals("shipments")){
+            return mapper.updateOrder(order_id,"已发货");
+        }
+        else if(operation.equals("AgreeReturn")){
+            Order order = mapper.GetById(order_id);
+            int buyer_id = order.getBuyer();
+            User buyer = userService.getById(buyer_id);
+            buyer.setWallet(buyer.getWallet()+order.getBuyer_payout());
+            userService.updateById(buyer);
+            return mapper.updateOrder(order_id,"已退货");
+        }
+        else if(operation.equals("RefuseReturn")){
+            Order order = mapper.GetById(order_id);
+            int seller_id = order.getSeller();
+            User seller = userService.getById(seller_id);
+            seller.setWallet(seller.getWallet()+order.getSeller_income());
+            userService.updateById(seller);
+            return mapper.updateOrder(order_id,"已完成");
+        }else return 0;
     }
 }
