@@ -46,13 +46,13 @@
 
 
     <select id="searchProducts" parameterType="String" resultMap="productVoMap">
-        SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'normal'
+        SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'normal' AND product.flag = 0
         where product.name like CONCAT('%',#{name}, '%') or product.type = #{name}
         order by ${order} ${asc}
     </select>
 
     <select id="searchAuditProducts" parameterType="String" resultMap="productVoMap">
-        SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'audit'
+        SELECT product.*, user.user_name FROM product inner join user ON product.user_id = user.id AND product.state = 'audit' AND product.flag = 0
         where product.name like CONCAT('%',#{name}, '%') or product.type = #{name}
         order by ${order} ${asc}
     </select>
