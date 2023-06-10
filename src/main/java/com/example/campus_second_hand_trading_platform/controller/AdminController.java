@@ -143,7 +143,7 @@ public class AdminController {
 
     @GetMapping("/searchProject")
     public CommonResult<?> searchProductByName(HttpServletRequest request, @RequestParam String name, @RequestParam int current, @RequestParam int num, @RequestParam String order){
-        IPage<ProductVo> products = iProductService.SearchProducts(name,order,current,num);
+        IPage<ProductVo> products = iProductService.SearchProducts(name,"ASC",order,current,num);
         log.info(order);
         return CommonResult.success(products);
     }
