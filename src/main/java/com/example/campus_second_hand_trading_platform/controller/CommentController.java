@@ -1,8 +1,10 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
 import com.example.campus_second_hand_trading_platform.dao.entity.Comment;
+import com.example.campus_second_hand_trading_platform.dao.entity.Evaluate;
 import com.example.campus_second_hand_trading_platform.domain.vo.CommentVo;
 import com.example.campus_second_hand_trading_platform.service.ICommentService;
+import com.example.campus_second_hand_trading_platform.service.IEvaluateService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +18,27 @@ import java.util.List;
 public class CommentController {
     @Autowired
     ICommentService service;
-
+    @Autowired
+    IEvaluateService evaluateService;
     /**
      * 新增评论
-     * @param commentdto
+     * @param comment
      * @return 添加成功与否
      */
     @PostMapping("/addComment")
-    public CommonResult<?> AddComent(@RequestBody Comment commentdto){
-        if(service.save(commentdto)){
-            return CommonResult.success(commentdto);
+    public CommonResult<?> AddComent(@RequestBody Comment comment){
+        if(service.save(comment)){
+            return CommonResult.success(comment);
         }else{
-            log.debug("add comment fail",commentdto);
+            log.debug("add comment fail",comment);
             return CommonResult.failed("add comment fail");
         }
     }
 
+    @PostMapping("/addEvaluate")
+    public CommonResult AddEvaluate(@RequestBody Evaluate evaluate){
+        return CommonResult.success(evaluateService.save(evaluate));
+    }
     /**
      * 通过商品id查找商品的评论列表
      * @param product_id
@@ -92,4 +99,7 @@ public class CommentController {
     public CommonResult GetCommentByOrder(@RequestParam int user_id,@RequestParam int product_id){
         return CommonResult.success(service.GetCommentByOrder(user_id,product_id));
     }
+
+
+
 }
