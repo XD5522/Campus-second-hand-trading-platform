@@ -25,6 +25,10 @@ public class RegisterDataDto {
 
     private String password; // 密码
 
+    private String type; // 用户类型
+
+    private String license; //营业执照
+
     public String getUserName() {
         return userName;
     }
@@ -35,6 +39,22 @@ public class RegisterDataDto {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 
     public void setName(String name) {
