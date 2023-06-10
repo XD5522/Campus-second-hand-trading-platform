@@ -20,23 +20,52 @@ public class CommentController {
     ICommentService service;
     @Autowired
     IEvaluateService evaluateService;
+
     /**
-     * 新增评论
-     * @param comment
-     * @return 添加成功与否
+     * 新增商品评论
+     * @param star
+     * @param content
+     * @param product_id
+     * @param buyer_id
+     * @return
      */
     @PostMapping("/addComment")
-    public CommonResult<?> AddComent(@RequestBody Comment comment){
-        if(service.save(comment)){
-            return CommonResult.success(comment);
-        }else{
-            log.debug("add comment fail",comment);
-            return CommonResult.failed("add comment fail");
-        }
+    public CommonResult<?> AddComent(@RequestParam double star,
+                                     @RequestParam String content,
+                                     @RequestParam int product_id,
+                                     @RequestParam int buyer_id){
+        Comment comment = new Comment();
+        comment.setUser_id(buyer_id);
+        comment.setProduct_id(product_id);
+        comment.setContent(content);
+        comment.setStar(star);
+        return CommonResult.success(service.save(comment));
     }
 
+    /**
+     * 新增用户评价
+     * @param star
+     * @param buyer_id
+     * @param seller_id
+     * @param product_id
+     * @param state
+     * @param content
+     * @return
+     */
     @PostMapping("/addEvaluate")
-    public CommonResult AddEvaluate(@RequestBody Evaluate evaluate){
+    public CommonResult AddEvaluat(@RequestParam double star,
+                                   @RequestParam int buyer_id,
+                                   @RequestParam int seller_id,
+                                   @RequestParam int product_id,
+                                   @RequestParam String state,
+                                   @RequestParam String content){
+        Evaluate evaluate = new Evaluate();
+        evaluate.setCommenter(buyer_id);
+        evaluate.setCommentee(seller_id);
+        evaluate.setStar(star);
+        evaluate.setState(state);
+        evaluate.setProductId(product_id);
+        evaluate.setContent(content);
         return CommonResult.success(evaluateService.save(evaluate));
     }
     /**
