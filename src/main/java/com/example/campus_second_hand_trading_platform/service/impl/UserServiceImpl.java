@@ -3,8 +3,11 @@ package com.example.campus_second_hand_trading_platform.service.impl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.campus_second_hand_trading_platform.dao.Repository.UserRepository;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
+import com.example.campus_second_hand_trading_platform.dao.entity.UserAccount;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
+import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
+import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowire;
@@ -32,6 +35,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private IUserAccountService iUserAccountService;
 
     public List<User> getByName(String name){
         return userMapper.getByName(name);
@@ -167,4 +173,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         return userRepository.searchAuditUser(searchText, start, pageSize);
     }
+
+    public boolean editMessage(UserDto userDto) {
+        User user = new User();
+        user.setUserName(userDto.getUserName());
+        user.setName(userDto.getName());
+        user.setCity(userDto.getCity());
+        user.setType(userDto.getType());
+        return userRepository.editMessage(user);
+    }
+
+    public boolean resetPassword(int userId) {
+
+        String resetPassword = "66dab74237d0253d9516b6240a488f44";
+
+        return userRepository.resetPassword(userId, resetPassword);
+    }
+
 }

@@ -26,6 +26,7 @@ public interface OrderMapper extends BaseMapper<Order> {
     List<OrderVo> GetPendingList(int id);
     IPage<OrderVo> GetOrderListByPage(IPage<OrderVo> page,int id);
     IPage<OrderVo> GetOrderListByPageAndState(IPage<OrderVo> page,int id,String state);
+    IPage<OrderVo>  SellerGetOrderListByState(IPage<OrderVo> page,int id,String state);
     IPage<OrderVo> GetOrderUnfinishedListByPage(IPage<OrderVo> page,int id);
 
     void insertOrder(Order order);

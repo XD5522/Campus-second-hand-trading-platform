@@ -65,6 +65,10 @@
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id} and `order`.state=#{state}
     </select>
+    <select id="SellerGetOrderListByState"  resultMap="OrderVo">
+        select `order`.*,name from `order` join product p on `order`.product_id = p.id
+        where `order`.seller = #{id} and `order`.state=#{state}
+    </select>
     <select id="GetOrderUnfinishedListByPage"  resultMap="OrderVo">
         select `order`.*,name from `order` join product p on `order`.product_id = p.id
         where `order`.buyer = #{id} and `order`.state!='已完成' and `order`.state!='已退货'

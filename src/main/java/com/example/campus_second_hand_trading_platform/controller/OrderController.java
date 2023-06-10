@@ -35,11 +35,31 @@ public class OrderController {
         return CommonResult.success(service.GetOrderListByPage(Id,PageSize,PageNum));
     }
 
+    /**
+     * 买家的获取订单方法
+     * @param Id
+     * @param PageSize
+     * @param PageNum
+     * @param State
+     * @return
+     */
     @GetMapping("GetOrderListByPage&State")
     public CommonResult<IPage<OrderVo>> GetOrderListByPageAndState(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum,@RequestParam String State){
         return CommonResult.success(service.GetOrderListByPageAndState(Id,PageSize,PageNum,State));
     }
 
+    /**
+     * 卖家的获取订单方法
+     * @param Id
+     * @param PageSize
+     * @param PageNum
+     * @param State
+     * @return
+     */
+        @GetMapping("SellerGetOrderListByPage&State")
+    public CommonResult<IPage<OrderVo>> SellerGetOrderListByState(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum,@RequestParam String State){
+        return CommonResult.success(service.SellerGetOrderListByState(Id,PageSize,PageNum,State));
+    }
     @GetMapping("GetOrderUnfinishedListByPage")
     public CommonResult<IPage<OrderVo>> GetOrderUnfinishedListByPage(@RequestParam int Id, @RequestParam int PageSize, @RequestParam int PageNum){
         return CommonResult.success(service.GetOrderUnfinishedListByPage(Id,PageSize,PageNum));
@@ -80,5 +100,10 @@ public class OrderController {
     @GetMapping("/returnProduct")
     public CommonResult ProductReturn(@RequestParam int order_id){
         return CommonResult.success(service.ProductReturn(order_id));
+    }
+
+    @GetMapping("seller")
+    public CommonResult SellerOperation(@RequestParam int order_id,@RequestParam String operation){
+        return CommonResult.success(service.SellerOperation(order_id,operation));
     }
 }
