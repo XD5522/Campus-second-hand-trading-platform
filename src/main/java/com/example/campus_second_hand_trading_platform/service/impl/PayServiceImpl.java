@@ -11,6 +11,7 @@ import com.example.campus_second_hand_trading_platform.service.CouponService;
 import com.example.campus_second_hand_trading_platform.service.PayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,9 @@ public class PayServiceImpl extends ServiceImpl<OrderMapper, Order> implements P
     UserMapper userMapper;
     @Autowired
     ProductMapper productMapper;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Override
     public List<Address> getAddress(int id) {
@@ -65,6 +69,7 @@ public class PayServiceImpl extends ServiceImpl<OrderMapper, Order> implements P
         log.info(String.valueOf(stock));
         couponMapper.deleteById(order.getCouponId());
         productMapper.sellProduct(order.getProductId(),stock,hisSale);
+        redisTemplate.opsForHash().delete("product",order.getProductId());
         log.info("111");
         double buyer = userMapper.selectById(order.getBuyer()).getWallet();
         userMapper.setWallet(order.getBuyer(),buyer-order.getTotal());
