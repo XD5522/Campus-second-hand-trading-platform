@@ -174,12 +174,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userRepository.searchAuditUser(searchText, start, pageSize);
     }
 
-    public boolean editMessage(UserDto userDto) {
+    public boolean editMessage(int id, String userName, String name, String city, String type) {
         User user = new User();
-        user.setUserName(userDto.getUserName());
-        user.setName(userDto.getName());
-        user.setCity(userDto.getCity());
-        user.setType(userDto.getType());
+        user.setUserName(userName);
+        user.setName(name);
+        user.setCity(city);
+        user.setType(type);
+        user.setId(id);
         return userRepository.editMessage(user);
     }
 

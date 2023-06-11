@@ -9,11 +9,13 @@ import com.example.campus_second_hand_trading_platform.domain.vo.UserVo;
 import com.example.campus_second_hand_trading_platform.service.IProductService;
 import com.example.campus_second_hand_trading_platform.service.IUserAccountService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
+import com.example.campus_second_hand_trading_platform.service.MinioService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,6 +39,9 @@ public class AdminController {
 
     @Autowired
     private IProductService iProductService;
+
+    @Autowired
+    private MinioService minioService;
 
     /**
      * 获取通过审核的用户
@@ -183,9 +188,8 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    public CommonResult<?> edit(@RequestBody UserDto userDto) {
-
-        if(iUserService.editMessage(userDto)) {
+    public CommonResult<?> edit(@RequestParam int id, @RequestParam String userName, @RequestParam String name, @RequestParam String city, @RequestParam String type) {
+        if(iUserService.editMessage(id, userName, name, city, type)) {
             log.info("修改成功");
             return CommonResult.success("修改成功");
         }
@@ -202,5 +206,4 @@ public class AdminController {
         }
         return CommonResult.failed();
     }
-
 }

@@ -7,6 +7,12 @@ public class UserDto {
 
     private String name;
 
+    private String city;
+
+    private String type;
+
+    private String email;
+
     public String getName() {
         return name;
     }
@@ -30,12 +36,6 @@ public class UserDto {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String city;
-
-    private String type;
-
-    private String email;
 
     public String getUserName() {
         return userName;

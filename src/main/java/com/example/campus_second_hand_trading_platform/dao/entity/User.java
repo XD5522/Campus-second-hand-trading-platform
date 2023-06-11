@@ -71,6 +71,10 @@ public class User implements Serializable {
         gender = registerDataDto.getGender();
         bankCard = registerDataDto.getBankCard();
         email = registerDataDto.getEmail();
+        type = registerDataDto.getType();
+        if(registerDataDto.getLicense() != null) {
+            license = registerDataDto.getLicense();
+        }
 
     }
 

@@ -3,11 +3,13 @@ package com.example.campus_second_hand_trading_platform.controller;
 import com.example.campus_second_hand_trading_platform.domain.dto.RegisterDataDto;
 import com.example.campus_second_hand_trading_platform.service.IUserRegisterService;
 import com.example.campus_second_hand_trading_platform.service.IUserService;
+import com.example.campus_second_hand_trading_platform.service.MinioService;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import com.example.campus_second_hand_trading_platform.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * TODO 用户注册控制器编写
@@ -30,6 +32,9 @@ public class UserRegisterController {
 
     @Autowired
     private MD5Utils md5Utils;
+
+    @Autowired
+    private MinioService minioService;
 
     /**
      * 用户注册
@@ -71,5 +76,6 @@ public class UserRegisterController {
 
         return CommonResult.success(null, "注册成功");
     }
+
 
 }

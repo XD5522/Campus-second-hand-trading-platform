@@ -60,7 +60,7 @@ public class UserLoginController {
         if(user == null) {
             //用户不存在
             log.info("用户不存在，登陆失败");
-            return CommonResult.failed();
+            return CommonResult.failed("用户名或密码错误");
         }
         log.info(user.toString());
 
@@ -71,19 +71,30 @@ public class UserLoginController {
         if(userAccount == null) {
             //用户账户不存在
             log.info("用户账户不存在，登陆失败");
-            return CommonResult.failed();
+            return CommonResult.failed("用户名或密码错误");
         }
         else {
             //用户存在，开始验证密码
             log.info("用户存在");
             if(md5Password.equals(userAccount.getUserPassword())) {
+
+                if(user.getState().equals("audit")) {
+                    return CommonResult.failed("账户未通过审核");
+                }
+                else if(user.getState().equals("审核不通过")) {
+                    return CommonResult.failed("账户的审核没有通过");
+                }
+                else if(user.getState().equals("封禁")) {
+                    return CommonResult.failed("账户已被封禁");
+                }
+
                 //生成token
                 token = jwtUtils.saveToken(user, userAccount.getUserAccount(), 3600L);
 
             }
             else {
                 log.info("密码不正确");
-                return CommonResult.failed();
+                return CommonResult.failed("用户名或密码错误");
             }
         }
         log.info(loginDataDto.toString());

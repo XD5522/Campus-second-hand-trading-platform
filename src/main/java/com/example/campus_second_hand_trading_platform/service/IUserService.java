@@ -43,7 +43,7 @@ public interface IUserService extends IService<User> {
 
     public List<UserVo> searchAuditUser(String searchText, int start, int pageSize);
 
-    public boolean editMessage(UserDto userDto);
+    public boolean editMessage(int id, String userName, String name, String city, String type);
 
     public boolean resetPassword(int userId);
 }

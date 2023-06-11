@@ -50,9 +50,9 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    @Insert("insert into user(user_name,name,city,phone,gender,bank_card,email) " +
-            "values(#{user.userName},#{user.name},#{user.city},#{user.phone}," +
-            "#{user.gender},#{user.bankCard},#{user.email})")
+    @Insert("insert into user(user_name,name,type,city,phone,gender,bank_card,email,license) " +
+            "values(#{user.userName},#{user.name},#{user.type},#{user.city},#{user.phone}," +
+            "#{user.gender},#{user.bankCard},#{user.email},#{user.license})")
     public int insertUser(@Param("user") User user);
 
     /**
@@ -177,7 +177,7 @@ public interface UserMapper extends BaseMapper<User> {
             "name = #{user.name}, " +
             "city = #{user.city}, " +
             "type = #{user.type} " +
-            "where user_name = #{user.userName}")
+            "where id = #{user.id}")
     public int editMessage(@Param("user") User user);
 
     @Update("update user_account set user_password = #{resetPassword} where user_id = #{userId}")

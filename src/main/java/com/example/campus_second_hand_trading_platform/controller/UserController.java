@@ -106,4 +106,14 @@ public class UserController {
     public CommonResult upload( @RequestParam MultipartFile file){
         return CommonResult.success(minioService.upload(file,"user",0));
     }
+
+    /**
+     * 上传商家营业执照
+     * @param file
+     * @return 图片相对地址
+     */
+    @PostMapping("/uploadLicense")
+    public CommonResult uploadLicense(@RequestParam MultipartFile file){
+        return CommonResult.success(minioService.upload(file,"license",0));
+    }
 }
