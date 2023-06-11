@@ -10,6 +10,7 @@ import com.example.campus_second_hand_trading_platform.utils.BeanUtils;
 import com.example.campus_second_hand_trading_platform.utils.CommonResult;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,6 +31,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
+@Slf4j
 public class UserController {
     @Autowired
     @Qualifier("UserServiceImpl")

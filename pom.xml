@@ -60,12 +60,6 @@
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>3.0.10</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
