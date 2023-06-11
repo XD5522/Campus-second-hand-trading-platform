@@ -68,6 +68,18 @@ public class AdminController {
     }
 
     /**
+     * 获取还未审核和未通过审核的商家
+     * @return
+     */
+
+    @GetMapping("/getAuditMerchantData")
+    public CommonResult<List<UserVo>> getAuditMerchant() {
+        List<UserVo> data;
+        data = iUserService.getAuditMerchant();
+        return CommonResult.success(data);
+    }
+
+    /**
      * 用户通过审核
      * @param userName
      * @return

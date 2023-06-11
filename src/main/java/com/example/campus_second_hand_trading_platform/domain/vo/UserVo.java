@@ -27,6 +27,8 @@ public class UserVo {
 
     private String img;
 
+    private String license;
+
     public String getUserName() {
         return userName;
     }

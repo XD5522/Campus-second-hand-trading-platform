@@ -31,6 +31,8 @@ public interface IUserService extends IService<User> {
 
     public List<UserVo> getAuditUser();
 
+    public List<UserVo> getAuditMerchant();
+
     public boolean passUser(String userName);
 
     public boolean noPassUser(String userName);
