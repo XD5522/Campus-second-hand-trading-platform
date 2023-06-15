@@ -36,6 +36,11 @@ public class CarController {
         Car car = new Car();
         try{
             BeanUtils.copyProperties(carDto,car);
+            log.info(car.toString());
+            log.info(car.toString());
+            log.info(car.toString());
+            log.info(car.toString());
+            log.info(car.toString());
             carService.save(car);
             return CommonResult.success(car);
         }

@@ -1,5 +1,7 @@
 package com.example.campus_second_hand_trading_platform.controller;
 
+import com.example.campus_second_hand_trading_platform.dao.entity.Address;
+import com.example.campus_second_hand_trading_platform.dao.mapper.AddressMapper;
 import com.example.campus_second_hand_trading_platform.dao.mapper.UserMapper;
 import com.example.campus_second_hand_trading_platform.domain.dto.UserDto;
 import com.example.campus_second_hand_trading_platform.dao.entity.User;
@@ -37,11 +39,11 @@ public class UserController {
     @Qualifier("UserServiceImpl")
     private IUserService userService;
     @Autowired
-    private UserMapper userMapper;
-    @Autowired
     MinioService minioService;
     @Autowired
     RedisTemplate redisTemplate;
+    @Autowired
+    AddressMapper addressMapper;
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto userDto){
         System.out.println(userDto.getUserName());
@@ -117,5 +119,23 @@ public class UserController {
     @PostMapping("/uploadLicense")
     public CommonResult uploadLicense(@RequestParam MultipartFile file){
         return CommonResult.success(minioService.upload(file,"license",0));
+    }
+    @PostMapping("address")
+    public CommonResult<?> addAddress(@RequestBody Address address){
+        try{
+            addressMapper.insert(address);
+            return CommonResult.success(address);
+        }catch (Exception e){
+            return CommonResult.failed("f");
+        }
+    }
+    @DeleteMapping("address")
+    public CommonResult<?> deleteAddress(@RequestParam int id){
+        try{
+            addressMapper.deleteById(id);
+            return CommonResult.success(id);
+        }catch (Exception e){
+            return CommonResult.failed("f");
+        }
     }
 }

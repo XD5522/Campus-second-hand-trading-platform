@@ -76,7 +76,7 @@ public class ProductController {
     }
 
     @PostMapping("/updateImg")
-    public CommonResult<?> updateImg(HttpServletRequest request,@RequestParam int id, @RequestParam(required = false) MultipartFile file){
+    public CommonResult<?> updateImg(HttpServletRequest request,@RequestParam int id, @RequestParam MultipartFile file){
 //        log.info(product.toString());
         Product product = productService.getById(id);
         String imgName = product.getImg();
