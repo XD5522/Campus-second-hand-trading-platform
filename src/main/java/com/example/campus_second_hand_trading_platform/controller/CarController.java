@@ -80,6 +80,12 @@ public class CarController {
     public CommonResult<?> deleteProductFromCar(HttpServletRequest request,@RequestBody List<Integer> ids){
         log.info(ids.toString());
         try{
+            log.info(ids.toString());
+            log.info(ids.toString());
+            log.info(ids.toString());
+            log.info(ids.toString());
+            log.info(ids.toString());
+            log.info(ids.toString());
             boolean result = carService.removeBatchByIds(ids);
             if(result){
                 return CommonResult.success(ids);
